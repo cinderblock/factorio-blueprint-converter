@@ -1,0 +1,17 @@
+{
+  "name": "factorio-blueprint-converter",
+  "version": "0.0.0",
+  "description": "Tool to convert and manage Factorio blueprints externally",
+  "main": "index.ts",
+  "scripts": {
+    "start": "tsx ."
+  },
+  "author": "Cameron Tacklind <cameron@tacklind.com> (https://cameron.tacklind.com)",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^22.10.5",
+    "prettier": "^3.4.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3"
+  }
+}
