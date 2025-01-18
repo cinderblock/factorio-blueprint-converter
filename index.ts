@@ -9,7 +9,7 @@ const CheckForUnlikelyStrings = true;
 
 const factorioDir = process.env.APPDATA + '/Factorio';
 
-function getBlueprintLocation(v2 = true) {
+export function getBlueprintLocation(v2 = true) {
   return `${factorioDir}/blueprint-storage${v2 ? '-2' : ''}.dat`;
 }
 
