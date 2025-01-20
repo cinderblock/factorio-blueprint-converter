@@ -590,9 +590,7 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
     await readArray(1, async index => {
       const from = await reader(unknownFrom);
       const to = await reader(unknownTo);
-      if (from || to) {
-        mappers.push({ index, from, to });
-      }
+      mappers.push({ index, from, to });
     });
   }
 
