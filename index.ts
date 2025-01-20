@@ -375,7 +375,7 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
     await skip(length);
     console.log('Data:', '...');
   }
-  async function readFilters(sectionName, type: Types) {
+  async function readFilters(type: Types) {
     const unknowns: Record<number, string> = {};
 
     console.log('Peak:', (await peak(100)).toString('hex'));
@@ -518,7 +518,7 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
 
     console.log('Peak:', (await peak(100)).toString('hex'));
 
-    const entityFilters = await readFilters('entity', 'ENTITY');
+    const entityFilters = await readFilters('ENTITY');
 
     console.log('Entity Filters:', entityFilters);
 
@@ -534,7 +534,7 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
 
     const tileSelectionMode = await readNumber(1);
 
-    const tileFilters = await readFilters('tile', 'TILE');
+    const tileFilters = await readFilters('TILE');
 
     throw new Error('Not finished');
   }
