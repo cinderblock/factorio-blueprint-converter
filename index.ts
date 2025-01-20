@@ -631,7 +631,7 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
 
   //   console.log('Start block: ' + (await peak(10)).toString('hex'));
 
-  // Version
+  // See: https://wiki.factorio.com/Version_string_format
   ret.version = {
     major: await readNumber(2),
     minor: await readNumber(2),
