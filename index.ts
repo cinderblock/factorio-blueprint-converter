@@ -2,8 +2,6 @@ import { createReadStream } from 'node:fs';
 import { readFile } from 'node:fs/promises';
 import { Readable } from 'node:stream';
 
-// cSpell:ignore Factorio
-
 // For debugging
 const CheckForUnlikelyStrings = true;
 
