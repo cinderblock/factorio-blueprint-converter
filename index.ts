@@ -60,51 +60,42 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
 
   await readable();
 
-  async function read(length: number): Promise<Buffer> {
+  async function read(length: number) {
     if (length < 0) throw new Error(`Can't read negative (${length}) bytes`);
-    if (!length) return Buffer.alloc(0);
     // Node.js limit is 1GiB
     if (length > 2 ** 30) throw new Error(`Reading ${length} bytes is too large`);
-    if (length > stream.readableLength) throw new Error(`Reading ${length} bytes is too large`);
 
-    let tries = 0;
+    let ret = Buffer.alloc(0);
 
-    let ret: Buffer;
-    while ((ret = stream.read(length)) === null) {
-      if (!stream.readable) {
-        throw new Error(`Unexpected end of stream`);
+    while (length > 0) {
+      const chunk = stream.read(Math.min(stream.readableLength, length)) as Buffer | null;
+      if (chunk === null) {
+        await readable();
+        continue;
       }
 
-      await readable();
-
-      if (tries++ > 1000) {
-        console.log(`Remaining bytes: ${stream.readableLength}, length: ${length}`);
-        throw new Error(`Too many tries`);
+      if (chunk.length > length) {
+        throw new Error(`Chunk too large: ${chunk.length} > ${length}`);
       }
+
+      length -= chunk.length;
+      ret = Buffer.concat([ret, chunk]);
     }
+
     return ret;
   }
 
   async function skip(length: number) {
+    if (length < 0) throw new Error(`Can't read negative (${length}) bytes`);
     console.log('Skipping:', length);
 
     while (length > 0) {
-      const chunk = stream.read(Math.min(stream.readableLength, length));
+      const chunk = stream.read(Math.min(stream.readableLength, length)) as Buffer | null;
       if (chunk === null) {
         await readable();
       } else {
         length -= chunk.length;
       }
-    }
-  }
-
-  async function skip2(length: number) {
-    console.log('Skipping:', length);
-
-    while (length > 0) {
-      // This doesn't work :/
-      const chunk = await read(Math.min(stream.readableLength, length));
-      length -= chunk.length;
     }
   }
 
