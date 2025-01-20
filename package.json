@@ -4,6 +4,7 @@
   "description": "Tool to convert and manage Factorio blueprints externally",
   "main": "index.ts",
   "scripts": {
+    "dev": "tsx --watch .",
     "start": "tsx ."
   },
   "author": "Cameron Tacklind <cameron@tacklind.com> (https://cameron.tacklind.com)",

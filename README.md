@@ -13,7 +13,7 @@ Back up your data.
 
 ```bash
 npm install
-npm run start
+npm run dev
 ```
 
 It automatically finds the default blueprint data file and extracts it.
