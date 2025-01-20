@@ -29,3 +29,7 @@ Eventually, it will write the JSON data to a file tree where changes can be trac
 - [Property tree](https://wiki.factorio.com/Property_tree) - A recursive variant format that holds a key-value pair
 - [Achievement file format](https://wiki.factorio.com/Achievement_file_format) - Factorio achievement file format
 - [Factorio Blueprint String](https://wiki.factorio.com/Blueprint_string_format) - Factorio blueprint string format
+
+### Credits
+
+This decoder is heavily based on the work done by asheiduk in their [Factorio Blueprint Decoder](https://github.com/asheiduk/factorio-blueprint-decoder) project.
