@@ -19,4 +19,4 @@ npm run dev
 It automatically finds the default blueprint data file and extracts it.
 
 For now, it just prints some stuff to terminal.
-Eventually, it will write the JSON data to a file tree.
+Eventually, it will write the JSON data to a file tree where changes can be tracked in a version control system.
