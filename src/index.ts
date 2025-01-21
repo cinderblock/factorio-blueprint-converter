@@ -1,34 +1,20 @@
 import { createReadStream } from 'node:fs';
-import { readFile } from 'node:fs/promises';
 import { Readable } from 'node:stream';
+import esMain from 'es-main';
+import { getBlueprintLocation } from './util/getBlueprintLocation.js';
+import {
+  BlueprintData,
+  Index,
+  BlueprintEntry,
+  Blueprint,
+  DeconstructionPlanner,
+  UpgradePlanner,
+  BlueprintBook,
+} from './BlueprintData.js';
+import { typeMap } from './typeMap.js';
 
 // For debugging
 const CheckForUnlikelyStrings = true;
-
-const factorioDir = process.env.APPDATA + '/Factorio';
-
-export function getBlueprintLocation(v2 = true) {
-  return `${factorioDir}/blueprint-storage${v2 ? '-2' : ''}.dat`;
-}
-
-type BlueprintData = {
-  version: Version;
-
-  expansions: Record<string, string[]>;
-  blueprints: (BlueprintEntry | null)[];
-
-  generationCounter: number;
-  saveTime: Date;
-};
-
-type Version = {
-  major: number;
-  minor: number;
-  patch: number;
-  developer: number;
-};
-
-type Types = 'ITEM' | 'FLUID' | 'VSIGNAL' | 'TILE' | 'ENTITY' | 'RECIPE' | 'EQUIPMENT' | 'QUALITY' | 'PLANET';
 
 /**
  * A class to make reading paused streams in blocks easier
@@ -41,7 +27,7 @@ type Types = 'ITEM' | 'FLUID' | 'VSIGNAL' | 'TILE' | 'ENTITY' | 'RECIPE' | 'EQUI
  *
  */
 export async function parseBlueprintData(stream: Readable): Promise<BlueprintData> {
-  const index: Record<Types, Entry[]> = {
+  const index: Record<Index.Types, Index.Entry[]> = {
     ITEM: [],
     FLUID: [],
     VSIGNAL: [],
@@ -53,10 +39,7 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
     PLANET: [],
   };
 
-  async function readable() {
-    return new Promise<void>(resolve => stream.once('readable', () => resolve()));
-    // .then(() => console.log('Readable'));
-  }
+  const readable = () => new Promise<void>(stream.once.bind(stream, 'readable'));
 
   await readable();
 
@@ -85,20 +68,6 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
     return ret;
   }
 
-  async function skip(length: number) {
-    if (length < 0) throw new Error(`Can't read negative (${length}) bytes`);
-    console.log('Skipping:', length);
-
-    while (length > 0) {
-      const chunk = stream.read(Math.min(stream.readableLength, length)) as Buffer | null;
-      if (chunk === null) {
-        await readable();
-      } else {
-        length -= chunk.length;
-      }
-    }
-  }
-
   async function peak(length: number): Promise<Buffer> {
     const copy = await read(length);
     stream.unshift(copy);
@@ -112,6 +81,7 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
    * If it is 0xff, it reads 4 bytes and returns that as a number.
    */
   async function readNumber(): Promise<number>;
+  async function readNumber(length: 0): Promise<number>;
   /**
    * Reads one byte and errors if it is 0xff
    * @param error If true, throw an error if the length is 0xff
@@ -219,7 +189,7 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
     return a[index];
   }
 
-  async function readEntry(type: Types) {
+  async function readEntry(type: Index.Types) {
     const id = await readNumber(type == 'TILE' ? 1 : 2);
     const a = index[type];
     const entry = a.find(e => e.id === id);
@@ -246,7 +216,7 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
   type Sig = { name: string; type: 'ITEM' | 'FLUID' | 'VSIGNAL' };
 
   async function readSignal(): Promise<Sig | null> {
-    const type = await readMappedNumber<'ITEM' | 'FLUID' | 'VSIGNAL'>(1, ['ITEM', 'FLUID', 'VSIGNAL']);
+    const type = await readMappedNumber<Sig['type']>(1, ['ITEM', 'FLUID', 'VSIGNAL']);
     const entry = await readEntry(type);
 
     if (!entry) return null;
@@ -284,7 +254,7 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
     return icons;
   }
 
-  async function parseLibraryObjects(): Promise<(BlueprintEntry | null)[]> {
+  async function parseLibraryObjects(): Promise<BlueprintEntry[]> {
     // 0x15 0x00 0x00 0x00        | 21 objects
 
     // 0x01                       | slot used
@@ -292,7 +262,7 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
     // 0x12 0x00 0x00 0x00        | generation
     // 0x4d 0x00                  | entry
 
-    return readArray<BlueprintEntry | null>(4, async slot => {
+    return readArray<BlueprintEntry>(4, async slot => {
       const slotUsed = await readBoolean();
       if (!slotUsed) {
         console.log(`Slot ${slot} not used`);
@@ -301,46 +271,42 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
 
       console.log('Slot used:', slot);
 
-      const libraryObjects: {
-        key: string;
-        prototype: string;
-        reader: () => Promise<HandlerData>;
-      }[] = [
-        { key: 'blueprint', prototype: 'blueprint', reader: parseBlueprint },
-        { key: 'blueprint_book', prototype: 'blueprint-book', reader: parseBlueprintBook },
-        { key: 'deconstruction_planner', prototype: 'deconstruction-item', reader: parseDeconstructionItem },
-        { key: 'upgrade_planner', prototype: 'upgrade-item', reader: parseUpgradeItem },
-      ];
+      const parse = await readMappedNumber(1, [
+        parseBlueprint,
+        parseBlueprintBook,
+        parseDeconstructionItem,
+        parseUpgradeItem,
+      ]);
 
-      const prefix = await readMappedNumber(1, libraryObjects);
-
-      // console.log('Prefix:', prefix);
-
-      const generation = await readNumber(4);
-
-      console.log('Generation:', generation);
-
-      const entry = await readEntry('ITEM');
-
-      if (!entry) {
-        throw new Error('Entry not found');
-      }
-
-      console.log('Entry:', entry.name);
-
-      if (entry.prototype !== prefix.prototype) {
-        throw new Error(`Entry ${entry.prototype} does not match prefix ${prefix.prototype}`);
-      }
-
-      return {
-        key: prefix.key,
-        _generation: generation,
-        handlerData: await prefix.reader(),
-      };
+      return parse();
     });
   }
 
-  async function parseBlueprint() {
+  async function parseBlueprintEntityHeader(prototype: string) {
+    const generation = await readNumber(4);
+
+    console.log('Generation:', generation);
+
+    const entry = await readEntry('ITEM');
+
+    if (!entry) {
+      throw new Error('Entry not found');
+    }
+
+    console.log('Entry:', entry.name);
+
+    if (entry.prototype !== prototype) {
+      throw new Error(`Entry ${entry.prototype} does not match ${prototype}`);
+    }
+
+    const label = await readString();
+
+    console.log('Label:', label);
+
+    return { generation, entry, label };
+  }
+
+  async function parseBlueprint(): Promise<Blueprint> {
     // Huge Pumpjacks             | label
     // 0x00                       | expect 0
     // 0x00                       | has removed mods
@@ -361,9 +327,11 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
     // 0x 000000000000560000000001200001000000000000006400000000000000000000000000000000000000000000000100
     // 0x 0000000000005600000000...
 
-    const label = await readString();
+    const header = await parseBlueprintEntityHeader('blueprint');
 
-    console.log('Blueprint:', label);
+    // blueprint-book
+    // deconstruction-item
+    // upgrade-item
 
     await expect(0, 'Expect 0');
 
@@ -372,10 +340,18 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
     const length = await readNumber();
 
     // TODO: Parse data
-    await skip(length);
-    console.log('Data:', '...');
+    const data = await read(length);
+
+    return {
+      key: 'blueprint',
+      generation: header.generation,
+      label: header.label,
+      description: 'not yet implemented',
+      data,
+    };
   }
-  async function readFilters(type: Types) {
+
+  async function readFilters(type: Index.Types) {
     const unknowns: Record<number, string> = {};
 
     console.log('Peak:', (await peak(100)).toString('hex'));
@@ -397,11 +373,7 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
 
     console.log('reading filters');
     await readArray(1, async index => {
-      let name = (
-        await readEntry(type).catch(e => {
-          console.log("warning: couldn't read entry", type, e.message);
-        })
-      )?.name;
+      let name = (await readEntry(type))?.name;
       //   let name = await readString();
       //   console.log('Name:', name);
       if (!name) return;
@@ -420,7 +392,7 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
     return filters;
   }
 
-  async function parseDeconstructionItem() {
+  async function parseDeconstructionItem(): Promise<DeconstructionPlanner> {
     /* Example Data: Empty planner
        054c6162656c0444657363000000001e000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001e00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001023b0000004e00
 
@@ -490,12 +462,11 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
       1e000000500004477269640000000400000001001f0000004d00 (might have some extra data)
       
      */
+
+    const header = await parseBlueprintEntityHeader('deconstruction-item');
+
     const exampleData = await peak(200);
     console.log('Example Data:', exampleData.toString('hex'));
-
-    const label = await readString();
-
-    console.log('Deconstruction Planner:', label);
 
     const description = await readString();
 
@@ -536,13 +507,25 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
 
     const tileFilters = await readFilters('TILE');
 
+    return {
+      key: 'deconstruction_planner',
+      generation: header.generation,
+      label: header.label,
+      description,
+      icons,
+      entityFilterMode,
+      entityFilters,
+      treesRocksOnly,
+      tileFilterMode,
+      tileSelectionMode,
+      tileFilters,
+    };
+
     throw new Error('Not finished');
   }
 
-  async function parseUpgradeItem() {
-    const label = await readString();
-
-    console.log('Upgrade Planner:', label);
+  async function parseUpgradeItem(): Promise<UpgradePlanner> {
+    const header = await parseBlueprintEntityHeader('upgrade-item');
 
     const description = await readString();
 
@@ -559,7 +542,7 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
     });
 
     async function reader(unknowns: Record<number, string>): Promise<{
-      type: Types;
+      type: Index.Types;
       name: string;
     }> {
       const isItem = await readBoolean();
@@ -583,8 +566,8 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
 
     const mappers: {
       index: number;
-      from: { type: Types; name: string };
-      to: { type: Types; name: string };
+      from: { type: Index.Types; name: string };
+      to: { type: Index.Types; name: string };
     }[] = [];
 
     await readArray(1, async index => {
@@ -592,12 +575,19 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
       const to = await reader(unknownTo);
       mappers.push({ index, from, to });
     });
+
+    return {
+      key: 'upgrade_planner',
+      generation: header.generation,
+      label: header.label,
+      description,
+      icons,
+      mappers,
+    };
   }
 
-  async function parseBlueprintBook() {
-    const label = await readString();
-
-    console.log('Blueprint Book:', label);
+  async function parseBlueprintBook(): Promise<BlueprintBook> {
+    const { label, generation } = await parseBlueprintEntityHeader('blueprint-book');
 
     const description = await readString();
 
@@ -605,11 +595,21 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
 
     const icons = await parseIcons();
 
-    const objects = await parseLibraryObjects();
+    const blueprints = await parseLibraryObjects();
 
     const activeIndex = await readNumber(1);
 
     await expect(0, 'Expect 0');
+
+    return {
+      key: 'blueprint_book',
+      generation,
+      label,
+      description,
+      icons,
+      blueprints,
+      activeIndex,
+    };
   }
 
   const ret = {
@@ -832,150 +832,12 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
   return ret;
 }
 
-type HandlerData = any;
-
-type Entry = {
-  prototype: string;
-  name: string;
-  id: number;
-};
-
-type BlueprintEntry = {
-  key: string;
-  _generation: number;
-  handlerData: HandlerData;
-};
-
-const typeMap: Record<string, Types> = {
-  // item
-  ammo: 'ITEM',
-  armor: 'ITEM',
-  blueprint: 'ITEM',
-  'blueprint-book': 'ITEM',
-  capsule: 'ITEM',
-  'deconstruction-item': 'ITEM',
-  gun: 'ITEM',
-  item: 'ITEM',
-  'item-with-entity-data': 'ITEM',
-  module: 'ITEM',
-  'spidertron-remote': 'ITEM',
-  'rail-planner': 'ITEM',
-  'repair-tool': 'ITEM',
-  tool: 'ITEM',
-  'upgrade-item': 'ITEM',
-  // item without known ways to put them into blueprints
-  'copy-paste-tool': 'ITEM',
-  'item-with-label': 'ITEM',
-  'item-with-inventory': 'ITEM',
-  'item-with-tags': 'ITEM',
-  'mining-tool': 'ITEM',
-  'selection-tool': 'ITEM',
-  // fluid
-  fluid: 'FLUID',
-  // virtual-signal
-  'virtual-signal': 'VSIGNAL',
-  // entity
-  accumulator: 'ENTITY',
-  'ammo-turret': 'ENTITY',
-  'arithmetic-combinator': 'ENTITY',
-  'artillery-turret': 'ENTITY',
-  'artillery-wagon': 'ENTITY',
-  'assembling-machine': 'ENTITY',
-  beacon: 'ENTITY',
-  boiler: 'ENTITY',
-  'burner-generator': 'ENTITY',
-  'cargo-wagon': 'ENTITY',
-  cliff: 'ENTITY',
-  'constant-combinator': 'ENTITY',
-  container: 'ENTITY',
-  'curved-rail': 'ENTITY',
-  'decider-combinator': 'ENTITY',
-  'electric-energy-interface': 'ENTITY',
-  'electric-pole': 'ENTITY',
-  'electric-turret': 'ENTITY',
-  'entity-ghost': 'ENTITY',
-  fish: 'ENTITY',
-  'fluid-turret': 'ENTITY',
-  'fluid-wagon': 'ENTITY',
-  furnace: 'ENTITY',
-  gate: 'ENTITY',
-  generator: 'ENTITY',
-  'heat-interface': 'ENTITY',
-  'heat-pipe': 'ENTITY',
-  'infinity-container': 'ENTITY',
-  'infinity-pipe': 'ENTITY',
-  inserter: 'ENTITY',
-  'item-entity': 'ENTITY',
-  'item-request-proxy': 'ENTITY',
-  lab: 'ENTITY',
-  lamp: 'ENTITY',
-  'land-mine': 'ENTITY',
-  'linked-belt': 'ENTITY',
-  'linked-container': 'ENTITY',
-  loader: 'ENTITY',
-  'loader-1x1': 'ENTITY',
-  locomotive: 'ENTITY',
-  'logistic-container': 'ENTITY',
-  'mining-drill': 'ENTITY',
-  'offshore-pump': 'ENTITY',
-  pipe: 'ENTITY',
-  'pipe-to-ground': 'ENTITY',
-  'power-switch': 'ENTITY',
-  'programmable-speaker': 'ENTITY',
-  pump: 'ENTITY',
-  radar: 'ENTITY',
-  'rail-chain-signal': 'ENTITY',
-  'rail-signal': 'ENTITY',
-  reactor: 'ENTITY',
-  roboport: 'ENTITY',
-  'rocket-silo': 'ENTITY',
-  'simple-entity': 'ENTITY',
-  'solar-panel': 'ENTITY',
-  splitter: 'ENTITY',
-  'storage-tank': 'ENTITY',
-  'straight-rail': 'ENTITY',
-  'tile-ghost': 'ENTITY',
-  'train-stop': 'ENTITY',
-  'transport-belt': 'ENTITY',
-  tree: 'ENTITY',
-  'underground-belt': 'ENTITY',
-  wall: 'ENTITY',
-  // tile
-  tile: 'TILE',
-  // recipe
-  recipe: 'RECIPE',
-  // special
-  'flying-text': 'ENTITY', // no handler (yet), used for "unknown-entity" in upgrade- and deconstruction plans
-
-  // new guesses in 2.0
-  car: 'ENTITY',
-  'curved-rail-a': 'ENTITY',
-  'curved-rail-b': 'ENTITY',
-  'display-panel': 'ENTITY',
-  'half-diagonal-rail': 'ENTITY',
-  'selector-combinator': 'ENTITY',
-
-  'active-defense-equipment': 'EQUIPMENT',
-  'battery-equipment': 'EQUIPMENT',
-  'energy-shield-equipment': 'EQUIPMENT',
-  'equipment-ghost': 'EQUIPMENT',
-  'generator-equipment': 'EQUIPMENT',
-  'movement-bonus-equipment': 'EQUIPMENT',
-  'roboport-equipment': 'EQUIPMENT',
-  'solar-panel-equipment': 'EQUIPMENT',
-  quality: 'QUALITY',
-  planet: 'PLANET',
-};
-
 async function main() {
-  const blueprintLocation = getBlueprintLocation();
-
-  const blueprintData = await parseBlueprintData(createReadStream(blueprintLocation));
-
+  const blueprintData = await parseBlueprintData(createReadStream(getBlueprintLocation()));
   console.log(blueprintData);
 }
 
-if (require.main === module) {
+if (esMain(import.meta)) {
   main().catch((e: unknown) => {
     console.error(e);
     process.exitCode = 1;

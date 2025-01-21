@@ -2,7 +2,7 @@
   "name": "factorio-blueprint-converter",
   "version": "0.0.0",
   "description": "Tool to convert and manage Factorio blueprints externally",
-  "main": "index.ts",
+  "main": "src/index.ts",
   "scripts": {
     "dev": "tsx --watch .",
     "start": "tsx ."
