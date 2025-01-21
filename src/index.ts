@@ -39,7 +39,9 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
     PLANET: [],
   };
 
-  const readable = () => new Promise<void>(stream.once.bind(stream, 'readable'));
+  async function readable(): Promise<void> {
+    return new Promise(resolve => stream.once('readable', resolve));
+  }
 
   await readable();
 
