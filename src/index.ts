@@ -36,6 +36,8 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
 
   await readable();
 
+  let fileLocation = 0;
+
   // Read a number of bytes from the stream and return it as a Buffer
   async function read(length: number) {
     if (length < 0) throw new Error(`Can't read negative (${length}) bytes`);
@@ -58,6 +60,8 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
       length -= chunk.length;
       ret = Buffer.concat([ret, chunk]);
     }
+
+    fileLocation += ret.length;
 
     return ret;
   }
@@ -818,12 +822,51 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
     ret.blueprints = await parseLibraryObjects();
 
     console.log('Done');
-
-    console.log('Remaining:', stream.readableLength);
   } catch (e) {
     console.error(e);
   }
 
+  // Read remaining data with timeout
+  const remainingData = await Promise.race([
+    new Promise<Buffer>((resolve, reject) => {
+      const chunks: Buffer[] = [];
+      stream.on('data', (chunk: Buffer) => chunks.push(chunk));
+      stream.on('end', () => resolve(Buffer.concat(chunks)));
+      stream.on('error', reject);
+    }),
+    new Promise<never>((_, reject) => setTimeout(() => reject(new Error('Timeout reading remaining data')), 100)),
+  ]);
+
+  const fullLength = fileLocation + remainingData.length;
+
+  if (remainingData.length > 0) {
+    console.log(`${remainingData.length} bytes of remaining data!`);
+    console.log(`File location: ${fileLocation} (${((100 * fileLocation) / fullLength).toFixed(0)}%)`);
+
+    const printRemainingBytesLines = 10;
+    if (printRemainingBytesLines) {
+      const groupSize = 2;
+      const groupCount = 32;
+      const bytesPerLine = groupSize * groupCount;
+
+      for (let line = 0; line < printRemainingBytesLines; line++) {
+        const offset = line * bytesPerLine;
+        const slice = remainingData.slice(offset, offset + bytesPerLine);
+
+        if (slice.length === 0) break; // Stop if we've run out of data
+
+        let hexLine = '';
+        for (let i = 0; i < slice.length; i += groupSize) {
+          const hex = slice.slice(i, i + groupSize).toString('hex');
+          hexLine += hex + ' ';
+        }
+
+        console.log(hexLine);
+      }
+    }
+
+    throw new Error(`Unexpected ${remainingData.length} bytes remaining in stream`);
+  }
   return ret;
 }
 
