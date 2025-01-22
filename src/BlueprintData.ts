@@ -1,3 +1,8 @@
+export type Sig = {
+  type: 'ITEM' | 'FLUID' | 'VSIGNAL';
+  name: string;
+};
+
 export type BlueprintData = {
   version: Version;
   expansions: Record<string, string[]>;

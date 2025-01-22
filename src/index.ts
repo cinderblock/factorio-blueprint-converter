@@ -10,6 +10,7 @@ import {
   DeconstructionPlanner,
   UpgradePlanner,
   BlueprintBook,
+  Sig,
 } from './BlueprintData.js';
 import { typeMap } from './typeMap.js';
 
@@ -211,8 +212,6 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
       throw new Error(`${message}. Expected ${b.toString('hex')}`);
     }
   }
-
-  type Sig = { name: string; type: 'ITEM' | 'FLUID' | 'VSIGNAL' };
 
   async function readSignal(): Promise<Sig | null> {
     const type = await readMappedNumber<Sig['type']>(1, ['ITEM', 'FLUID', 'VSIGNAL']);
