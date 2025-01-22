@@ -29,6 +29,7 @@ export type Blueprint = {
   description: string;
   data: Buffer;
 };
+
 export type BlueprintBook = {
   key: 'blueprint_book';
   generation: number;

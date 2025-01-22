@@ -16,16 +16,6 @@ import { typeMap } from './typeMap.js';
 // For debugging
 const CheckForUnlikelyStrings = true;
 
-/**
- * A class to make reading paused streams in blocks easier
- *
- * read* methods will read the buffer and move the index
- * peak* methods will read the buffer but not move the index
- *
- * *Number methods will read a number of bytes and return the value as a LE number
- * *Count methods read a byte to determine the length of the number to read and then read that number
- *
- */
 export async function parseBlueprintData(stream: Readable): Promise<BlueprintData> {
   const index: Record<Index.Types, Index.Entry[]> = {
     ITEM: [],
@@ -39,12 +29,14 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
     PLANET: [],
   };
 
+  // Wait for the stream to be readable
   async function readable(): Promise<void> {
     return new Promise(resolve => stream.once('readable', resolve));
   }
 
   await readable();
 
+  // Read a number of bytes from the stream and return it as a Buffer
   async function read(length: number) {
     if (length < 0) throw new Error(`Can't read negative (${length}) bytes`);
     // Node.js limit is 1GiB
@@ -70,6 +62,7 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
     return ret;
   }
 
+  // Read a number of bytes from the stream and return it as a Buffer without moving the stream index
   async function peak(length: number): Promise<Buffer> {
     const copy = await read(length);
     stream.unshift(copy);
@@ -408,7 +401,6 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
        000000000000000000000000000000000000000000000000000000000000
        000000000000000000000000000000000000000000000000000000000000
        000000000000000000000000000000000000000000000000000000000000
-       
        00000000
        1e
        000000000000000000000000000000000000000000000000000000000000
@@ -467,8 +459,7 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
 
     const header = await parseBlueprintEntityHeader('deconstruction-item');
 
-    const exampleData = await peak(200);
-    console.log('Example Data:', exampleData.toString('hex'));
+    console.log('Peak:', (await peak(200)).toString('hex'));
 
     const description = await readString();
 
@@ -508,6 +499,8 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
     const tileSelectionMode = await readNumber(1);
 
     const tileFilters = await readFilters('TILE');
+
+    throw new Error('Not finished');
 
     return {
       key: 'deconstruction_planner',
