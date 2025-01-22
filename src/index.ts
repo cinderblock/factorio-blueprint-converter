@@ -345,6 +345,7 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
       generation: header.generation,
       label: header.label,
       description: 'not yet implemented',
+      removedMods,
       data,
     };
   }

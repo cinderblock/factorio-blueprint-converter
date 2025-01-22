@@ -32,6 +32,7 @@ export type Blueprint = {
   generation: number;
   label: string;
   description: string;
+  removedMods: boolean;
   data: Buffer;
 };
 
