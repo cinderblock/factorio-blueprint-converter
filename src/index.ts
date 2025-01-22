@@ -386,8 +386,6 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
       filters.push({ index, name });
     });
 
-    throw new Error('Not finished');
-
     return filters;
   }
 
@@ -476,7 +474,6 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
     console.log('Icons:', icons);
 
     // console.log((await read(100)).toString('hex'));
-    // throw new Error('Not implemented');
 
     console.log('Peak:', (await peak(100)).toString('hex'));
 
@@ -504,8 +501,6 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
 
     const tileFilters = await readFilters('TILE');
 
-    throw new Error('Not finished');
-
     return {
       key: 'deconstruction_planner',
       generation: header.generation,
@@ -519,8 +514,6 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
       tileSelectionMode,
       tileFilters,
     };
-
-    throw new Error('Not finished');
   }
 
   async function parseUpgradeItem(): Promise<UpgradePlanner> {
