@@ -3,4 +3,7 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "always"
   },
+  "workbench.editorAssociations": {
+    "*.dat": "hexEditor.hexedit"
+  },
 }
