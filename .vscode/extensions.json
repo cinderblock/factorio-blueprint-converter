@@ -4,5 +4,6 @@
     "streetsidesoftware.code-spell-checker",
     "dbaeumer.vscode-eslint",
     "ms-vscode.hexeditor",
+    "github.vscode-github-actions",
   ]
 }
