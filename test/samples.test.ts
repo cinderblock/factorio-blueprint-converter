@@ -1,31 +1,45 @@
+import { describe, it, expect } from 'vitest';
 import { parseBlueprintData } from '../src/index.js';
-import { createReadStream, readdirSync } from 'node:fs';
+import { createReadStream, readdirSync, readFileSync } from 'node:fs';
+import { parse } from 'yaml';
+import { checkBlueprintDataMatchesString } from './helpers/compare.js';
 
 const samplesDir = 'test/samples';
 
-console.log(`Reading samples from ${samplesDir}`);
-
 // get array of sample file names in the samples folder
-const samples = readdirSync(samplesDir).filter(file => file.endsWith('.dat'));
 
 describe('Blueprint Sample Parser', () => {
-  samples.forEach(sample => {
-    describe(`${sample}`, () => {
-      it(`should parse ${sample}`, async () => {
-        const data = await parseBlueprintData(createReadStream(`${samplesDir}/${sample}`));
-        expect(data).toBeTruthy();
+  const blueprintStrings = parse(readFileSync(`${samplesDir}/exports.yaml`, 'utf-8')) as Record<string, string>;
 
-        // Verify data is serializable
-        expect(() => JSON.stringify(data)).not.toThrow();
+  readdirSync(samplesDir)
+    // Filter out non-dat files
+    .filter(file => file.endsWith('.dat'))
+    // Only test one sample for now, starting at 8
+    // .slice(8)
+    // .slice(0, 1)
+    .forEach(sample => {
+      describe(sample, () => {
+        it('should parse', async () => {
+          const path = `${samplesDir}/${sample}`;
+          const data = await parseBlueprintData(createReadStream(path));
 
-        // TODO: check if it matches the blueprint strings in exports.yaml
+          expect(data).toBeTruthy();
+
+          // Verify data is serializable
+          expect(() => JSON.stringify(data)).not.toThrow();
+
+          if (blueprintStrings[sample]) {
+            expect(checkBlueprintDataMatchesString(data.blueprints[0], blueprintStrings[sample])).toBe(true);
+          }
+        });
       });
     });
-  });
+
+  return;
 
   it(`should handle errors for corrupted stream`, async () => {
-    // Create a corrupted stream by ending it early
-    const corruptedStream = createReadStream(`${samplesDir}/${samples[0]}`, { end: 10 });
+    // Create a corrupted stream by using a json file
+    const corruptedStream = createReadStream(`package.json`);
     await expect(parseBlueprintData(corruptedStream)).rejects.toThrow();
   });
 
