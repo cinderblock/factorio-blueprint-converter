@@ -620,6 +620,8 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
     developer: await readNumber(2),
   };
 
+  console.log('Version:', ret.version);
+
   if (ret.version.major > 2) {
     console.error('Warning: Blueprint version is higher than 2');
   }
@@ -630,6 +632,8 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
 
     // Read expansions
     await readArray(1, async () => (ret.expansions[await readString()] ??= []).push(await readString()));
+
+    console.log('expansions:', ret.expansions);
 
     // Fill Index
     {
@@ -760,6 +764,8 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
       const mainCategory = await readString();
       console.log('Main Category:', mainCategory);
 
+      console.log('Peak:', (await peak(100)).toString('hex'));
+
       // Is this a count or no? It *almost* aligns with the number of groups...
       const firstIndex = await readNumber(2);
       const firstName = await readString();
@@ -803,7 +809,11 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
 
     ret.generationCounter = await readNumber(4);
 
+    console.log('generationCounter:', ret.generationCounter);
+
     ret.saveTime = await readDate();
+
+    console.log('saveTime:', ret.saveTime);
 
     const extra = await readNumber(4);
 
