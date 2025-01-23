@@ -626,17 +626,17 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
     console.error('Warning: Blueprint version is higher than 2');
   }
 
-    // Check bool
-    await expect(0, 'Initial bool false check');
+  // Check bool
+  await expect(0, 'Initial bool false check');
 
-    // Read expansions
-    await readArray(1, async () => (ret.expansions[await readString()] ??= []).push(await readString()));
+  // Read expansions
+  await readArray(1, async () => (ret.expansions[await readString()] ??= []).push(await readString()));
 
-    console.log('expansions:', ret.expansions);
+  console.log('expansions:', ret.expansions);
 
-    // Fill Index
-    {
-      /** Example data
+  // Fill Index
+  {
+    /** Example data
         0x41 0x00               | 65 prototypes ?
 
         equipment-grid          | first prototype name ?
@@ -754,43 +754,43 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
         aquilo
         // */
 
-      //   const index = {} as Record<Types, any>;
-      let x = 0;
+    //   const index = {} as Record<Types, any>;
+    let x = 0;
 
-      const indexCount = await readNumber(2);
-      console.log(`indexCount: ${indexCount}`);
+    const indexCount = await readNumber(2);
+    console.log(`indexCount: ${indexCount}`);
 
-      const mainCategory = await readString();
-      console.log('Main Category:', mainCategory);
+    const mainCategory = await readString();
+    console.log('Main Category:', mainCategory);
 
-      console.log('Peak:', (await peak(100)).toString('hex'));
+    console.log('Peak:', (await peak(100)).toString('hex'));
 
-      // Is this a count or no? It *almost* aligns with the number of groups...
-      const firstIndex = await readNumber(2);
-      const firstName = await readString();
+    // Is this a count or no? It *almost* aligns with the number of groups...
+    const firstIndex = await readNumber(2);
+    const firstName = await readString();
 
-      console.log(firstIndex, firstName);
+    console.log(firstIndex, firstName);
 
-      for (let j = 1; j < indexCount; j++) {
-        const prototype = await readString();
-        // console.log('prototype:', prototype);
+    for (let j = 1; j < indexCount; j++) {
+      const prototype = await readString();
+      // console.log('prototype:', prototype);
 
-        const readNum = prototype == 'quality' ? 1 : 2;
-        await readArray(readNum, async () => {
-          const id = await readNumber(readNum);
-          const name = await readString();
-          console.log(x++, j, prototype, id, name);
+      const readNum = prototype == 'quality' ? 1 : 2;
+      await readArray(readNum, async () => {
+        const id = await readNumber(readNum);
+        const name = await readString();
+        console.log(x++, j, prototype, id, name);
 
-          console.log('type:', typeMap[prototype], prototype);
+        console.log('type:', typeMap[prototype], prototype);
 
-          index[typeMap[prototype]].push({ prototype, name, id });
-        });
-      }
-
-      console.log(index);
+        index[typeMap[prototype]].push({ prototype, name, id });
+      });
     }
 
-    /* Example data
+    console.log(index);
+  }
+
+  /* Example data
 
        0x00
        0x00
@@ -800,30 +800,30 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
        0x01
     // */
 
-    // Unknown purpose. Changes
-    await readNumber(1);
+  // Unknown purpose. Changes
+  await readNumber(1);
 
-    // Unknown purpose. Static
-    await expect(0, '???');
+  // Unknown purpose. Static
+  await expect(0, '???');
 
-    ret.generationCounter = await readNumber(4);
+  ret.generationCounter = await readNumber(4);
 
-    console.log('generationCounter:', ret.generationCounter);
+  console.log('generationCounter:', ret.generationCounter);
 
-    ret.saveTime = await readDate();
+  ret.saveTime = await readDate();
 
-    console.log('saveTime:', ret.saveTime);
+  console.log('saveTime:', ret.saveTime);
 
-    const extra = await readNumber(4);
+  const extra = await readNumber(4);
 
-    console.log('extra:', extra);
+  console.log('extra:', extra);
 
-    // Unknown purpose. Static
-    await expect(1, '???');
+  // Unknown purpose. Static
+  await expect(1, '???');
 
-    ret.blueprints = await parseLibraryObjects();
+  ret.blueprints = await parseLibraryObjects();
 
-    console.log('Done');
+  console.log('Done');
 
   // Read remaining data with timeout
   const remainingData = await Promise.race([
