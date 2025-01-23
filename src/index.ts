@@ -626,7 +626,6 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
     console.error('Warning: Blueprint version is higher than 2');
   }
 
-  try {
     // Check bool
     await expect(0, 'Initial bool false check');
 
@@ -825,9 +824,6 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
     ret.blueprints = await parseLibraryObjects();
 
     console.log('Done');
-  } catch (e) {
-    console.error(e);
-  }
 
   // Read remaining data with timeout
   const remainingData = await Promise.race([
