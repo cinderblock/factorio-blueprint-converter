@@ -1,27 +1,42 @@
 import { describe, it, expect } from 'vitest';
-import { parseBlueprintData } from '../src/index.js';
+import { annotatedData, parseBlueprintData } from '../src/index.js';
 import { createReadStream, readdirSync, readFileSync } from 'node:fs';
 import { parse } from 'yaml';
 import { checkBlueprintDataMatchesString } from './helpers/compare.js';
+import { mkdir, stat, writeFile } from 'node:fs/promises';
+import { join } from 'node:path';
 
 const samplesDir = 'test/samples';
 
-// get array of sample file names in the samples folder
-
-describe('Blueprint Sample Parser', () => {
-  const blueprintStrings = parse(readFileSync(`${samplesDir}/exports.yaml`, 'utf-8')) as Record<string, string>;
-
-  readdirSync(samplesDir)
-    // Filter out non-dat files
-    .filter(file => file.endsWith('.dat'))
-    // Only test one sample for now, starting at 8
-    // .slice(8)
-    // .slice(0, 1)
-    .forEach(sample => {
+describe('Blueprint Parser', () => {
+  describe('Samples', () => {
+    const blueprintStrings = parse(readFileSync(join(samplesDir, 'exports.yaml'), 'utf-8')) as Record<string, string>;
+    for (const sample of readdirSync(samplesDir).filter(file => file.endsWith('.dat'))) {
       describe(sample, () => {
         it('should parse', async () => {
-          const path = `${samplesDir}/${sample}`;
-          const data = await parseBlueprintData(createReadStream(path));
+          const path = join(samplesDir, sample);
+
+          // Capture the data and any potential error
+          let data;
+          try {
+            data = await parseBlueprintData(createReadStream(path));
+          } finally {
+            // Write annotated data even if parsing failed
+            if (annotatedData.length > 0) {
+              const annotatedPath = join(samplesDir, 'annotated', `${sample}.txt`);
+              await mkdir(join(samplesDir, 'annotated'), { recursive: true });
+
+              // Create .gitignore if it doesn't exist
+              const gitignorePath = join(samplesDir, 'annotated', '.gitignore');
+              try {
+                await stat(gitignorePath);
+              } catch {
+                await writeFile(gitignorePath, '.gitignore\n*.dat.txt\n');
+              }
+
+              await writeFile(annotatedPath, annotatedData.join('\n') + '\n');
+            }
+          }
 
           expect(data).toBeTruthy();
 
@@ -33,9 +48,11 @@ describe('Blueprint Sample Parser', () => {
           }
         });
       });
-    });
+    }
+  });
 
   return;
+  // Broken
 
   it(`should handle errors for corrupted stream`, async () => {
     // Create a corrupted stream by using a json file
