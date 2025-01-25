@@ -9,7 +9,7 @@ import annotationWriter from './helpers/annotationWriter.js';
 
 const samplesDir = 'test/samples';
 
-describe('Blueprint Parser', () => {
+describe('Blueprint Parser', { concurrent: true }, () => {
   describe('Samples', async () => {
     const blueprintStrings = parse(await readFile(join(samplesDir, 'exports.yaml'), 'utf-8')) as Record<string, string>;
 
