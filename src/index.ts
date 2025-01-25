@@ -205,12 +205,20 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
     const buff = await read(length);
     const value = buff.toString('utf8');
 
-    if (CheckForUnlikelyStrings && !/^[\x20-\x7E]*$/.test(value)) {
-      console.log(buff.toString('hex'));
-      throw new Error(`Invalid name ${value}`);
-    }
+    // Escape unprintable characters for annotation display
+    const escapedValue = value.replace(/[^\x20-\x7E]/g, char => {
+      if (char === '\n') return '\\n';
+      if (char === '\r') return '\\r';
+      if (char === '\t') return '\\t';
+      return `\\x${char.charCodeAt(0).toString(16).padStart(2, '0')}`;
+    });
+    annotation?.decoded(escapedValue);
 
-    annotation?.decoded(value);
+    if (CheckForUnlikelyStrings && !/^[\x20-\x7E\r\n\t]*$/.test(value)) {
+      console.log(buff.toString('hex'));
+      annotation?.decoded('Invalid name');
+      throw new Error(`Invalid name ${escapedValue}`);
+    }
 
     return value;
   }
