@@ -38,3 +38,11 @@ jobs:
             echo "--- $file ---"
             cat $file
           done
+      - uses: actions/upload-artifact@v4
+        # Always upload annotated files, even on failure
+        if: success() || steps.test.conclusion == 'failure'
+        with:
+          name: annotated-files
+          path: test/samples/annotated/*.dat.txt
+          if-no-files-found: error
+          overwrite: true
