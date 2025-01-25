@@ -3,7 +3,7 @@ import { parseBlueprintData } from '../src/index.js';
 import { createReadStream } from 'node:fs';
 import { parse } from 'yaml';
 import { checkBlueprintDataMatchesString } from './helpers/compare.js';
-import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
+import { mkdir, readdir, readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import annotationWriter from './helpers/annotationWriter.js';
 
@@ -16,7 +16,7 @@ describe('Blueprint Parser', { concurrent: true }, () => {
 
     const annotationsDir = join(samplesDir, 'annotated');
 
-    await mkdir(annotationsDir, { recursive: true }).then(() => writeFile(join(annotationsDir, '.gitignore'), '.gitignore\n*.dat.txt\n'));
+    await mkdir(annotationsDir, { recursive: true });
 
     const sampleFiles = (await readdir(samplesDir)).filter(file => file.endsWith('.dat'));
 
