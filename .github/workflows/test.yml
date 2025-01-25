@@ -28,3 +28,13 @@ jobs:
 
       - name: Run tests
         run: npm test --color=always
+        id: test
+
+      - name: Print annotated and decoded files
+        # Always print annotated files, even on failure
+        if: success() || steps.test.conclusion == 'failure'
+        run: |
+          for file in test/samples/annotated/*.dat.txt; do
+            echo "--- $file ---"
+            cat $file
+          done
