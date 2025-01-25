@@ -877,7 +877,7 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
       // console.log('prototype:', prototype);
 
       const readNum = prototype == 'quality' ? 1 : 2;
-      await readArray(readNum, i =>
+      await readArray(readNum, async i =>
         wrapLabel(`[${i.toString().padStart(2)}]`, async () => {
           const id = await wrapLabel('id', () => readNumber(readNum));
           const name = await wrapLabel('name', () => readString());
