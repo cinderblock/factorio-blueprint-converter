@@ -11,15 +11,49 @@ This project is in early development and is not yet ready for use.
 
 Back up your data.
 
+### Setup
+
+Install npm dependencies
+
 ```bash
 npm install
-npm run dev
+```
+
+### Run the tests
+
+```bash
+npm run test
+```
+
+#### Watch mode for Tests
+
+```bash
+npm run test:watch
+```
+
+### Normal usage
+
+```bash
+npm start
 ```
 
 It automatically finds the default blueprint data file and extracts it.
 
 For now, it just prints some stuff to terminal.
 Eventually, it will write the JSON data to a file tree where changes can be tracked in a version control system.
+
+#### Dev
+
+Automatically reruns main program on file changes.
+
+```bash
+npm run dev
+```
+
+## Development
+
+Test scripts currently generate annotated files in the `test/samples/annotated` directory.
+These should be helpful for developing the parser and decoding the binary data.
 
 ## See Also
 
