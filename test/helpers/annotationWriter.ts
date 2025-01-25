@@ -8,6 +8,8 @@ import PQueue from 'p-queue';
 const loadTime = new Date();
 
 function streamToBuffer(stream: Readable): Promise<Buffer> {
+  if (stream.readableEnded) return Promise.resolve(Buffer.alloc(0));
+
   return new Promise((resolve, reject) => {
     const chunks: Buffer[] = [];
     stream.on('data', chunk => chunks.push(chunk as Buffer));
