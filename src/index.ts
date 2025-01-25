@@ -17,16 +17,16 @@ import { typeMap } from './typeMap.js';
 // For debugging
 const CheckForUnlikelyStrings = true;
 
-export const annotatedData: string[] = [];
-let arrayNestingLevel = 0;
-let arrayIndex: number;
-
-function amendData(data: string) {
-  const curr = annotatedData[annotatedData.length - 1];
-  annotatedData[annotatedData.length - 1] = curr.padEnd(120) + ' => ' + data;
+export interface Annotation {
+  // mark next read as not to be printed
+  peek(): void;
+  pushLabel(label: string): void;
+  popLabel(): void;
+  read(buffer: Buffer, location: number): void;
+  decoded(v: string): void;
 }
 
-export async function parseBlueprintData(stream: Readable): Promise<BlueprintData> {
+export async function parseBlueprintData(stream: Readable, annotation?: Annotation): Promise<BlueprintData> {
   const index: Record<Index.Types, Index.Entry[]> = {
     ITEM: [],
     FLUID: [],
@@ -39,6 +39,13 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
     PLANET: [],
   };
 
+  async function wrapLabel<T>(label: string, fn: () => T): Promise<T> {
+    annotation?.pushLabel(label);
+    const ret = await fn();
+    annotation?.popLabel();
+    return ret;
+  }
+
   // Wait for the stream to be readable
   async function readable(): Promise<void> {
     return new Promise(resolve => stream.once('readable', resolve));
@@ -49,12 +56,12 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
   let fileLocation = 0;
 
   // Read a number of bytes from the stream and return it as a Buffer
-  async function read(length: number, label?: string | false) {
+  async function read(length: number) {
     if (length < 0) throw new Error(`Can't read negative (${length}) bytes`);
     // Node.js limit is 1GiB
     if (length > 2 ** 30) throw new Error(`Reading ${length} bytes is too large`);
 
-    let ret = Buffer.alloc(0);
+    const chunks: Buffer[] = [];
 
     while (length > 0) {
       const chunk = stream.read(Math.min(stream.readableLength, length)) as Buffer | null;
@@ -68,24 +75,22 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
       }
 
       length -= chunk.length;
-      ret = Buffer.concat([ret, chunk]);
+      chunks.push(chunk);
     }
+
+    const ret = Buffer.concat(chunks);
+
+    annotation?.read(ret, fileLocation);
 
     fileLocation += ret.length;
-
-    if (label) {
-      annotatedData.push(
-        // `${ret.toString('hex').padEnd(80)} ${' '.repeat(Math.max(0, arrayNestingLevel - 1))}${'⮑'.repeat(Math.min(arrayNestingLevel, 1))}${label}`,
-        `${ret.toString('hex').padEnd(80)} ${arrayIndex ? `[${arrayIndex.toString().padStart(3)}] ` : ''}${label}`,
-      );
-    }
 
     return ret;
   }
 
   // Read a number of bytes from the stream and return it as a Buffer without moving the stream index
-  async function peak(length: number): Promise<Buffer> {
-    const copy = await read(length, false);
+  async function peek(length: number): Promise<Buffer> {
+    annotation?.peek();
+    const copy = await read(length);
     stream.unshift(copy);
     return copy;
   }
@@ -96,36 +101,31 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
    * Reads one byte. If it is not 0xff, it is returned as a number.
    * If it is 0xff, it reads 4 bytes and returns that as a number.
    */
-  async function readNumberLow(label: string | false): Promise<number>;
-  async function readNumberLow(length: 0, label?: string | false): Promise<number>;
+  async function readNumberLow(): Promise<number>;
+  async function readNumberLow(length: 0): Promise<number>;
   /**
    * Reads one byte and errors if it is 0xff
    * @param error If true, throw an error if the length is 0xff
    */
-  async function readNumberLow(error: true, label?: string | false): Promise<number>;
+  async function readNumberLow(error: true): Promise<number>;
   /**
    * Read a number of bytes from the stream and return it as a number
    * @param length The number of bytes to read. Can be negative to read a signed number
    */
-  async function readNumberLow(length: number, label?: string | false): Promise<number>;
-  async function readNumberLow(length: 8 | -8, label?: string | false): Promise<bigint>;
-  async function readNumberLow(length: number | true | string | false = 0, label?: string | false) {
-    if (typeof length === 'string' || length === false) {
-      label = length;
-      length = 0;
-    }
-
+  async function readNumberLow(length: number): Promise<number>;
+  async function readNumberLow(length: 8 | -8): Promise<bigint>;
+  async function readNumberLow(length: number | true = 0) {
     // TODO: remove this case?
     if (length === true) {
-      length = await readNumberLow(1, label);
+      length = await readNumberLow(1);
       if (length !== 255) return length;
       throw new Error(`Unexpected flexible length 0xff`);
     }
 
     if (length === 0) {
-      length = await readNumberLow(1, label);
+      length = await readNumberLow(1);
       if (length !== 255) return length;
-      return await readNumberLow(4, label);
+      return await readNumberLow(4);
     }
 
     let signed = false;
@@ -137,7 +137,7 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
 
     if (length > 8) throw new Error(`Reading ${length} bytes is too large`);
 
-    const data = await read(length, label);
+    const data = await read(length);
 
     if (length > 6) {
       if (length === 8) {
@@ -158,32 +158,29 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
    * Reads one byte. If it is not 0xff, it is returned as a number.
    * If it is 0xff, it reads 4 bytes and returns that as a number.
    */
-  async function readNumber(label: string | false): Promise<number>;
-  async function readNumber(length: 0, label?: string | false): Promise<number>;
+  async function readNumber(): Promise<number>;
+  async function readNumber(length: 0): Promise<number>;
   /**
    * Reads one byte and errors if it is 0xff
    * @param error If true, throw an error if the length is 0xff
    */
-  async function readNumber(error: true, label?: string | false): Promise<number>;
+  async function readNumber(error: true): Promise<number>;
   /**
    * Read a number of bytes from the stream and return it as a number
    * @param length The number of bytes to read. Can be negative to read a signed number
    */
-  async function readNumber(length: number, label?: string | false): Promise<number>;
-  async function readNumber(length: 8 | -8, label?: string | false): Promise<bigint>;
-  async function readNumber(
-    length: number | true | string | false = 0,
-    label?: string | false,
-  ): Promise<number | bigint> {
-    const ret = await readNumberLow(length as number, label);
+  async function readNumber(length: number): Promise<number>;
+  async function readNumber(length: 8 | -8): Promise<bigint>;
+  async function readNumber(length: number | true | string | false = 0): Promise<number | bigint> {
+    const ret = await readNumberLow(length as number);
 
-    if (label !== false) amendData(ret.toString());
+    annotation?.decoded(ret.toString());
 
     return ret;
   }
 
-  async function readBoolean(label?: string | false) {
-    const v = await readNumberLow(1, label);
+  async function readBoolean() {
+    const v = await readNumberLow(1);
     let ret: boolean;
     if (v === 0) {
       ret = false;
@@ -192,18 +189,20 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
     } else {
       throw new Error(`Unexpected boolean value ${v}`);
     }
-    if (label !== false) amendData(ret.toString());
+
+    annotation?.decoded(ret.toString());
+
     return ret;
   }
 
-  async function readDate(label?: string | false) {
-    return new Date((await readNumberLow(4, label)) * 1000);
+  async function readDate() {
+    return new Date((await readNumberLow(4)) * 1000);
   }
 
-  async function readString(label?: string | false) {
-    const length = await readNumber(0, `${label} length`);
+  async function readString() {
+    const length = await readNumber(0);
 
-    const buff = await read(length, `${label} value`);
+    const buff = await read(length);
     const value = buff.toString('utf8');
 
     if (CheckForUnlikelyStrings && !/^[\x20-\x7E]*$/.test(value)) {
@@ -211,31 +210,23 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
       throw new Error(`Invalid name ${value}`);
     }
 
-    if (label !== false) amendData(value);
+    annotation?.decoded(value);
 
     return value;
   }
 
-  async function readArray<T>(lengthLength: number, fn: (index: number) => Promise<T>, label?: string | false) {
-    // Maybe this should be a readNumber() call?
-    const length = await readNumber(lengthLength, label);
+  async function readArray<T>(lengthLength: number, fn: (index: number) => Promise<T>) {
+    const length = await readNumber(lengthLength);
     if (lengthLength === 1 && length === 255) {
       throw new Error(`Unexpected length 0xff for Array`);
     }
 
     console.log('Reading array of length:', length);
 
-    arrayNestingLevel++;
-
     const arr = [] as T[];
     for (let i = 0; i < length; i++) {
-      const lastIndex = arrayIndex;
-      arrayIndex = i;
       arr.push(await fn(i));
-      arrayIndex = lastIndex;
     }
-
-    arrayNestingLevel--;
 
     return arr;
   }
@@ -246,21 +237,23 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
    * @param a Array to read from
    * @returns The selected entry
    */
-  async function readMappedNumber<T>(length: number, a: T[], label?: string | false) {
-    const index = await readNumber(length, label);
+  async function readMappedNumber<T>(length: number, a: T[]) {
+    const index = await readNumber(length);
     if (index >= a.length) {
       throw new Error(`Index ${index} out of range for array of length ${a.length}`);
     }
     return a[index];
   }
 
-  async function readEntry(type: Index.Types, label?: string | false) {
-    const id = await readNumber(type == 'TILE' ? 1 : 2, label);
+  async function readEntry(type: Index.Types) {
+    const id = await readNumber(type == 'TILE' ? 1 : 2);
     const a = index[type];
     const entry = a.find(e => e.id === id);
     if (!entry) {
       //   throw new Error(`Entry with id ${id} not found in index`);
     }
+
+    annotation?.decoded(entry?.name ?? 'null');
 
     return entry;
   }
@@ -273,37 +266,43 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
       b = Buffer.from(b);
     }
 
-    if (b.compare(await read(b.length, message)) !== 0) {
-      throw new Error(`${message}. Expected ${b.toString('hex')}`);
-    }
+    await wrapLabel(message, async () => {
+      if (b.compare(await read(b.length)) !== 0) {
+        throw new Error(`${message}. Expected ${b.toString('hex')}`);
+      }
 
-    amendData(`0x${b.toString('hex')} ✅`);
+      annotation?.decoded(`0x${b.toString('hex')} ✅`);
+    });
   }
 
-  async function readSignal(label?: string | false): Promise<Sig | null> {
-    const type = await readMappedNumber<Sig['type']>(1, ['ITEM', 'FLUID', 'VSIGNAL'], label + ' type');
-    const entry = await readEntry(type, label + ' entry');
+  async function readSignal(): Promise<Sig | null> {
+    return await wrapLabel('signal', async () => {
+      const type = await wrapLabel('type', () => readMappedNumber<Sig['type']>(1, ['ITEM', 'FLUID', 'VSIGNAL']));
+      annotation?.decoded(type);
 
-    if (!entry) return null;
+      const entry = await wrapLabel('entry', () => readEntry(type));
+      annotation?.decoded(entry?.name ?? 'null');
 
-    return {
-      type,
-      name: entry.name,
-    };
+      if (!entry) return null;
+
+      return {
+        type,
+        name: entry.name,
+      };
+    });
   }
 
-  async function parseIcons(label?: string | false) {
-    const unknownIcons = await readArray(1, _ => readString(label + ' unknownIcons'), label + ' unknownIcons');
+  async function parseIcons() {
+    const unknownIcons = await wrapLabel('unknownIcons', () => readArray(1, readString));
 
     const icons: {
       index: number;
       signal: Sig;
     }[] = [];
 
-    await readArray(
-      1,
-      async i => {
-        const signal = await readSignal(label + ' icon');
+    await wrapLabel('icons', async () => {
+      await readArray(1, async i => {
+        const signal = await readSignal();
         if (!signal) {
           console.log(`Icon ${i} not found`);
           return;
@@ -316,9 +315,8 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
           index: i + 1,
           signal,
         });
-      },
-      label + ' icons',
-    );
+      });
+    });
 
     return icons;
   }
@@ -331,10 +329,11 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
     // 0x12 0x00 0x00 0x00        | generation
     // 0x4d 0x00                  | entry
 
-    return readArray<BlueprintEntry>(
-      4,
-      async slot => {
-        const slotUsed = await readBoolean(label + ' slot used');
+    return await wrapLabel('library objects', () =>
+      readArray<BlueprintEntry>(4, async slot => {
+        const slotUsed = await readBoolean();
+        annotation?.decoded(slotUsed ? 'used' : 'not used');
+
         if (!slotUsed) {
           console.log(`Slot ${slot} not used`);
           return null;
@@ -342,40 +341,42 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
 
         console.log('Slot used:', slot);
 
-        const parse = await readMappedNumber(
-          1,
-          [parseBlueprint, parseBlueprintBook, parseDeconstructionItem, parseUpgradeItem],
-          label + ' parse',
-        );
+        const parse = await readMappedNumber(1, [
+          parseBlueprint,
+          parseBlueprintBook,
+          parseDeconstructionItem,
+          parseUpgradeItem,
+        ]);
 
         return parse();
-      },
-      label + ' library objects',
+      }),
     );
   }
 
-  async function parseBlueprintEntityHeader(prototype: string, annotationLabel?: string | false) {
-    const generation = await readNumber(4, annotationLabel + ' generation');
+  async function parseBlueprintEntityHeader(prototype: string) {
+    return wrapLabel('header', async () => {
+      const generation = await wrapLabel('generation', () => readNumber(4));
 
-    console.log('Generation:', generation);
+      console.log('Generation:', generation);
 
-    const entry = await readEntry('ITEM', annotationLabel + ' entry');
+      const entry = await wrapLabel('entry', () => readEntry('ITEM'));
 
-    if (!entry) {
-      throw new Error('Entry not found');
-    }
+      if (!entry) {
+        throw new Error('Entry not found');
+      }
 
-    console.log('Entry:', entry.name);
+      console.log('Entry:', entry.name);
 
-    if (entry.prototype !== prototype) {
-      throw new Error(`Entry ${entry.prototype} does not match ${prototype}`);
-    }
+      if (entry.prototype !== prototype) {
+        throw new Error(`Entry ${entry.prototype} does not match ${prototype}`);
+      }
 
-    const label = await readString(annotationLabel + ' label');
+      const label = await wrapLabel('label', () => readString());
 
-    console.log('Label:', label);
+      console.log('Label:', label);
 
-    return { generation, entry, label };
+      return { generation, entry, label };
+    });
   }
 
   async function parseBlueprint(): Promise<Blueprint> {
@@ -399,7 +400,9 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
     // 0x 000000000000560000000001200001000000000000006400000000000000000000000000000000000000000000000100
     // 0x 0000000000005600000000...
 
-    const header = await parseBlueprintEntityHeader('blueprint', 'blueprint');
+    annotation?.pushLabel('blueprint');
+
+    const header = await parseBlueprintEntityHeader('blueprint');
 
     // blueprint-book
     // deconstruction-item
@@ -407,12 +410,13 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
 
     await expect(0, 'Expect 0');
 
-    const removedMods = await readBoolean('blueprint removed mods');
+    const removedMods = await wrapLabel('removed mods', () => readBoolean());
 
-    const length = await readNumber(4, 'blueprint data length');
+    const length = await wrapLabel('data length', () => readNumber(4));
 
-    // TODO: Parse data
-    const data = await read(length);
+    const data = await wrapLabel('unparsed data', () => read(length));
+
+    annotation?.popLabel(); // blueprint
 
     return {
       key: 'blueprint',
@@ -424,20 +428,19 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
     };
   }
 
-  async function readFilters(type: Index.Types, label?: string | false) {
+  async function readFilters(type: Index.Types) {
+    annotation?.pushLabel('filters');
+
     const unknowns: Record<number, string> = {};
 
-    console.log('Peak:', (await peak(100)).toString('hex'));
+    await wrapLabel('unknowns', async () =>
+      readArray(1, async () => {
+        const index = await wrapLabel('index', () => readNumber(2));
 
-    console.log('reading unknowns');
-    await readArray(
-      1,
-      async () => {
-        const index = await readNumber(2, label + ' unknown index');
-        const name = await readString(label + ' unknown name');
+        const name = await wrapLabel('name', () => readString());
+
         unknowns[index] = name;
-      },
-      label + ' unknowns',
+      }),
     );
 
     const filters: {
@@ -446,15 +449,9 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
       name: string;
     }[] = [];
 
-    console.log('Peak:', (await peak(100)).toString('hex'));
-
-    console.log('reading filters');
-    await readArray(
-      1,
-      async index => {
-        let name = (await readEntry(type, label + ' unknown entry'))?.name;
-        //   let name = await readString();
-        //   console.log('Name:', name);
+    await wrapLabel('filters', () =>
+      readArray(1, async index => {
+        let name = (await wrapLabel('unknown entry', () => readEntry(type)))?.name;
         if (!name) return;
 
         const unknownReplacement = unknowns[index];
@@ -464,8 +461,7 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
         }
 
         filters.push({ index, name });
-      },
-      label + ' filters',
+      }),
     );
 
     const quality: {
@@ -473,17 +469,17 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
       name: string;
     }[] = [];
 
-    await readArray(
-      1,
-      async () => {
-        const index = await readNumber(2, label + ' quality index');
-        const name = await readString(label + ' quality name');
+    await wrapLabel('quality', () =>
+      readArray(1, async () => {
+        const index = await wrapLabel('index', () => readNumber(2));
+        const name = await wrapLabel('name', () => readString());
         quality.push({ index, name });
-      },
-      label + ' quality',
+      }),
     );
 
-    return filters;
+    annotation?.popLabel(); // filters
+
+    return { filters, quality };
   }
 
   async function parseDeconstructionItem(): Promise<DeconstructionPlanner> {
@@ -554,49 +550,39 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
       000101
       1e000000500004477269640000000400000001001f0000004d00 (might have some extra data)
       
-     */
+      */
+
+    annotation?.pushLabel('deconstruction-item');
 
     const header = await parseBlueprintEntityHeader('deconstruction-item');
 
-    console.log('Peak:', (await peak(200)).toString('hex'));
-
-    const description = await readString('Desc');
+    const description = await wrapLabel('description', () => readString());
 
     console.log('Deconstruction Planner Desc:', description);
 
-    console.log('Peak:', (await peak(100)).toString('hex'));
-
-    const icons = await parseIcons('Deconstruction Planner Icons');
-
-    console.log('Icons:', icons);
+    const icons = await parseIcons();
 
     // console.log((await read(100)).toString('hex'));
 
-    console.log('Peak:', (await peak(100)).toString('hex'));
-
-    const entityFilterMode = await readNumber(1, 'Deconstruction Planner Entity Filter Mode');
+    const entityFilterMode = await wrapLabel('Entity filter mode', () => readNumber(1));
 
     console.log('Entity Filter Mode:', entityFilterMode);
 
-    console.log('Peak:', (await peak(100)).toString('hex'));
-
-    const entityFilters = await readFilters('ENTITY', 'Deconstruction Planner Entity Filters');
+    const entityFilters = await wrapLabel('entity filters', () => readFilters('ENTITY'));
 
     console.log('Entity Filters:', entityFilters);
 
-    console.log('Peak:', (await peak(100)).toString('hex'));
-
-    const treesRocksOnly = await readBoolean('Deconstruction Planner Trees/Rocks Only');
+    const treesRocksOnly = await wrapLabel('trees/rocks only', () => readBoolean());
 
     console.log('Trees/Rocks Only:', treesRocksOnly);
 
-    console.log('Peak:', (await peak(100)).toString('hex'));
+    const tileFilterMode = await wrapLabel('tile filter mode', () => readNumber(1));
 
-    const tileFilterMode = await readNumber(1, 'Deconstruction Planner Tile Filter Mode');
+    const tileSelectionMode = await wrapLabel('tile selection mode', () => readNumber(1));
 
-    const tileSelectionMode = await readNumber(1, 'Deconstruction Planner Tile Selection Mode');
+    const tileFilters = await wrapLabel('tile filters', () => readFilters('TILE'));
 
-    const tileFilters = await readFilters('TILE', 'Deconstruction Planner Tile Filters');
+    annotation?.popLabel(); // deconstruction-item
 
     return {
       key: 'deconstruction_planner',
@@ -614,32 +600,32 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
   }
 
   async function parseUpgradeItem(): Promise<UpgradePlanner> {
+    annotation?.pushLabel('Upgrade-item');
+
     const header = await parseBlueprintEntityHeader('upgrade-item');
 
-    const description = await readString('Desc');
+    const description = await wrapLabel('description', () => readString());
 
-    const icons = await parseIcons('Upgrade Planner Icons');
+    const icons = await parseIcons();
 
     const unknownFrom: Record<number, string> = {};
     const unknownTo: Record<number, string> = {};
 
-    await readArray(
-      1,
-      async () => {
-        const name = await readString('Upgrade Planner Unknown Name');
-        const isTo = await readBoolean('Upgrade Planner Unknown To');
-        const index = await readNumber(2, 'Upgrade Planner Unknown Index');
+    await wrapLabel('unknowns', () =>
+      readArray(1, async () => {
+        const name = await wrapLabel('name', () => readString());
+        const isTo = await wrapLabel('isTo', () => readBoolean());
+        const index = await wrapLabel('index', () => readNumber(2));
         (isTo ? unknownTo : unknownFrom)[index] = name;
-      },
-      'Upgrade Planner Unknowns',
+      }),
     );
 
     async function reader(unknowns: Record<number, string>): Promise<{
       type: Index.Types;
       name: string;
     }> {
-      const isItem = await readBoolean('Upgrade Planner Unknown Is Item');
-      const entry = await readEntry(isItem ? 'ITEM' : 'ENTITY', 'Upgrade Planner Unknown Entry');
+      const isItem = await wrapLabel('isItem', () => readBoolean());
+      const entry = await wrapLabel('entry', () => readEntry(isItem ? 'ITEM' : 'ENTITY'));
 
       if (!entry) {
         throw new Error('Unknown entry');
@@ -663,15 +649,15 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
       to: { type: Index.Types; name: string };
     }[] = [];
 
-    await readArray(
-      1,
-      async index => {
+    await wrapLabel('mappers', () =>
+      readArray(1, async index => {
         const from = await reader(unknownFrom);
         const to = await reader(unknownTo);
         mappers.push({ index, from, to });
-      },
-      'Upgrade Planner Mappers',
+      }),
     );
+
+    annotation?.popLabel(); // upgrade-item
 
     return {
       key: 'upgrade_planner',
@@ -684,19 +670,22 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
   }
 
   async function parseBlueprintBook(): Promise<BlueprintBook> {
+    annotation?.pushLabel('Blueprint Book');
     const { label, generation } = await parseBlueprintEntityHeader('blueprint-book');
 
-    const description = await readString('Desc');
+    const description = await wrapLabel('description', () => readString());
 
     console.log('Description:', description);
 
-    const icons = await parseIcons('Blueprint Book Icons');
+    const icons = await parseIcons();
 
     const blueprints = await parseLibraryObjects();
 
-    const activeIndex = await readNumber(1, 'Blueprint Book Active Index');
+    const activeIndex = await wrapLabel('activeIndex', () => readNumber(1));
 
     await expect(0, 'Expect 0');
+
+    annotation?.popLabel(); // blueprint-book
 
     return {
       key: 'blueprint_book',
@@ -718,12 +707,12 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
   //   console.log('Start block: ' + (await peak(10)).toString('hex'));
 
   // See: https://wiki.factorio.com/Version_string_format
-  ret.version = {
-    major: await readNumber(2, 'Version Major'),
-    minor: await readNumber(2, 'Version Minor'),
-    patch: await readNumber(2, 'Version Patch'),
-    developer: await readNumber(2, 'Version Developer'),
-  };
+  ret.version = await wrapLabel('version', async () => ({
+    major: await wrapLabel('major', () => readNumber(2)),
+    minor: await wrapLabel('minor', () => readNumber(2)),
+    patch: await wrapLabel('patch', () => readNumber(2)),
+    developer: await wrapLabel('developer', () => readNumber(2)),
+  }));
 
   console.log('Version:', ret.version);
 
@@ -735,10 +724,10 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
   await expect(0, 'Initial bool false check');
 
   // Read expansions
-  await readArray(
-    1,
-    async () => (ret.expansions[await readString('game')] ??= []).push(await readString('file')),
-    'Expansions',
+  await wrapLabel('expansions', async () =>
+    readArray(1, async () =>
+      (ret.expansions[await wrapLabel('game', readString)] ??= []).push(await wrapLabel('file', readString)),
+    ),
   );
 
   console.log('expansions:', ret.expansions);
@@ -864,36 +853,32 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
         // */
 
     //   const index = {} as Record<Types, any>;
-    let x = 0;
 
-    const indexCount = await readNumber(2, 'Index Count');
+    const indexCount = await wrapLabel('indexCount', () => readNumber(2));
     console.log(`indexCount: ${indexCount}`);
 
-    const mainCategory = await readString('Main Category');
+    const mainCategory = await wrapLabel('mainCategory', readString);
     console.log('Main Category:', mainCategory);
 
-    console.log('Peak:', (await peak(100)).toString('hex'));
-
     // Is this a count or no? It *almost* aligns with the number of groups...
-    const firstIndex = await readNumber(2, 'First Index');
-    const firstName = await readString('First Name');
+    const firstIndex = await wrapLabel('firstIndex', () => readNumber(2));
+    const firstName = await wrapLabel('firstName', () => readString());
 
     console.log(firstIndex, firstName);
 
     for (let j = 1; j < indexCount; j++) {
-      const prototype = await readString('Prototype');
+      const prototype = await wrapLabel('prototype', () => readString());
       // console.log('prototype:', prototype);
 
       const readNum = prototype == 'quality' ? 1 : 2;
-      await readArray(readNum, async () => {
-        const id = await readNumber(readNum, 'Index ID');
-        const name = await readString('Index Name');
-        console.log(x++, j, prototype, id, name);
+      await readArray(readNum, i =>
+        wrapLabel(`[${i.toString().padStart(2)}]`, async () => {
+          const id = await wrapLabel('id', () => readNumber(readNum));
+          const name = await wrapLabel('name', () => readString());
 
-        console.log('type:', typeMap[prototype], prototype);
-
-        index[typeMap[prototype]].push({ prototype, name, id });
-      });
+          index[typeMap[prototype]].push({ prototype, name, id });
+        }),
+      );
     }
 
     console.log(index);
@@ -910,20 +895,20 @@ export async function parseBlueprintData(stream: Readable): Promise<BlueprintDat
     // */
 
   // Unknown purpose. Changes
-  await readNumber(1, 'Unknown 1');
+  await wrapLabel('unknown1', () => readNumber(1));
 
   // Unknown purpose. Static
   await expect(0, 'Unknown 2');
 
-  ret.generationCounter = await readNumber(4, 'Generation Counter');
+  ret.generationCounter = await wrapLabel('generationCounter', () => readNumber(4));
 
   console.log('generationCounter:', ret.generationCounter);
 
-  ret.saveTime = await readDate('Save Time');
+  ret.saveTime = await wrapLabel('saveTime', () => readDate());
 
   console.log('saveTime:', ret.saveTime);
 
-  const extra = await readNumber(4, 'Extra');
+  const extra = await wrapLabel('extra', () => readNumber(4));
 
   console.log('extra:', extra);
 

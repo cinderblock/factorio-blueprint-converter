@@ -1,41 +1,37 @@
 import { describe, it, expect } from 'vitest';
-import { annotatedData, parseBlueprintData } from '../src/index.js';
-import { createReadStream, readdirSync, readFileSync } from 'node:fs';
+import { parseBlueprintData } from '../src/index.js';
+import { createReadStream } from 'node:fs';
 import { parse } from 'yaml';
 import { checkBlueprintDataMatchesString } from './helpers/compare.js';
-import { mkdir, stat, writeFile } from 'node:fs/promises';
+import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
+import annotationWriter from './helpers/annotationWriter.js';
 
 const samplesDir = 'test/samples';
 
 describe('Blueprint Parser', () => {
-  describe('Samples', () => {
-    const blueprintStrings = parse(readFileSync(join(samplesDir, 'exports.yaml'), 'utf-8')) as Record<string, string>;
-    for (const sample of readdirSync(samplesDir).filter(file => file.endsWith('.dat'))) {
+  describe('Samples', async () => {
+    const blueprintStrings = parse(await readFile(join(samplesDir, 'exports.yaml'), 'utf-8')) as Record<string, string>;
+
+    const dir = join(samplesDir, 'annotated');
+
+    await mkdir(dir, { recursive: true }).then(() => writeFile(join(dir, '.gitignore'), '.gitignore\n*.dat.txt\n'));
+
+    const sampleFiles = (await readdir(samplesDir)).filter(file => file.endsWith('.dat'));
+
+    for (const sample of sampleFiles) {
       describe(sample, () => {
-        it('should parse', async () => {
+        it('should parse', { timeout: 20000 }, async () => {
           const path = join(samplesDir, sample);
 
           // Capture the data and any potential error
           let data;
+          const stream = createReadStream(path);
+          const annotation = await annotationWriter(join(dir, `${sample}.txt`));
           try {
-            data = await parseBlueprintData(createReadStream(path));
+            data = await parseBlueprintData(stream, annotation);
           } finally {
-            // Write annotated data even if parsing failed
-            if (annotatedData.length > 0) {
-              const annotatedPath = join(samplesDir, 'annotated', `${sample}.txt`);
-              await mkdir(join(samplesDir, 'annotated'), { recursive: true });
-
-              // Create .gitignore if it doesn't exist
-              const gitignorePath = join(samplesDir, 'annotated', '.gitignore');
-              try {
-                await stat(gitignorePath);
-              } catch {
-                await writeFile(gitignorePath, '.gitignore\n*.dat.txt\n');
-              }
-
-              await writeFile(annotatedPath, annotatedData.join('\n') + '\n');
-            }
+            await annotation.finish(stream);
           }
 
           expect(data).toBeTruthy();
