@@ -11,11 +11,12 @@ const samplesDir = 'test/samples';
 
 describe('Blueprint Parser', { concurrent: true }, () => {
   describe('Samples', async () => {
+    // We have the blueprint strings in a yaml file for some samples
     const blueprintStrings = parse(await readFile(join(samplesDir, 'exports.yaml'), 'utf-8')) as Record<string, string>;
 
-    const dir = join(samplesDir, 'annotated');
+    const annotationsDir = join(samplesDir, 'annotated');
 
-    await mkdir(dir, { recursive: true }).then(() => writeFile(join(dir, '.gitignore'), '.gitignore\n*.dat.txt\n'));
+    await mkdir(annotationsDir, { recursive: true }).then(() => writeFile(join(annotationsDir, '.gitignore'), '.gitignore\n*.dat.txt\n'));
 
     const sampleFiles = (await readdir(samplesDir)).filter(file => file.endsWith('.dat'));
 
@@ -27,7 +28,7 @@ describe('Blueprint Parser', { concurrent: true }, () => {
           // Capture the data and any potential error
           let data;
           const stream = createReadStream(path);
-          const annotation = await annotationWriter(join(dir, `${sample}.txt`));
+          const annotation = await annotationWriter(join(annotationsDir, `${sample}.txt`));
           try {
             data = await parseBlueprintData(stream, annotation);
           } finally {
