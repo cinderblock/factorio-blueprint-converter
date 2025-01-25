@@ -3,6 +3,7 @@ import { dirname } from 'path';
 import { Annotation } from '../../src/index.js';
 import { createWriteStream } from 'node:fs';
 import { Readable } from 'node:stream';
+import PQueue from 'p-queue';
 
 const loadTime = new Date();
 
@@ -22,7 +23,7 @@ export default async function annotationWriter(
 
   const output = createWriteStream(filename, { flags: 'w' });
 
-  let activeWrite = new Promise<void>(resolve => resolve());
+  const writeQueue = new PQueue({ concurrency: 1 });
 
   async function doOneWrite(data: string) {
     if (output.write(data)) return;
@@ -30,7 +31,7 @@ export default async function annotationWriter(
     await new Promise(resolve => output.once('drain', resolve));
   }
   function write(data: string): Promise<void> {
-    return (activeWrite = activeWrite.then(() => doOneWrite(data)));
+    return writeQueue.add(() => doOneWrite(data));
   }
 
   const startTime = new Date();
