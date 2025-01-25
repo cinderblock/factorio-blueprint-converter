@@ -18,7 +18,7 @@ function streamToBuffer(stream: Readable): Promise<Buffer> {
 
 export default function annotationWriter(
   filename: string,
-): Annotation & { finish: (stream: Readable) => Promise<void> } {
+): Annotation & { finish: (stream: Readable, originalFilesize?: number) => Promise<void> } {
   const output = createWriteStream(filename, { flags: 'w' });
 
   const writeQueue = new PQueue({ concurrency: 1 });
@@ -71,14 +71,17 @@ export default function annotationWriter(
       void write(' => ');
       void write(v);
     },
-    finish: async (stream: Readable) => {
+    finish: async (stream: Readable, originalFilesize?: number) => {
+      void write('\n');
       void write('\n');
 
       const remaining = await streamToBuffer(stream);
 
-      if (!remaining.length) return;
+      if (originalFilesize !== undefined) void write(`Original file size: ${originalFilesize}\n`);
+      void write(`Remaining bytes: ${remaining.length}\n`);
 
-      void write('\nRemaining bytes:\n');
+      if (remaining.length) void write('\n');
+
       void write((remaining.toString('hex').match(/.{1,80}/g) ?? []).join('\n'));
       await write('\n');
 
