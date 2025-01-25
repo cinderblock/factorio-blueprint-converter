@@ -43,6 +43,8 @@ export default function annotationWriter(
 
   const labels: string[] = [];
 
+  let nextLocation: number;
+
   return {
     peek: () => {
       peeking = true;
@@ -66,6 +68,7 @@ export default function annotationWriter(
       }
 
       void write(`${location.toString().padStart(4)} ${buffer.toString('hex').padEnd(80)} ${labels.join(' ')}`);
+      nextLocation = location + buffer.length;
     },
     decoded: (v: string) => {
       void write(' => ');
@@ -77,12 +80,30 @@ export default function annotationWriter(
 
       const remaining = await streamToBuffer(stream);
 
-      if (originalFilesize !== undefined) void write(`Original file size: ${originalFilesize}\n`);
+      if (nextLocation === undefined) {
+        void write(`No data read??\n`);
+      } else {
+        void write(`Next expected read location: ${nextLocation}\n`);
+
+        if (originalFilesize !== undefined) {
+          void write(`Original file size: ${originalFilesize}\n`);
+
+          const missing = originalFilesize - nextLocation - remaining.length;
+          void write(`Missing bytes: ${missing}\n`);
+        }
+      }
+
       void write(`Remaining bytes: ${remaining.length}\n`);
 
-      if (remaining.length) void write('\n');
+      if (remaining.length) {
+        void write('\n');
+        if (originalFilesize !== undefined) {
+          void write(`Starting at: ${originalFilesize - remaining.length}\n`);
+        }
+      }
 
       void write((remaining.toString('hex').match(/.{1,80}/g) ?? []).join('\n'));
+      await write('\n');
       await write('\n');
 
       const endTime = new Date();
