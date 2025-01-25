@@ -1,5 +1,3 @@
-import { mkdir } from 'node:fs/promises';
-import { dirname } from 'path';
 import { Annotation } from '../../src/index.js';
 import { createWriteStream } from 'node:fs';
 import { Readable } from 'node:stream';
@@ -18,11 +16,9 @@ function streamToBuffer(stream: Readable): Promise<Buffer> {
   });
 }
 
-export default async function annotationWriter(
+export default function annotationWriter(
   filename: string,
-): Promise<Annotation & { finish: (stream: Readable) => Promise<void> }> {
-  await mkdir(dirname(filename), { recursive: true });
-
+): Annotation & { finish: (stream: Readable) => Promise<void> } {
   const output = createWriteStream(filename, { flags: 'w' });
 
   const writeQueue = new PQueue({ concurrency: 1 });
