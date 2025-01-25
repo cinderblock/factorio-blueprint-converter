@@ -712,8 +712,6 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
 
   /////// Start reading data ///////
 
-  //   console.log('Start block: ' + (await peak(10)).toString('hex'));
-
   // See: https://wiki.factorio.com/Version_string_format
   ret.version = await wrapLabel('version', async () => ({
     major: await wrapLabel('major', () => readNumber(2)),
