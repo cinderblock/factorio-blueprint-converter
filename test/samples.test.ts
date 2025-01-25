@@ -36,13 +36,13 @@ describe('Blueprint Parser', { concurrent: true, timeout: 1000 }, () => {
 
           // Verify data is serializable
           expect(() => JSON.stringify(data)).not.toThrow();
-        });
 
-        if (blueprintStrings[sample]) {
-          it('should match blueprint string', () => {
-            expect(checkBlueprintDataMatchesString(data.blueprints[0], blueprintStrings[sample])).toBe(true);
-          });
-        }
+          if (blueprintStrings[sample]) {
+            it('should match blueprint string', () => {
+              expect(checkBlueprintDataMatchesString(data.blueprints[0], blueprintStrings[sample])).toBe(true);
+            });
+          }
+        });
 
         const originalFilesize = (await stat(path)).size;
 
