@@ -7,6 +7,8 @@ The initial goal is to be able to have a file per blueprint that can be committe
 
 This project is in early development and is not yet ready for use.
 
+[![Tests](https://github.com/cinderblock/factorio-blueprint-converter/actions/workflows/test.yml/badge.svg)](https://github.com/cinderblock/factorio-blueprint-converter/actions/workflows/test.yml)
+
 ## Usage
 
 Back up your data.
