@@ -3,6 +3,20 @@ import { createWriteStream } from 'node:fs';
 import { Readable } from 'node:stream';
 import PQueue from 'p-queue';
 
+function timeToString(time: Date): string {
+  return time
+    .toLocaleString('en-US', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      timeZoneName: 'short',
+    })
+    .replace(/^(\d+)\/(\d+)\/(\d+),/, '$3-$1-$2');
+}
+
 const loadTime = new Date();
 
 function streamToBuffer(stream: Readable): Promise<Buffer> {
@@ -34,8 +48,8 @@ export default function annotationWriter(
 
   const startTime = new Date();
 
-  void write(`Load time: ${loadTime.toLocaleString()}\n`);
-  void write(`Start time: ${startTime.toLocaleString()}\n`);
+  void write(`Load time: ${timeToString(loadTime)}\n`);
+  void write(`Start time: ${timeToString(startTime)}\n`);
   void write(`Time taken: ${startTime.getTime() - loadTime.getTime()}ms\n`);
 
   let peeking = false;
@@ -107,7 +121,7 @@ export default function annotationWriter(
       await write('\n');
 
       const endTime = new Date();
-      await write(`End time: ${endTime.toLocaleString()}\n`);
+      await write(`End time: ${timeToString(endTime)}\n`);
       await write(`Time taken: ${endTime.getTime() - startTime.getTime()}ms\n`);
     },
   };
