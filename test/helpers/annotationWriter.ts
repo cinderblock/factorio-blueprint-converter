@@ -2,6 +2,7 @@ import { Annotation } from '../../src/index.js';
 import { createWriteStream } from 'node:fs';
 import { Readable } from 'node:stream';
 import PQueue from 'p-queue';
+import findStrings from './findStrings.js';
 
 function timeToString(time: Date): string {
   return time
@@ -113,6 +114,26 @@ export default function annotationWriter(
       }
 
       void write(`Unparsed bytes: ${remaining.length}\n\n`);
+
+      void write('Found Strings:\n');
+      for (const string of findStrings(Buffer.concat(chunks))) {
+        if (string.string) {
+          void write(`${string.start.toString().padStart(4)} ${string.data.toString('hex').padEnd(80)}`);
+          void write(` => ${string.string.replace(/\n/g, '\\n')}`);
+          void write('\n');
+        } else {
+          for (let i = 0; i < string.data.length; i += 40) {
+            void write(
+              `${(string.start + i).toString().padStart(4)} ${string.data
+                .subarray(i, i + 40)
+                .toString('hex')
+                .padEnd(80)}\n`,
+            );
+          }
+        }
+      }
+
+      void write('\n');
 
       if (nextLocation === undefined) {
         void write(`No data read??\n`);
