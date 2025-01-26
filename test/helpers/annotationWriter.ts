@@ -52,12 +52,14 @@ export default function annotationWriter(
   void write(`Start time: ${timeToString(startTime)}\n`);
   void write(`Time taken: ${startTime.getTime() - loadTime.getTime()}ms\n`);
 
+  const chunks: Buffer[] = [];
+
   let peeking = false;
   let needsNewline = false;
 
   const labels: string[] = [];
 
-  let nextLocation: number;
+  let nextLocation = 0;
 
   return {
     peek: () => {
@@ -75,10 +77,16 @@ export default function annotationWriter(
         return;
       }
 
+      chunks.push(buffer);
+
       if (needsNewline) {
         void write('\n');
       } else {
         needsNewline = true;
+      }
+
+      if (location !== nextLocation) {
+        void write(`Lost data at ${location.toString().padStart(4)}\n`);
       }
 
       void write(`${location.toString().padStart(4)} ${buffer.toString('hex').padEnd(80)} ${labels.join(' ')}`);
@@ -90,35 +98,36 @@ export default function annotationWriter(
     },
     finish: async (stream: Readable, originalFilesize?: number) => {
       void write('\n');
-      void write('\n');
 
       const remaining = await streamToBuffer(stream);
+
+      if (remaining.length) {
+        chunks.push(remaining);
+        const location = originalFilesize !== undefined ? originalFilesize - remaining.length : nextLocation;
+        void write(
+          (remaining.toString('hex').match(/.{1,80}/g) ?? [])
+            .map((l, i) => `${(location + i * 40).toString().padStart(4)} ${l}`)
+            .join('\n'),
+        );
+        void write('\n\n');
+      }
+
+      void write(`Unparsed bytes: ${remaining.length}\n\n`);
 
       if (nextLocation === undefined) {
         void write(`No data read??\n`);
       } else {
-        void write(`Next expected read location: ${nextLocation}\n`);
-
         if (originalFilesize !== undefined) {
           void write(`Original file size: ${originalFilesize}\n`);
 
           const missing = originalFilesize - nextLocation - remaining.length;
-          void write(`Missing bytes: ${missing}\n`);
+          if (missing) {
+            void write(`Missing bytes: ${missing}\n`);
+          }
         }
       }
 
-      void write(`Remaining bytes: ${remaining.length}\n`);
-
-      if (remaining.length) {
-        void write('\n');
-        if (originalFilesize !== undefined) {
-          void write(`Starting at: ${originalFilesize - remaining.length}\n`);
-        }
-      }
-
-      void write((remaining.toString('hex').match(/.{1,80}/g) ?? []).join('\n'));
-      await write('\n');
-      await write('\n');
+      await write('\n\n');
 
       const endTime = new Date();
       await write(`End time: ${timeToString(endTime)}\n`);
