@@ -1,68 +1,73 @@
-type SplitResult = { start: number; data: Buffer; string?: string };
+import { isUtf8 } from 'node:buffer';
+import { FactorioBadStringRegex } from '../../src/util/FactorioBadStringRegex.js';
 
-// All known strings are at least 3 bytes long
-const ShortestString = 3;
+type SplitResult = { start: number; data: Buffer; string?: string };
 
 /**
  * Find Factorio Strings in a buffer and return the original buffer split into chunks with the strings parsed in an easy to process object format.
  *
- * Factorio strings start with a Factorio Number, which describes the length of the string.
+ * A Factorio String starts with a Factorio Number, which describes the length of the string.
  *
- * A Factorio Number is up to a 32-bit unsigned integer but, if it is less than 255, it is encoded in a single byte.
+ * A Factorio Number is a 32-bit, usually unsigned, integer.
+ * If it is less than 255, is encoded in a single byte.
  * If it is greater than or equal to 255, it is encoded in a 5 byte sequence, starting with a 0xFF byte, followed by 4 bytes of the number, LE
  *
  * @param buff
  * @returns
  */
-export default function findStrings(buff: Buffer): SplitResult[] {
+export default function findStrings(
+  buff: Buffer,
+  options: { skipOverFoundString?: boolean; shortestString?: number; badCharacterRegex?: RegExp } = {},
+): SplitResult[] {
+  const { skipOverFoundString = true, shortestString = 3, badCharacterRegex = FactorioBadStringRegex } = options;
+
   const results: SplitResult[] = [];
 
   let lastUnknown = 0;
-  let searchLocation = 0;
 
   function pushUnknowns(end?: number) {
     const data = buff.subarray(lastUnknown, end);
-    if (data.length) results.push({ start: lastUnknown, data });
+    if (!data.length) return;
+
+    results.push({ start: lastUnknown, data });
+    lastUnknown += data.length;
   }
 
-  while (searchLocation < buff.length - 1) {
+  for (let searchLocation = 0; searchLocation < buff.length; searchLocation++) {
     let stringBytes = buff[searchLocation];
-
-    if (!stringBytes) {
-      searchLocation++;
-      continue;
-    }
-
-    if (stringBytes < ShortestString) {
-      searchLocation++;
-      continue;
-    }
 
     let offset = 1;
     if (stringBytes === 0xff) {
       stringBytes = buff.readUInt32LE(searchLocation + offset);
-      if (stringBytes < 255) {
-        searchLocation++;
-        continue;
-      }
       offset += 4;
+
+      // If the 4-byte number is less than 255, it would have been encoded in a single byte. Skip it
+      if (stringBytes < 255) continue;
     }
 
-    if (searchLocation + offset + stringBytes > buff.length) {
-      searchLocation++;
-      continue;
-    }
+    // If the string is too short, skip it
+    if (stringBytes < shortestString) continue;
 
-    const data = buff.subarray(searchLocation, searchLocation + stringBytes + offset);
+    const end = searchLocation + stringBytes + offset;
 
-    const string = data.toString('utf-8', offset);
+    // If the string is so long that it would go past the end of the buffer, skip it
+    if (end > buff.length) continue;
 
-    // test for non-printable characters
-    if (string.match(/[^\s\p{L}\p{M}\p{N}\p{S}\p{P}]/u)) {
-      searchLocation++;
-      continue;
-    }
+    // Get the buffer
+    const data = Buffer.from(buff.subarray(searchLocation, end));
 
+    // Just the string data
+    const stringData = data.subarray(offset);
+
+    // If the string data is not valid UTF-8, skip it
+    if (!isUtf8(stringData)) continue;
+
+    const string = stringData.toString('utf-8');
+
+    // If the string contains bad characters, skip it
+    if (string.match(badCharacterRegex)) continue;
+
+    // Push any unknown data before the string
     pushUnknowns(searchLocation);
 
     results.push({
@@ -71,8 +76,15 @@ export default function findStrings(buff: Buffer): SplitResult[] {
       string,
     });
 
-    searchLocation += stringBytes + offset;
-    lastUnknown = searchLocation;
+    if (end > lastUnknown) {
+      lastUnknown = end;
+    }
+
+    // Skip over found strings if the option is set or if the next byte is unlikely part of a string
+    if (skipOverFoundString || (buff[end] ?? 0) < 10) {
+      // -1 to account for the increment that will happen
+      searchLocation += stringBytes + offset - 1;
+    }
   }
 
   pushUnknowns();

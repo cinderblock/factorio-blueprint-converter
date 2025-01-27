@@ -33,7 +33,10 @@ function streamToBuffer(stream: Readable): Promise<Buffer> {
 
 export default function annotationWriter(
   filename: string,
+  options: { printFullData?: boolean } = {},
 ): Annotation & { finish: (stream: Readable, originalFilesize?: number) => Promise<void> } {
+  const { printFullData = false } = options;
+
   const output = createWriteStream(filename, { flags: 'w' });
 
   const writeQueue = new PQueue({ concurrency: 1 });
@@ -115,20 +118,27 @@ export default function annotationWriter(
 
       void write(`Unparsed bytes: ${remaining.length}\n\n`);
 
+      const allData = Buffer.concat(chunks);
+
       void write('Found Strings:\n');
-      for (const string of findStrings(Buffer.concat(chunks))) {
+      for (const string of findStrings(allData, { skipOverFoundString: false })) {
+        const loc = string.start.toString().padStart(4);
+        const hex = string.data.toString('hex').padEnd(80);
         if (string.string) {
-          void write(`${string.start.toString().padStart(4)} ${string.data.toString('hex').padEnd(80)}`);
-          void write(` => ${string.string.replace(/\n/g, '\\n')}`);
-          void write('\n');
+          const str = string.string.replace(/\n/g, '\\n');
+          void write(`${loc} ${hex.length > 80 ? hex.slice(0, 77) + '...' : hex} => ${str}\n`);
         } else {
-          for (let i = 0; i < string.data.length; i += 40) {
-            void write(
-              `${(string.start + i).toString().padStart(4)} ${string.data
-                .subarray(i, i + 40)
-                .toString('hex')
-                .padEnd(80)}\n`,
-            );
+          if (printFullData) {
+            for (let i = 0; i < string.data.length; i += 40) {
+              void write(
+                `${(string.start + i).toString().padStart(4)} ${string.data
+                  .subarray(i, i + 40)
+                  .toString('hex')
+                  .padEnd(80)}\n`,
+              );
+            }
+          } else {
+            void write(`${loc} ${hex.length > 80 ? hex.slice(0, 77) + '...' : hex}\n`);
           }
         }
       }

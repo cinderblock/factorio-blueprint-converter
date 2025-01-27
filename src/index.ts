@@ -13,6 +13,7 @@ import {
   Sig,
 } from './BlueprintData.js';
 import { typeMap } from './typeMap.js';
+import { FactorioBadStringRegex } from './util/FactorioBadStringRegex.js';
 
 // For debugging
 const CheckForUnlikelyStrings = true;
@@ -214,7 +215,7 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
     });
     annotation?.decoded(escapedValue);
 
-    if (CheckForUnlikelyStrings && !/^[\x20-\x7E\r\n\t]*$/.test(value)) {
+    if (CheckForUnlikelyStrings && FactorioBadStringRegex.test(value)) {
       console.log(buff.toString('hex'));
       annotation?.decoded('Invalid name');
       throw new Error(`Invalid name ${escapedValue}`);
