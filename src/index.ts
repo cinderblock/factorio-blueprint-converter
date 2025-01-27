@@ -22,7 +22,7 @@ export interface Annotation {
   // mark next read as not to be printed
   peek(): void;
   pushLabel(label: string): void;
-  popLabel(): void;
+  clearLabel(label: string): void;
   read(buffer: Buffer, location: number): void;
   decoded(v: string): void;
 }
@@ -43,7 +43,7 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
   async function wrapLabel<T>(label: string, fn: () => T): Promise<T> {
     annotation?.pushLabel(label);
     const ret = await fn();
-    annotation?.popLabel();
+    annotation?.clearLabel(label);
     return ret;
   }
 
@@ -425,7 +425,7 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
 
     const data = await wrapLabel('unparsed data', () => read(length));
 
-    annotation?.popLabel(); // blueprint
+    annotation?.clearLabel('blueprint');
 
     return {
       key: 'blueprint',
@@ -486,7 +486,7 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
       }),
     );
 
-    annotation?.popLabel(); // filters
+    annotation?.clearLabel('filters');
 
     return { filters, quality };
   }
@@ -506,7 +506,7 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
     const tileSelectionMode = await wrapLabel('tile selection mode', () => readNumber(1));
     const tileFilters = await wrapLabel('tile filters', () => readFilters('TILE'));
 
-    annotation?.popLabel(); // deconstruction-item
+    annotation?.clearLabel('deconstruction-item');
 
     return {
       key: 'deconstruction_planner',
@@ -581,7 +581,7 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
       }),
     );
 
-    annotation?.popLabel(); // upgrade-item
+    annotation?.clearLabel('upgrade-item');
 
     return {
       key: 'upgrade_planner',
@@ -609,7 +609,7 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
 
     await expect(0, 'Expect 0');
 
-    annotation?.popLabel(); // blueprint-book
+    annotation?.clearLabel('blueprint-book');
 
     return {
       key: 'blueprint_book',

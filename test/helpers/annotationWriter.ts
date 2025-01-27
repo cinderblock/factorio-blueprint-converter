@@ -72,8 +72,9 @@ export default function annotationWriter(
     pushLabel: (label: string) => {
       labels.push(label);
     },
-    popLabel: () => {
-      labels.pop();
+    clearLabel: (label: string) => {
+      const popped = labels.pop();
+      if (label !== popped) throw new Error(`Label mismatch. ${label} !== ${popped}`);
     },
     read: (buffer: Buffer, location: number) => {
       if (peeking) {
