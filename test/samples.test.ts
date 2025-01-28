@@ -35,9 +35,16 @@ describe('Samples', { concurrent: true, timeout: 1000 }, async () => {
         expect(() => JSON.stringify(data)).not.toThrow();
 
         if (blueprintStrings[sample]) {
-          it('should match blueprint string', () => {
-            expect(checkBlueprintDataMatchesString(data.blueprints[0], blueprintStrings[sample])).toBe(true);
-          });
+          if (blueprintStrings[sample].length !== data.blueprints.length) {
+            throw new Error(
+              `Blueprint string length ${blueprintStrings[sample].length} does not match data length ${data.blueprints.length}`,
+            );
+          }
+          for (let i = 0; i < blueprintStrings[sample].length; i++) {
+            it(`should match blueprint string ${i}`, () => {
+              expect(checkBlueprintDataMatchesString(data.blueprints[i], blueprintStrings[sample][i])).toBe(true);
+            });
+          }
         }
       });
 
@@ -54,13 +61,13 @@ async function loadSamples() {
     file.match('(^|[/\\\\])exports.yaml$'),
   );
 
-  const blueprintStrings: Record<string, string> = {};
+  const blueprintStrings: Record<string, string[]> = {};
 
   for (const exportsFile of exportsFiles) {
     const dir = dirname(exportsFile);
-    const exports = parse(await readFile(join(SamplesDir, exportsFile), 'utf-8')) as Record<string, string>;
+    const exports = parse(await readFile(join(SamplesDir, exportsFile), 'utf-8')) as Record<string, string | string[]>;
     for (const [key, value] of Object.entries(exports)) {
-      blueprintStrings[join(dir, key)] = value;
+      blueprintStrings[join(dir, key)] = Array.isArray(value) ? value : value.split('\n');
     }
   }
 
