@@ -10,7 +10,7 @@ import annotationWriter from './helpers/annotationWriter.js';
 const SamplesDir = join(import.meta.dirname, 'samples');
 
 // TODO: Allow env override?
-const annotationsDir = join(import.meta.dirname, 'annotated');
+const annotationsDir = join(import.meta.dirname, 'samples-annotated');
 
 describe('Samples', { concurrent: true, timeout: 1000 }, async () => {
   // We have the blueprint strings in a yaml file for some samples
