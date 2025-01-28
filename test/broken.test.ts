@@ -2,7 +2,7 @@ import { it, expect, describe } from 'vitest';
 import { parseBlueprintData } from '../src/index.js';
 import { createReadStream } from 'node:fs';
 
-describe('Broken', { concurrent: true, timeout: 1000 }, () => {
+describe('Broken', { concurrent: true, timeout: 200 }, () => {
   it(`should handle errors for corrupted stream`, async () => {
     // Create a corrupted stream by using a json file
     const corruptedStream = createReadStream('package.json');
