@@ -29,7 +29,7 @@ jobs:
         id: test
 
       - name: Print annotated and decoded files
-        # Always print annotated files, even on failure
+        # Always print annotated files, even on other failure
         if: success() || steps.test.conclusion == 'failure'
         run: |
           find test/samples-annotated -type f -name "*.dat.txt" | while read file; do
@@ -37,7 +37,7 @@ jobs:
             cat "$file"
           done
       - uses: actions/upload-artifact@v4
-        # Always upload annotated files, even on failure
+        # Always upload annotated files, even on other failure
         if: success() || steps.test.conclusion == 'failure'
         with:
           name: annotated-files
