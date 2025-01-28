@@ -32,7 +32,7 @@ jobs:
         # Always print annotated files, even on failure
         if: success() || steps.test.conclusion == 'failure'
         run: |
-          for file in test/samples/annotated/*.dat.txt; do
+          find test/annotated -type f -name "*.dat.txt" | while read file; do
             echo "--- $file ---"
             cat "$file"
           done
