@@ -56,10 +56,9 @@ describe('Samples', { concurrent: true, timeout: 1000 }, async () => {
 });
 
 async function loadSamples() {
-  const sampleFiles = (await readdir(SamplesDir, { recursive: true })).filter(file => file.endsWith('.dat'));
-  const exportsFiles = (await readdir(SamplesDir, { recursive: true })).filter(file =>
-    file.match('(^|[/\\\\])exports.yaml$'),
-  );
+  const files = await readdir(SamplesDir, { recursive: true });
+  const sampleFiles = files.filter(file => file.match(/[^/\\]\.dat$/));
+  const exportsFiles = files.filter(file => file.match(/(^|[/\\])exports.yaml$/));
 
   const blueprintStrings: Record<string, string[]> = {};
 
