@@ -67,6 +67,9 @@ async function loadSamples() {
     const dir = dirname(exportsFile);
     const exports = parse(await readFile(join(SamplesDir, exportsFile), 'utf-8')) as Record<string, string | string[]>;
     for (const [key, value] of Object.entries(exports)) {
+      if (blueprintStrings[join(dir, key)]) {
+        throw new Error(`Duplicate blueprint string ${join(dir, key)}`);
+      }
       blueprintStrings[join(dir, key)] = Array.isArray(value) ? value : value.split('\n');
     }
   }
