@@ -67,21 +67,17 @@ describe('Samples', { concurrent: true, timeout: 1000 }, async () => {
         const outPath = join(annotationsDir, 'parsedProportion.log.tsv');
         const stats = await stat(outPath).catch(() => null);
         const stream = createWriteStream(outPath, { flags: 'a' });
-        function write(data: string) {
-          if (stream.write(data)) return;
-          return new Promise(resolve => stream.once('drain', resolve));
+        async function write(data: string) {
+          return stream.write(data) || new Promise<void>(resolve => stream.once('drain', resolve));
+        }
+        async function writeLine(data: string[]) {
+          await write(data.join('\t') + '\n');
         }
 
         // if file empty, write header
-        if (!stats?.size) {
-          await write(Object.keys(parsedProportion).join('\t') + '\n');
-        }
+        if (!stats?.size) await writeLine(Object.keys(parsedProportion));
 
-        await write(
-          Object.values(parsedProportion)
-            .map(v => (typeof v === 'number' ? v.toFixed(3) : v))
-            .join('\t') + '\n',
-        );
+        await writeLine(Object.values(parsedProportion).map(v => (typeof v === 'number' ? v.toFixed(3) : v)));
       })(),
       writeFile(join(annotationsDir, 'parsedProportion.json'), JSON.stringify(parsedProportion, null, 2)),
     ]);
