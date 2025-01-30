@@ -216,7 +216,7 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
     annotation?.decoded(escapedValue);
 
     if (CheckForUnlikelyStrings && FactorioBadStringRegex.test(value)) {
-      console.log(buff.toString('hex'));
+      // console.log(buff.toString('hex'));
       annotation?.decoded('Invalid name');
       throw new Error(`Invalid name ${escapedValue}`);
     }
@@ -229,8 +229,6 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
     if (lengthLength === 1 && length === 255) {
       throw new Error(`Unexpected length 0xff for Array`);
     }
-
-    console.log('Reading array of length:', length);
 
     const arr = [] as T[];
     for (let i = 0; i < length; i++) {
@@ -465,7 +463,6 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
 
         const unknownReplacement = unknowns[index];
         if (unknownReplacement) {
-          console.log('Replacing name');
           name = unknownReplacement;
         }
 
@@ -636,8 +633,6 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
     developer: await wrapLabel('developer', () => readNumber(2)),
   }));
 
-  console.log('Version:', ret.version);
-
   if (ret.version.major > 2) {
     console.error('Warning: Blueprint version is higher than 2');
   }
@@ -651,8 +646,6 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
       (ret.expansions[await wrapLabel('game', readString)] ??= []).push(await wrapLabel('file', readString)),
     ),
   );
-
-  console.log('expansions:', ret.expansions);
 
   // Fill Index
   {
@@ -777,10 +770,8 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
     //   const index = {} as Record<Types, any>;
 
     const indexCount = await wrapLabel('indexCount', () => readNumber(2));
-    console.log(`indexCount: ${indexCount}`);
 
     const mainCategory = await wrapLabel('mainCategory', readString);
-    console.log('Main Category:', mainCategory);
 
     // Is this a count or no? It *almost* aligns with the number of groups...
     const firstIndex = await wrapLabel('firstIndex', () => readNumber(2));
@@ -803,7 +794,6 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
       );
     }
 
-    console.log(index);
   }
 
   /* Example data
@@ -824,22 +814,14 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
 
   ret.generationCounter = await wrapLabel('generationCounter', () => readNumber(4));
 
-  console.log('generationCounter:', ret.generationCounter);
-
   ret.saveTime = await wrapLabel('saveTime', () => readDate());
 
-  console.log('saveTime:', ret.saveTime);
-
   const extra = await wrapLabel('extra', () => readNumber(4));
-
-  console.log('extra:', extra);
 
   // Unknown purpose. Static
   await expect(1, 'Unknown 3');
 
   ret.blueprints = await parseLibraryObjects();
-
-  console.log('Done');
 
   // Read remaining data with timeout
   const remainingData = await Promise.race([
