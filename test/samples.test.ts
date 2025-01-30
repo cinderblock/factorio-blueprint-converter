@@ -6,6 +6,7 @@ import { checkBlueprintDataMatchesString } from './helpers/compare.js';
 import { mkdir, readdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import annotationWriter from './helpers/annotationWriter.js';
+import { timeToString } from './helpers/timeToString.js';
 
 const SamplesDir = join(import.meta.dirname, 'samples');
 
@@ -16,7 +17,8 @@ describe('Samples', { concurrent: true, timeout: 1000 }, async () => {
   // We have the blueprint strings in a yaml file for some samples
   const { blueprintStrings, sampleFiles } = await loadSamples();
 
-  const parsedProportion: Record<string, number> = {};
+  const parsedProportion: Record<string, number | string> = {};
+  parsedProportion.date = timeToString();
 
   for (const sample of sampleFiles) {
     describe(sample, async () => {
@@ -77,7 +79,7 @@ describe('Samples', { concurrent: true, timeout: 1000 }, async () => {
 
         await write(
           Object.values(parsedProportion)
-            .map(v => v.toFixed(3))
+            .map(v => (typeof v === 'number' ? v.toFixed(3) : v))
             .join('\t') + '\n',
         );
       })(),
