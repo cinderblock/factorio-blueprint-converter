@@ -61,6 +61,7 @@ describe('Samples', { concurrent: true, timeout: 1000 }, async () => {
   afterAll(async () => {
     await Promise.all([
       (async () => {
+        if (process.env.CI) return;
         const outPath = join(annotationsDir, 'parsedProportion.log.tsv');
         const stats = await stat(outPath).catch(() => null);
         const stream = createWriteStream(outPath, { flags: 'a' });
