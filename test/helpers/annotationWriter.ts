@@ -34,7 +34,10 @@ function streamToBuffer(stream: Readable): Promise<Buffer> {
 export default function annotationWriter(
   filename: string,
   options: { printFullData?: boolean } = {},
-): Annotation & { finish: (stream: Readable, originalFilesize?: number) => Promise<void> } {
+): Annotation & {
+  finish(stream: Readable, originalFilesize?: number): Promise<void>;
+  getParsedBytes(): number;
+} {
   const { printFullData = false } = options;
 
   const output = createWriteStream(filename, { flags: 'w' });
@@ -164,6 +167,9 @@ export default function annotationWriter(
       const endTime = new Date();
       await write(`End time: ${timeToString(endTime)}\n`);
       await write(`Time taken: ${endTime.getTime() - startTime.getTime()}ms\n`);
+    },
+    getParsedBytes: () => {
+      return nextLocation;
     },
   };
 }

@@ -1,9 +1,9 @@
 import { describe, it, expect, afterAll } from 'vitest';
 import { parseBlueprintData } from '../src/index.js';
-import { createReadStream } from 'node:fs';
+import { createReadStream, createWriteStream } from 'node:fs';
 import { parse } from 'yaml';
 import { checkBlueprintDataMatchesString } from './helpers/compare.js';
-import { mkdir, readdir, readFile, stat } from 'node:fs/promises';
+import { mkdir, readdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import annotationWriter from './helpers/annotationWriter.js';
 
@@ -15,6 +15,8 @@ const annotationsDir = join(import.meta.dirname, 'samples-annotated');
 describe('Samples', { concurrent: true, timeout: 1000 }, async () => {
   // We have the blueprint strings in a yaml file for some samples
   const { blueprintStrings, sampleFiles } = await loadSamples();
+
+  const parsedProportion: Record<string, number> = {};
 
   for (const sample of sampleFiles) {
     describe(sample, async () => {
@@ -48,11 +50,39 @@ describe('Samples', { concurrent: true, timeout: 1000 }, async () => {
         }
       });
 
-      const originalFilesize = (await stat(path)).size;
-
-      afterAll(() => annotation.finish(stream, originalFilesize), 400);
+      afterAll(async () => {
+        const originalFilesize = (await stat(path)).size;
+        parsedProportion[sample] = annotation.getParsedBytes() / originalFilesize;
+        await annotation.finish(stream, originalFilesize);
+      }, 400);
     });
   }
+
+  afterAll(async () => {
+    await Promise.all([
+      (async () => {
+        const outPath = join(annotationsDir, 'parsedProportion.log.tsv');
+        const stats = await stat(outPath).catch(() => null);
+        const stream = createWriteStream(outPath, { flags: 'a' });
+        function write(data: string) {
+          if (stream.write(data)) return;
+          return new Promise(resolve => stream.once('drain', resolve));
+        }
+
+        // if file empty, write header
+        if (!stats?.size) {
+          await write(Object.keys(parsedProportion).join('\t') + '\n');
+        }
+
+        await write(
+          Object.values(parsedProportion)
+            .map(v => v.toFixed(3))
+            .join('\t') + '\n',
+        );
+      })(),
+      writeFile(join(annotationsDir, 'parsedProportion.json'), JSON.stringify(parsedProportion, null, 2)),
+    ]);
+  }, 700);
 });
 
 async function loadSamples() {
