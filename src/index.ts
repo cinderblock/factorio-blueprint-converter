@@ -378,7 +378,7 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
         throw new Error(`Entry ${entry.prototype} does not match ${prototype}`);
       }
 
-      const label = await wrapLabel('label', () => readString());
+      const label = await wrapLabel('label', readString);
 
       console.log('Label:', label);
 
@@ -417,7 +417,7 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
 
     await expect(0, 'Expect 0');
 
-    const removedMods = await wrapLabel('removed mods', () => readBoolean());
+    const removedMods = await wrapLabel('removed mods', readBoolean);
 
     const length = await wrapLabel('data length', () => readNumber(4));
 
@@ -444,7 +444,7 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
       readArray(1, async () => {
         const index = await wrapLabel('index', () => readNumber(2));
 
-        const name = await wrapLabel('name', () => readString());
+        const name = await wrapLabel('name', readString);
 
         unknowns[index] = name;
       }),
@@ -492,12 +492,12 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
     annotation?.pushLabel('deconstruction-item');
 
     const header = await parseBlueprintEntityHeader('deconstruction-item');
-    const description = await wrapLabel('description', () => readString());
+    const description = await wrapLabel('description', readString);
     const icons = await parseIcons();
 
     const entityFilterMode = await wrapLabel('Entity filter mode', () => readNumber(1));
     const entityFilters = await wrapLabel('entity filters', () => readFilters('ENTITY'));
-    const treesRocksOnly = await wrapLabel('trees/rocks only', () => readBoolean());
+    const treesRocksOnly = await wrapLabel('trees/rocks only', readBoolean);
 
     const tileFilterMode = await wrapLabel('tile filter mode', () => readNumber(1));
     const tileSelectionMode = await wrapLabel('tile selection mode', () => readNumber(1));
@@ -525,7 +525,7 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
 
     const header = await parseBlueprintEntityHeader('upgrade-item');
 
-    const description = await wrapLabel('description', () => readString());
+    const description = await wrapLabel('description', readString);
 
     const icons = await parseIcons();
 
@@ -534,8 +534,8 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
 
     await wrapLabel('unknowns', () =>
       readArray(1, async () => {
-        const name = await wrapLabel('name', () => readString());
-        const isTo = await wrapLabel('isTo', () => readBoolean());
+        const name = await wrapLabel('name', readString);
+        const isTo = await wrapLabel('isTo', readBoolean);
         const index = await wrapLabel('index', () => readNumber(2));
         (isTo ? unknownTo : unknownFrom)[index] = name;
       }),
@@ -545,7 +545,7 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
       type: Index.Types;
       name: string;
     }> {
-      const isItem = await wrapLabel('isItem', () => readBoolean());
+      const isItem = await wrapLabel('isItem', readBoolean);
       const entry = await wrapLabel('entry', () => readEntry(isItem ? 'ITEM' : 'ENTITY'));
 
       if (!entry) {
@@ -594,7 +594,7 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
     annotation?.pushLabel('Blueprint Book');
     const { label, generation } = await parseBlueprintEntityHeader('blueprint-book');
 
-    const description = await wrapLabel('description', () => readString());
+    const description = await wrapLabel('description', readString);
 
     console.log('Description:', description);
 
