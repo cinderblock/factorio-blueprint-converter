@@ -201,9 +201,9 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
   }
 
   async function readString() {
-    const length = await readNumber(0);
+    const length = await wrapLabel('str-length', () => readNumber(0));
 
-    const buff = await read(length);
+    const buff = await wrapLabel('str', () => read(length));
     const value = buff.toString('utf8');
 
     // Escape unprintable characters for annotation display
