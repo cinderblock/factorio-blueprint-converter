@@ -1,6 +1,9 @@
 import { join } from 'path/posix';
 
-// TODO: Allow env override?
-export const AnnotationsDir = join(import.meta.dirname, 'samples-annotated');
+// TODO: cwd?
+export const WorkDir = '.';
 
-export const SamplesDir = join(import.meta.dirname, 'samples');
+// TODO: Allow env override?
+export const AnnotationsDir = join(WorkDir, 'test', 'samples-annotated');
+
+export const SamplesDir = join(WorkDir, 'test', 'samples');
