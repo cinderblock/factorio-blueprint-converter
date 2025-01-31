@@ -1,20 +1,14 @@
 import { describe, it, expect, afterAll } from 'vitest';
 import { parseBlueprintData } from '../src/index.js';
-import { createReadStream, createWriteStream } from 'node:fs';
+import { createReadStream } from 'node:fs';
 import { parse } from 'yaml';
 import { checkBlueprintDataMatchesString } from './helpers/compare.js';
-import { mkdir, readdir, readFile, stat, writeFile } from 'node:fs/promises';
+import { mkdir, readdir, readFile, stat } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import annotationWriter from './helpers/annotationWriter.js';
 import { timeToString } from './helpers/timeToString.js';
-import { getGitHash } from './helpers/git.js';
-
-const SamplesDir = join(import.meta.dirname, 'samples');
-
-// TODO: Allow env override?
-const annotationsDir = join(import.meta.dirname, 'samples-annotated');
-
-const hash = getGitHash().catch(() => 'unknown');
+import { AnnotationsDir, SamplesDir } from './helpers/dirs.js';
+import { writeLogs } from './helpers/writeLog.js';
 
 describe('Samples', { concurrent: true, timeout: 1000 }, async () => {
   // We have the blueprint strings in a yaml file for some samples
@@ -27,7 +21,7 @@ describe('Samples', { concurrent: true, timeout: 1000 }, async () => {
     describe(sample, async () => {
       const path = join(SamplesDir, sample);
       const stream = createReadStream(path);
-      const outPath = join(annotationsDir, `${sample}.txt`);
+      const outPath = join(AnnotationsDir, `${sample}.txt`);
 
       await mkdir(dirname(outPath), { recursive: true });
 
@@ -63,29 +57,7 @@ describe('Samples', { concurrent: true, timeout: 1000 }, async () => {
     });
   }
 
-  afterAll(async () => {
-    await Promise.all([
-      (async () => {
-        if (process.env.CI?.toLowerCase() === 'true') return;
-        parsedProportion['git hash'] = await hash;
-        const outPath = join(annotationsDir, 'parsedProportion.log.tsv');
-        const stats = await stat(outPath).catch(() => null);
-        const stream = createWriteStream(outPath, { flags: 'a' });
-        async function write(data: string) {
-          return stream.write(data) || new Promise<void>(resolve => stream.once('drain', resolve));
-        }
-        async function writeLine(data: string[]) {
-          await write(data.join('\t') + '\n');
-        }
-
-        // if file empty, write header
-        if (!stats?.size) await writeLine(Object.keys(parsedProportion));
-
-        await writeLine(Object.values(parsedProportion).map(v => (typeof v === 'number' ? v.toFixed(3) : v)));
-      })(),
-      writeFile(join(annotationsDir, 'parsedProportion.json'), JSON.stringify(parsedProportion, null, 2)),
-    ]);
-  }, 700);
+  afterAll(() => writeLogs(parsedProportion), 700);
 });
 
 async function loadSamples() {
