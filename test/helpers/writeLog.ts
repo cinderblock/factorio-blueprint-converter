@@ -56,7 +56,8 @@ async function writeLogFile(parsedProportion: Record<string, number | string>) {
 
     const before = '\n';
 
-    while (readStream.readable) {
+    while (true) {
+      if (!readStream.readable) await new Promise(resolve => readStream.once('readable', resolve));
       const chunk = readStream.read(600) as Buffer;
 
       if (chunk) {
