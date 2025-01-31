@@ -7,11 +7,14 @@ import { mkdir, readdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import annotationWriter from './helpers/annotationWriter.js';
 import { timeToString } from './helpers/timeToString.js';
+import { getGitHash } from './helpers/git.js';
 
 const SamplesDir = join(import.meta.dirname, 'samples');
 
 // TODO: Allow env override?
 const annotationsDir = join(import.meta.dirname, 'samples-annotated');
+
+const hash = getGitHash().catch(() => 'unknown');
 
 describe('Samples', { concurrent: true, timeout: 1000 }, async () => {
   // We have the blueprint strings in a yaml file for some samples
@@ -64,6 +67,7 @@ describe('Samples', { concurrent: true, timeout: 1000 }, async () => {
     await Promise.all([
       (async () => {
         if (process.env.CI?.toLowerCase() === 'true') return;
+        parsedProportion['git hash'] = await hash;
         const outPath = join(annotationsDir, 'parsedProportion.log.tsv');
         const stats = await stat(outPath).catch(() => null);
         const stream = createWriteStream(outPath, { flags: 'a' });
