@@ -41,11 +41,11 @@ describe('Samples', { concurrent: true, timeout: 1000 }, async () => {
               `Blueprint string length ${blueprintStrings[sample].length} does not match data length ${data.blueprints.length}`,
             );
           }
-          for (let i = 0; i < blueprintStrings[sample].length; i++) {
+          blueprintStrings[sample].forEach((blueprintString, i) => {
             it(`should match blueprint string ${i}`, () => {
-              expect(checkBlueprintDataMatchesString(data.blueprints[i], blueprintStrings[sample][i])).toBe(true);
+              expect(checkBlueprintDataMatchesString(data.blueprints[i], blueprintString)).toBe(true);
             });
-          }
+          });
         }
       });
 
