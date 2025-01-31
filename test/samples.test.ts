@@ -1,14 +1,14 @@
 import { describe, it, expect, afterAll } from 'vitest';
 import { parseBlueprintData } from '../src/index.js';
 import { createReadStream } from 'node:fs';
-import { parse } from 'yaml';
 import { checkBlueprintDataMatchesString } from './helpers/compare.js';
-import { mkdir, readdir, readFile, stat } from 'node:fs/promises';
+import { mkdir, stat } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import annotationWriter from './helpers/annotationWriter.js';
 import { timeToString } from './helpers/timeToString.js';
 import { AnnotationsDir, SamplesDir } from './helpers/dirs.js';
 import { writeLogs } from './helpers/writeLog.js';
+import { loadSamples } from './helpers/loadSamples.js';
 
 describe('Samples', { concurrent: true, timeout: 1000 }, async () => {
   // We have the blueprint strings in a yaml file for some samples
@@ -59,32 +59,3 @@ describe('Samples', { concurrent: true, timeout: 1000 }, async () => {
 
   afterAll(() => writeLogs(parsedProportion), 700);
 });
-
-async function loadSamples() {
-  const files = await readdir(SamplesDir, { recursive: true });
-  const sampleFiles = files.filter(file => file.match(/[^/\\]\.dat$/));
-  const exportsFiles = files.filter(file => file.match(/(^|[/\\])exports.yaml$/));
-
-  const blueprintStrings: Record<string, string[]> = {};
-
-  for (const exportsFile of exportsFiles) {
-    const dir = dirname(exportsFile);
-    const exports = parse(await readFile(join(SamplesDir, exportsFile), 'utf-8')) as Record<string, string | string[]>;
-    for (let [key, value] of Object.entries(exports)) {
-      key = join(dir, key);
-      if (blueprintStrings[key]) {
-        throw new Error(`Duplicate blueprint string ${key} in ${exportsFile}`);
-      }
-      if (typeof value === 'string') {
-        value = value.split('\n');
-      }
-      if (!Array.isArray(value)) {
-        throw new Error(`Invalid blueprint string ${key} in ${exportsFile}`);
-      }
-
-      blueprintStrings[key] = value;
-    }
-  }
-
-  return { blueprintStrings, sampleFiles, exportsFiles };
-}
