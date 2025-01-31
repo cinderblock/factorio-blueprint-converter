@@ -1,7 +1,13 @@
 import { exec as nodeExec } from 'child_process';
 
-export async function exec(command: string) {
-  return new Promise<{ code: number | null; stdout: string; stderr: string }>(resolve => {
-    nodeExec(command).on('close', code => resolve({ code, stdout: '', stderr: '' }));
+export function exec(command: string): Promise<{ stdout: string; stderr: string }> {
+  return new Promise((resolve, reject) => {
+    nodeExec(command, (exception, stdout, stderr) => {
+      if (exception) {
+        reject(exception);
+      } else {
+        resolve({ stdout, stderr });
+      }
+    });
   });
 }
