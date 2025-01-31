@@ -22,7 +22,7 @@ export async function writeLogs(parsedProportion: Record<string, number | string
 async function writeLogFile(parsedProportion: Record<string, number | string>) {
   const outPath = join(AnnotationsDir, 'parsedProportion.log.tsv');
   const outPathOld = outPath + '.old';
-  const stats = await stat(outPath).catch(() => null);
+  const stats = await stat(outPath).catch(() => {});
   const order: string[] = [];
   let copyOld = false;
 
