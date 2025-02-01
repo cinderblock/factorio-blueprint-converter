@@ -38,8 +38,11 @@ export default function findStrings(
 
     let offset = 1;
     if (stringBytes === 0xff) {
+      const intBytes = 4;
+      if (searchLocation + offset + intBytes > buff.length) continue;
+
       stringBytes = buff.readUInt32LE(searchLocation + offset);
-      offset += 4;
+      offset += intBytes;
 
       // If the 4-byte number is less than 255, it would have been encoded in a single byte. Skip it
       if (stringBytes < 255) continue;
