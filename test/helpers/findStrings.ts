@@ -17,9 +17,19 @@ type SplitResult = { start: number; data: Buffer; string?: string };
  */
 export default function findStrings(
   buff: Buffer,
-  options: { skipOverFoundString?: boolean; shortestString?: number; badCharacterRegex?: RegExp } = {},
+  options: {
+    skipOverFoundString?: boolean;
+    shortestString?: number;
+    longestString?: number;
+    badCharacterRegex?: RegExp;
+  } = {},
 ): SplitResult[] {
-  const { skipOverFoundString = true, shortestString = 3, badCharacterRegex = FactorioBadStringRegex } = options;
+  const {
+    skipOverFoundString = true,
+    shortestString = 3,
+    longestString = 2000,
+    badCharacterRegex = FactorioBadStringRegex,
+  } = options;
 
   const results: SplitResult[] = [];
 
@@ -50,6 +60,9 @@ export default function findStrings(
 
     // If the string is too short, skip it
     if (stringBytes < shortestString) continue;
+
+    // If the string is too long, skip it
+    if (stringBytes > longestString) continue;
 
     const end = searchLocation + stringBytes + offset;
 
