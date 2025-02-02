@@ -63,19 +63,23 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
     if (length > 2 ** 30) throw new Error(`Reading ${length} bytes is too large`);
 
     const chunks: Buffer[] = [];
+    let bytesRead = 0;
 
-    while (length > 0) {
-      const chunk = stream.read(Math.min(stream.readableLength, length)) as Buffer | null;
+    while (bytesRead < length) {
+      if (!stream.readableLength && chunks.length) {
+        throw new Error(`Stream ended after reading ${bytesRead} of ${length} bytes`);
+      }
+      const chunk = stream.read(Math.min(stream.readableLength, length - bytesRead)) as Buffer | null;
+
       if (chunk === null) {
+        if (stream.readableEnded) {
+          throw new Error(`Stream ended after reading ${bytesRead} of ${length} bytes`);
+        }
         await readable();
         continue;
       }
 
-      if (chunk.length > length) {
-        throw new Error(`Chunk too large: ${chunk.length} > ${length}`);
-      }
-
-      length -= chunk.length;
+      bytesRead += chunk.length;
       chunks.push(chunk);
     }
 
