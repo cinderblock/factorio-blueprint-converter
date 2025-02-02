@@ -10,11 +10,7 @@ export const hash = getGitHash().catch(() => 'unknown');
 export async function writeLogs(parsedProportion: Record<string, number | string>) {
   parsedProportion['git hash'] = await hash;
 
-  const jobs = [writeJson(parsedProportion)];
-
-  if (process.env.CI?.toLowerCase() !== 'true') {
-    jobs.push(writeLogFile(parsedProportion));
-  }
+  const jobs = [writeJson(parsedProportion), writeLogFile(parsedProportion)];
 
   await Promise.all(jobs);
 }
