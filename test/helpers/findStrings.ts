@@ -43,31 +43,32 @@ export default function findStrings(
     lastUnknown += data.length;
   }
 
-  for (let searchLocation = 0; searchLocation < buff.length; searchLocation++) {
+  function getString(searchLocation: number) {
     let stringBytes = buff[searchLocation];
 
     let offset = 1;
     if (stringBytes === 0xff) {
       const intBytes = 4;
-      if (searchLocation + offset + intBytes > buff.length) continue;
+      // if the buffer can't contain the 4 byte number, skip it
+      if (searchLocation + offset + intBytes > buff.length) return null;
 
       stringBytes = buff.readUInt32LE(searchLocation + offset);
       offset += intBytes;
 
       // If the 4-byte number is less than 255, it would have been encoded in a single byte. Skip it
-      if (stringBytes < 255) continue;
+      if (stringBytes < 255) return null;
     }
 
     // If the string is too short, skip it
-    if (stringBytes < shortestString) continue;
+    if (stringBytes < shortestString) return null;
 
     // If the string is too long, skip it
-    if (stringBytes > longestString) continue;
+    if (stringBytes > longestString) return null;
 
     const end = searchLocation + stringBytes + offset;
 
     // If the string is so long that it would go past the end of the buffer, skip it
-    if (end > buff.length) continue;
+    if (end > buff.length) return null;
 
     // Get the buffer
     const data = Buffer.from(buff.subarray(searchLocation, end));
@@ -76,12 +77,21 @@ export default function findStrings(
     const stringData = data.subarray(offset);
 
     // If the string data is not valid UTF-8, skip it
-    if (!isUtf8(stringData)) continue;
+    if (!isUtf8(stringData)) return null;
 
     const string = stringData.toString('utf-8');
 
     // If the string contains bad characters, skip it
-    if (string.match(badCharacterRegex)) continue;
+    if (string.match(badCharacterRegex)) return null;
+
+    return { string, data, end };
+  }
+
+  for (let searchLocation = 0; searchLocation < buff.length; searchLocation++) {
+    const res = getString(searchLocation);
+    if (!res) continue;
+
+    const { string, data, end } = res;
 
     // Push any unknown data before the string
     pushUnknowns(searchLocation);
@@ -96,10 +106,13 @@ export default function findStrings(
       lastUnknown = end;
     }
 
-    // Skip over found strings if the option is set or if the next byte is unlikely part of a string
-    if (skipOverFoundString || (buff[end] ?? 0) < 10) {
+    // Skip over found strings if
+    //  - the option is set
+    //  - if the next byte is unlikely part of a string
+    //  - if there is a valid string after the end of the current string
+    if (skipOverFoundString || (buff[end] ?? 0) < 10 || getString(end)) {
       // -1 to account for the increment that will happen
-      searchLocation += stringBytes + offset - 1;
+      searchLocation = end - 1;
     }
   }
 
