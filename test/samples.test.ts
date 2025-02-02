@@ -1,4 +1,4 @@
-import { describe, it, expect, afterAll } from 'vitest';
+import { describe, it, expect, afterAll, afterEach } from 'vitest';
 import { parseBlueprintData } from '../src/index.js';
 import { createReadStream } from 'node:fs';
 import { checkBlueprintDataMatchesString } from './helpers/compare.js';
@@ -52,10 +52,16 @@ describe('Samples', { concurrent: true, timeout: 1000 }, async () => {
         }
       });
 
-      afterAll(async () => {
-        const originalFilesize = (await stat(path)).size;
-        parsedProportion[sample] = annotation.getParsedBytes() / originalFilesize;
-        await annotation.finish(stream, originalFilesize);
+      const statPath = stat(path).catch(() => undefined);
+
+      afterEach(async context => {
+        if (!context.task.name.startsWith('should parse and return an object')) return;
+        if (!context.task.result) throw new Error('No result');
+        const originalFilesize = (await statPath)?.size;
+        if (originalFilesize === undefined) throw new Error('No original filesize');
+        parsedProportion[sample] = originalFilesize === 0 ? 1 : annotation.getParsedBytes() / originalFilesize;
+
+        await annotation.finish(stream, originalFilesize, context.task.result);
       }, 400);
     });
   }

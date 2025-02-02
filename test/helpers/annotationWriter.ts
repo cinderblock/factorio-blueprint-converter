@@ -4,6 +4,7 @@ import { Readable } from 'node:stream';
 import PQueue from 'p-queue';
 import findStrings from './findStrings.js';
 import { timeToString } from './timeToString.js';
+import { RunnerTaskResult } from 'vitest';
 
 const loadTime = new Date();
 
@@ -22,7 +23,7 @@ export default function annotationWriter(
   filename: string,
   options: { printFullData?: boolean } = {},
 ): Annotation & {
-  finish(stream: Readable, originalFilesize?: number): Promise<void>;
+  finish(stream: Readable, originalFilesize?: number, result?: RunnerTaskResult): Promise<void>;
   getParsedBytes(): number;
 } {
   const { printFullData = false } = options;
@@ -91,7 +92,7 @@ export default function annotationWriter(
       void write(' => ');
       void write(v);
     },
-    finish: async (stream: Readable, originalFilesize?: number) => {
+    finish: async (stream: Readable, originalFilesize?: number, result?: RunnerTaskResult) => {
       void write('\n');
 
       const remaining = await streamToBuffer(stream);
@@ -124,6 +125,15 @@ export default function annotationWriter(
             void write(`Missing bytes: ${missing}\n`);
           }
         }
+      }
+
+      if (result) {
+        void write(`Errors: ${result.errors?.length}\n`);
+        for (const error of result.errors ?? []) {
+          void write(`  ${error.message}\n`);
+        }
+
+        void write(`Note: ${result.note}\n`);
       }
 
       await write('\n');
