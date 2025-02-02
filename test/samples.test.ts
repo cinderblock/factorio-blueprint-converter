@@ -18,9 +18,12 @@ describe('Samples', { concurrent: true, timeout: 1000 }, async () => {
   parsedProportion.date = timeToString();
 
   for (const sample of sampleFiles) {
-    describe(sample, async () => {
+    const standardizedName = sample.replace('\\', '/').replace(/\.dat$/, '');
+
+    describe(standardizedName, async () => {
       const path = join(SamplesDir, sample);
       const stream = createReadStream(path);
+
       const outPath = join(AnnotationsDir, `${sample}.txt`);
 
       await mkdir(dirname(outPath), { recursive: true });
