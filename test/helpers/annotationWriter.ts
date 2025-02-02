@@ -104,12 +104,29 @@ export default function annotationWriter(
             .map((l, i) => `${(location + i * 40).toString().padStart(4)} ${l}`)
             .join('\n'),
         );
-        void write('\n\n');
+        void write('\n');
       }
 
-      void write(`Unparsed bytes: ${remaining.length}\n\n`);
+      void write('\n');
+
+      void write(`Unparsed bytes: ${remaining.length}\n`);
 
       const allData = Buffer.concat(chunks);
+
+      if (nextLocation === undefined) {
+        void write(`No data read??\n`);
+      } else {
+        if (originalFilesize !== undefined) {
+          void write(`Original file size: ${originalFilesize}\n`);
+
+          const missing = originalFilesize - nextLocation - remaining.length;
+          if (missing) {
+            void write(`Missing bytes: ${missing}\n`);
+          }
+        }
+      }
+
+      await write('\n');
 
       void write('Found Strings:\n');
       for (const string of findStrings(allData, { skipOverFoundString: false })) {
@@ -134,22 +151,7 @@ export default function annotationWriter(
         }
       }
 
-      void write('\n');
-
-      if (nextLocation === undefined) {
-        void write(`No data read??\n`);
-      } else {
-        if (originalFilesize !== undefined) {
-          void write(`Original file size: ${originalFilesize}\n`);
-
-          const missing = originalFilesize - nextLocation - remaining.length;
-          if (missing) {
-            void write(`Missing bytes: ${missing}\n`);
-          }
-        }
-      }
-
-      await write('\n\n');
+      await write('\n');
 
       const endTime = new Date();
       await write(`End time: ${timeToString(endTime)}\n`);
