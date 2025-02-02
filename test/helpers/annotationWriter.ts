@@ -154,6 +154,7 @@ export default function annotationWriter(
       const endTime = new Date();
       await write(`End time: ${timeToString(endTime)}\n`);
       await write(`Time taken: ${endTime.getTime() - startTime.getTime()}ms\n`);
+      await new Promise(resolve => output.end(resolve));
     },
     getParsedBytes: () => {
       return nextLocation;

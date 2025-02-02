@@ -77,6 +77,7 @@ async function writeLogFile(parsedProportion: Record<string, number | string>) {
   }
 
   await writeLine(order.map(k => parsedProportion[k]).map(v => (typeof v === 'number' ? v.toFixed(3) : v)));
+  await new Promise(resolve => writeStream.end(resolve));
 }
 
 function writeJson(parsedProportion: Record<string, number | string>) {
