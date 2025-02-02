@@ -27,6 +27,12 @@ npm install
 npm run test
 ```
 
+#### Get a nice UI for the tests
+
+```bash
+npm run test:ui
+```
+
 #### Watch mode for Tests
 
 ```bash
