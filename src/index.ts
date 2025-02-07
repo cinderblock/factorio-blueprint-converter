@@ -645,7 +645,9 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
   ret.saveTime = await wrapLabel('saveTime', () => readDate());
   annotation?.decoded(timeToString(ret.saveTime));
 
-  const extra = await wrapLabel('extra', () => readNumber(4));
+  if (ret.version.major >= 2) {
+    const extra = await wrapLabel('extra', () => readNumber(4));
+  }
 
   // Unknown purpose. Static
   await expect(1, 'Unknown3');
