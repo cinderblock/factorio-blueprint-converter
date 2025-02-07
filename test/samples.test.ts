@@ -33,7 +33,8 @@ describe('Samples', { concurrent: true, timeout: 1000 }, async () => {
 
       let data: BlueprintData;
 
-      it('should parse', { timeout: 500 }, async () => {
+      const ShouldParse = 'should parse';
+      it(ShouldParse, { timeout: 500 }, async () => {
         data = await parseBlueprintData(stream, annotation);
       });
 
@@ -56,7 +57,7 @@ describe('Samples', { concurrent: true, timeout: 1000 }, async () => {
       const statPath = stat(path).catch(() => undefined);
 
       afterEach(async context => {
-        if (!context.task.name.startsWith('should parse and return an object')) return;
+        if (context.task.name !== ShouldParse) return;
         if (!context.task.result) throw new Error('No result');
         const originalFilesize = (await statPath)?.size;
         if (originalFilesize === undefined) throw new Error('No original filesize');
