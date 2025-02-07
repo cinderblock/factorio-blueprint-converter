@@ -14,6 +14,7 @@ import {
 } from './BlueprintData.js';
 import { typeMap } from './typeMap.js';
 import { FactorioBadStringRegex } from './util/FactorioBadStringRegex.js';
+import { timeToString } from '../test/helpers/timeToString.js';
 
 // For debugging
 const CheckForUnlikelyStrings = true;
@@ -333,16 +334,9 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
   }
 
   async function parseLibraryObjects(): Promise<BlueprintEntry[]> {
-    // 0x15 0x00 0x00 0x00        | 21 objects
-
-    // 0x01                       | slot used
-    // 0x00                       | prefix
-    // 0x12 0x00 0x00 0x00        | generation
-    // 0x4d 0x00                  | entry
-
-    return await wrapLabel('library objects', () =>
+    return await wrapLabel('LibObj', () =>
       readArray<BlueprintEntry>(4, async slot => {
-        const slotUsed = await readBoolean();
+        const slotUsed = await wrapLabel('slot-used', readBoolean);
         annotation?.decoded(slotUsed ? 'used' : 'not used');
 
         if (!slotUsed) {
@@ -352,14 +346,13 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
 
         console.log('Slot used:', slot);
 
-        const parse = await readMappedNumber(1, [
-          parseBlueprint,
-          parseBlueprintBook,
-          parseDeconstructionItem,
-          parseUpgradeItem,
-        ]);
+        const parser = await wrapLabel('entity-type', () =>
+          readMappedNumber(1, [parseBlueprint, parseBlueprintBook, parseDeconstructionItem, parseUpgradeItem]),
+        );
 
-        return parse();
+        annotation?.decoded(parser.name + '()');
+
+        return parser();
       }),
     );
   }
@@ -368,15 +361,11 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
     return wrapLabel('header', async () => {
       const generation = await wrapLabel('generation', () => readNumber(4));
 
-      console.log('Generation:', generation);
-
       const entry = await wrapLabel('entry', () => readEntry('ITEM'));
 
       if (!entry) {
         throw new Error('Entry not found');
       }
-
-      console.log('Entry:', entry.name);
 
       if (entry.prototype !== prototype) {
         throw new Error(`Entry ${entry.prototype} does not match ${prototype}`);
@@ -384,34 +373,12 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
 
       const label = await wrapLabel('label', readString);
 
-      console.log('Label:', label);
-
       return { generation, entry, label };
     });
   }
 
   async function parseBlueprint(): Promise<Blueprint> {
-    // Huge Pumpjacks             | label
-    // 0x00                       | expect 0
-    // 0x00                       | has removed mods
-    // 0xff 0x95 0x01 0x03 0x00   | length (bytes)
-    // 0x02 0x00 0x00 0x00 0x1c 0x00 0x01 0x00 0x00 0x0d
-    // base
-    // 1.1.0.json
-    // base
-    // 1.2.0 stack inserter rename.json
-    // base
-    // 2.0.0-biter-egg.json
-    // ...
-    // space-age
-    // tungsten-belt-rename.json
-    // 0x 11b6748ffd533648ca1c6800309b8cd7d7ace03c
-    // 0x 000000100000560080e080e0200001000000000000006400000000000000000000000000000000000000000000000100
-    // 0x 000000000000560000000001200001000000000000006400000000000000000000000000000000000000000000000100
-    // 0x 000000000000560000000001200001000000000000006400000000000000000000000000000000000000000000000100
-    // 0x 0000000000005600000000...
-
-    annotation?.pushLabel('blueprint');
+    annotation?.pushLabel('Blueprint');
 
     const header = await parseBlueprintEntityHeader('blueprint');
 
@@ -423,11 +390,11 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
 
     const removedMods = await wrapLabel('removed mods', readBoolean);
 
-    const length = await wrapLabel('data length', () => readNumber(4));
+    const length = await wrapLabel('DataLength', () => readNumber(4));
 
-    const data = await wrapLabel('unparsed data', () => read(length));
+    const data = await wrapLabel('UnparsedData', () => read(length));
 
-    annotation?.clearLabel('blueprint');
+    annotation?.clearLabel('Blueprint');
 
     return {
       key: 'blueprint',
@@ -440,7 +407,7 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
   }
 
   async function readFilters(type: Index.Types) {
-    annotation?.pushLabel('filters');
+    annotation?.pushLabel(`readFilters(${type})`);
 
     const unknowns: Record<number, string> = {};
 
@@ -460,9 +427,9 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
       name: string;
     }[] = [];
 
-    await wrapLabel('filters', () =>
+    await wrapLabel('Filters', () =>
       readArray(1, async index => {
-        let name = (await wrapLabel('unknown entry', () => readEntry(type)))?.name;
+        let name = (await wrapLabel('UnknownEntry', () => readEntry(type)))?.name;
         if (!name) return;
 
         const unknownReplacement = unknowns[index];
@@ -487,27 +454,27 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
       }),
     );
 
-    annotation?.clearLabel('filters');
+    annotation?.clearLabel(`readFilters(${type})`);
 
     return { filters, quality };
   }
 
   async function parseDeconstructionItem(): Promise<DeconstructionPlanner> {
-    annotation?.pushLabel('deconstruction-item');
+    annotation?.pushLabel('Decon');
 
     const header = await parseBlueprintEntityHeader('deconstruction-item');
     const description = await wrapLabel('description', readString);
     const icons = await parseIcons();
 
-    const entityFilterMode = await wrapLabel('Entity filter mode', () => readNumber(1));
-    const entityFilters = await wrapLabel('entity filters', () => readFilters('ENTITY'));
-    const treesRocksOnly = await wrapLabel('trees/rocks only', readBoolean);
+    const entityFilterMode = await wrapLabel('EFMode', () => readNumber(1));
+    const entityFilters = await wrapLabel('EF', () => readFilters('ENTITY'));
+    const treesRocksOnly = await wrapLabel('TROnly', readBoolean);
 
-    const tileFilterMode = await wrapLabel('tile filter mode', () => readNumber(1));
-    const tileSelectionMode = await wrapLabel('tile selection mode', () => readNumber(1));
-    const tileFilters = await wrapLabel('tile filters', () => readFilters('TILE'));
+    const tileFilterMode = await wrapLabel('TFMode', () => readNumber(1));
+    const tileSelectionMode = await wrapLabel('TSMode', () => readNumber(1));
+    const tileFilters = await wrapLabel('TF', () => readFilters('TILE'));
 
-    annotation?.clearLabel('deconstruction-item');
+    annotation?.clearLabel('Decon');
 
     return {
       key: 'deconstruction_planner',
@@ -595,12 +562,10 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
   }
 
   async function parseBlueprintBook(): Promise<BlueprintBook> {
-    annotation?.pushLabel('Blueprint Book');
+    annotation?.pushLabel('BB');
     const { label, generation } = await parseBlueprintEntityHeader('blueprint-book');
 
     const description = await wrapLabel('description', readString);
-
-    console.log('Description:', description);
 
     const icons = await parseIcons();
 
@@ -610,7 +575,7 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
 
     await expect(0, 'Expect 0');
 
-    annotation?.clearLabel('blueprint-book');
+    annotation?.clearLabel('BB');
 
     return {
       key: 'blueprint_book',
@@ -811,19 +776,20 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
     // */
 
   // Unknown purpose. Changes
-  await wrapLabel('unknown1', () => readNumber(1));
+  await wrapLabel('Unknown1', () => readNumber(1));
 
   // Unknown purpose. Static
-  await expect(0, 'Unknown 2');
+  await expect(0, 'Unknown2');
 
   ret.generationCounter = await wrapLabel('generationCounter', () => readNumber(4));
 
   ret.saveTime = await wrapLabel('saveTime', () => readDate());
+  annotation?.decoded(timeToString(ret.saveTime));
 
   const extra = await wrapLabel('extra', () => readNumber(4));
 
   // Unknown purpose. Static
-  await expect(1, 'Unknown 3');
+  await expect(1, 'Unknown3');
 
   ret.blueprints = await parseLibraryObjects();
 
