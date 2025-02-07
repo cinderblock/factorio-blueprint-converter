@@ -390,7 +390,7 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
 
     const removedMods = await wrapLabel('removed mods', readBoolean);
 
-    const length = await wrapLabel('DataLength', () => readNumber(4));
+    const length = await wrapLabel('DataLength', () => readNumber());
 
     const data = await wrapLabel('UnparsedData', () => read(length));
 
