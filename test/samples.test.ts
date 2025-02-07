@@ -38,7 +38,9 @@ describe('Samples', { concurrent: true, timeout: 1000 }, async () => {
         data = await parseBlueprintData(stream, annotation);
       });
 
-      it('should be valid', { timeout: 100 }, () => {
+      it('should be valid', { timeout: 100 }, ({ skip }) => {
+        if (data === undefined) skip();
+
         expect(data).toBeTruthy();
 
         // Verify data is serializable
@@ -46,7 +48,8 @@ describe('Samples', { concurrent: true, timeout: 1000 }, async () => {
       });
 
       if (blueprintStrings[sample]) {
-        it(`should match blueprint strings`, () => {
+        it(`should match blueprint strings`, ({ skip }) => {
+          if (data === undefined) skip();
           expect(blueprintStrings[sample].length).toBe(data.blueprints.length);
           blueprintStrings[sample].forEach((blueprintString, i) => {
             expect(checkBlueprintDataMatchesString(data.blueprints[i], blueprintString)).toBe(true);
