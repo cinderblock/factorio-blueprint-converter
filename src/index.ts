@@ -494,7 +494,7 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
   }
 
   async function parseUpgradeItem(): Promise<UpgradePlanner> {
-    annotation?.pushLabel('Upgrade-item');
+    annotation?.pushLabel('UpgradeItem');
 
     const header = await parseBlueprintEntityHeader('upgrade-item');
 
@@ -551,7 +551,7 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
       }),
     );
 
-    annotation?.clearLabel('upgrade-item');
+    annotation?.clearLabel('UpgradeItem');
 
     return {
       key: 'upgrade_planner',
