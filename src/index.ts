@@ -654,47 +654,30 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
 
   ret.blueprints = await parseLibraryObjects();
 
-  // Read remaining data with timeout
+  // await wrapLabel('Unknown4', () => read(3));
+
+  //////// Done Parsing ////////
+
+  // Read remaining data with timeout (there shouldn't be any)
   const remainingData = await Promise.race([
     new Promise<Buffer>((resolve, reject) => {
       const chunks: Buffer[] = [];
-      stream.on('data', (chunk: Buffer) => chunks.push(chunk));
-      stream.on('end', () => resolve(Buffer.concat(chunks)));
       stream.on('error', reject);
+      stream.on('end', () => resolve(Buffer.concat(chunks)));
+      stream.on('data', (chunk: Buffer) => chunks.push(chunk));
+      stream.resume();
     }),
     new Promise<never>((_, reject) => setTimeout(() => reject(new Error('Timeout reading remaining data')), 100)),
   ]);
 
-  const fullLength = fileLocation + remainingData.length;
-
   if (remainingData.length > 0) {
-    console.log(`${remainingData.length} bytes of remaining data!`);
-    console.log(`File location: ${fileLocation} (${((100 * fileLocation) / fullLength).toFixed(0)}%)`);
-
-    const printRemainingBytesLines = 10;
-    if (printRemainingBytesLines) {
-      const groupSize = 2;
-      const groupCount = 32;
-      const bytesPerLine = groupSize * groupCount;
-
-      for (let line = 0; line < printRemainingBytesLines; line++) {
-        const offset = line * bytesPerLine;
-        const slice = remainingData.slice(offset, offset + bytesPerLine);
-
-        if (slice.length === 0) break; // Stop if we've run out of data
-
-        let hexLine = '';
-        for (let i = 0; i < slice.length; i += groupSize) {
-          const hex = slice.slice(i, i + groupSize).toString('hex');
-          hexLine += hex + ' ';
-        }
-
-        console.log(hexLine);
-      }
-    }
+    await wrapLabel('RemainingData', () => {
+      annotation?.read(remainingData, fileLocation);
+    });
 
     throw new Error(`Unexpected ${remainingData.length} bytes remaining in stream`);
   }
+
   return ret;
 }
 
