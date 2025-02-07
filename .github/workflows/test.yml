@@ -41,6 +41,6 @@ jobs:
         if: success() || steps.test.conclusion == 'failure'
         with:
           name: annotated-files
-          path: test/samples/annotated
+          path: test/samples-annotated
           if-no-files-found: error
           overwrite: true
