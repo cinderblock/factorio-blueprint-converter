@@ -9,6 +9,7 @@ import { timeToString } from './helpers/timeToString.js';
 import { AnnotationsDir, SamplesDir } from './helpers/dirs.js';
 import { writeLogs } from './helpers/writeLog.js';
 import { loadSamples } from './helpers/loadSamples.js';
+import { BlueprintData } from '../src/BlueprintData.js';
 
 describe('Samples', { concurrent: true, timeout: 1000 }, async () => {
   // We have the blueprint strings in a yaml file for some samples
@@ -20,7 +21,7 @@ describe('Samples', { concurrent: true, timeout: 1000 }, async () => {
   for (const sample of sampleFiles) {
     const standardizedName = sample.replace('\\', '/').replace(/\.dat$/, '');
 
-    describe(standardizedName, async () => {
+    describe(standardizedName, { concurrent: false }, async () => {
       const path = join(SamplesDir, sample);
       const stream = createReadStream(path);
 
@@ -30,27 +31,27 @@ describe('Samples', { concurrent: true, timeout: 1000 }, async () => {
 
       const annotation = annotationWriter(outPath);
 
-      it('should parse and return an object', { timeout: 500 }, async () => {
-        const data = await parseBlueprintData(stream, annotation);
+      let data: BlueprintData;
 
+      it('should parse', { timeout: 500 }, async () => {
+        data = await parseBlueprintData(stream, annotation);
+      });
+
+      it('should be valid', { timeout: 100 }, () => {
         expect(data).toBeTruthy();
 
         // Verify data is serializable
         expect(() => JSON.stringify(data)).not.toThrow();
-
-        if (blueprintStrings[sample]) {
-          if (blueprintStrings[sample].length !== data.blueprints.length) {
-            throw new Error(
-              `Blueprint string length ${blueprintStrings[sample].length} does not match data length ${data.blueprints.length}`,
-            );
-          }
-          blueprintStrings[sample].forEach((blueprintString, i) => {
-            it(`should match blueprint string ${i}`, () => {
-              expect(checkBlueprintDataMatchesString(data.blueprints[i], blueprintString)).toBe(true);
-            });
-          });
-        }
       });
+
+      if (blueprintStrings[sample]) {
+        it(`should match blueprint strings`, () => {
+          expect(blueprintStrings[sample].length).toBe(data.blueprints.length);
+          blueprintStrings[sample].forEach((blueprintString, i) => {
+            expect(checkBlueprintDataMatchesString(data.blueprints[i], blueprintString)).toBe(true);
+          });
+        });
+      }
 
       const statPath = stat(path).catch(() => undefined);
 
