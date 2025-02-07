@@ -618,141 +618,9 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
     ),
   );
 
-  // Fill Index
-  {
-    /** Example data
-        0x41 0x00               | 65 prototypes ?
-
-        equipment-grid          | first prototype name ?
-
-        0x01 0x03               | name count - 769
-        medium-equipment-grid   | category name
-
-        accumulator             | group name
-        0x01 0x00               | length
-        0x4B 0x00               | ID?
-        accumulator             | name
-
-        arithmetic-combinator
-        0x01 0x00
-        0x41 0x00
-        arithmetic-combinator
-
-        artillery-turret
-        0x01 0x00
-        0x7B 0x00
-        artillery-turret
-
-        assembling-machine
-        0x01 0x00
-        0x64 0x00
-        centrifuge
-
-        beacon
-        0x01 0x00
-        0x6C 0x00
-        beacon
-
-        car
-        0x01 0x00
-        0x36 0x00
-        tank
-
-        cargo-wagon
-        0x01 0x00
-        0x32 0x00
-        cargo-wagon
-
-        ...
-
-        display-panel
-        0x01 0x00
-        0x47 0x00
-        display-panel
-
-        electric-pole
-        0x04 0x00
-        0x1B 0x00
-        small-electric-pole
-        0x1C 0x00
-        medium-electric-pole
-        0x1D 0x00
-        big-electric-pole
-        0x1E 0x00
-        substation
-
-        electric-turret
-        0x02 0x00
-        0x79 0x00
-        laser-turret
-        0x7D 0x00
-        tesla-turret
-
-        entity-ghost
-        0x01 0x00
-        0x49 0x03
-        entity-ghost
-
-        half-diagonal-rail
-        0x01 0x00
-        0x23 0x00
-        half-diagonal-rail
-
-        inserter
-        0x03 0x00
-        0x16 0x00
-        inserter
-        //...
-
-        0x3E 0x00
-        up-arrow
-        0x42 0x00
-        down-arrow
-        0x4A 0x00
-        signal-item-parameter
-
-        quality
-        0x05
-        0x01
-        normal
-        0x02
-        uncommon
-        0x03
-        rare
-        0x04
-        epic
-        0x05
-        legendary
-
-        planet
-        0x05 0x00
-        0x01 0x00
-        nauvis
-        0x02 0x00
-        vulcanus
-        0x03 0x00
-        gleba
-        0x04 0x00
-        fulgora
-        0x05 0x00
-        aquilo
-        // */
-
-    //   const index = {} as Record<Types, any>;
-
-    const indexCount = await wrapLabel('indexCount', () => readNumber(2));
-
-    const mainCategory = await wrapLabel('mainCategory', readString);
-
-    // Is this a count or no? It *almost* aligns with the number of groups...
-    const firstIndex = await wrapLabel('firstIndex', () => readNumber(2));
-    const firstName = await wrapLabel('firstName', () => readString());
-
-    console.log(firstIndex, firstName);
-
-    for (let j = 1; j < indexCount; j++) {
-      const prototype = await wrapLabel('prototype', () => readString());
-      // console.log('prototype:', prototype);
+  await wrapLabel('IndexSize', () =>
+    readArray(2, async () => {
+      const prototype = await wrapLabel('Prototype', () => readString());
 
       const readNum = prototype == 'quality' ? 1 : 2;
       await readArray(readNum, async i =>
@@ -763,19 +631,8 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
           index[typeMap[prototype]].push({ prototype, name, id });
         }),
       );
-    }
-
-  }
-
-  /* Example data
-
-       0x00
-       0x00
-       0x3a 0x00 0x00 0x00  | generation counter?
-       0x47 0xb2 0x6c 0x67  | save time?
-       0x00 0x00 0x00 0x00  | extra data? New in 2.0?
-       0x01
-    // */
+    }),
+  );
 
   // Unknown purpose. Changes
   await wrapLabel('Unknown1', () => readNumber(1));
