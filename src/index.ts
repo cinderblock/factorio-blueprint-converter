@@ -446,13 +446,15 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
       name: string;
     }[] = [];
 
-    await wrapLabel('quality', () =>
-      readArray(1, async () => {
-        const index = await wrapLabel('index', () => readNumber(2));
-        const name = await wrapLabel('name', () => readString());
-        quality.push({ index, name });
-      }),
-    );
+    if (ret.version.major >= 2) {
+      await wrapLabel('Quality', () =>
+        readArray(1, async () => {
+          const index = await wrapLabel('index', () => readNumber(2));
+          const name = await wrapLabel('name', () => readString());
+          quality.push({ index, name });
+        }),
+      );
+    }
 
     annotation?.clearLabel(`readFilters(${type})`);
 
