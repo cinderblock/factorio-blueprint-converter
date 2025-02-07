@@ -85,9 +85,14 @@ export default function annotationWriter(
         void write(`Lost data at ${location.toString().padStart(4)}\n`);
       }
 
-      void write(`${location.toString().padStart(4)} ${buffer.toString('hex').padEnd(80)} ${labels.join(' ')}`);
+      const loc = location.toString().padStart(4);
+      const hex = buffer.toString('hex').padEnd(80);
+
+      void write(`${loc} ${trimEndOfString(hex)} ${labels.join(' ')}`);
+
       nextLocation = location + buffer.length;
     },
+
     decoded: (v: string) => {
       void write(' => ');
       void write(v);
@@ -144,19 +149,19 @@ export default function annotationWriter(
         const hex = string.data.toString('hex').padEnd(80);
         if (string.string) {
           const str = string.string.replace(/\n/g, '\\n');
-          void write(`${loc} ${hex.length > 80 ? hex.slice(0, 77) + '...' : hex} => ${str}\n`);
+          void write(`${loc} ${trimEndOfString(hex)} => ${str}\n`);
         } else {
           if (printFullData) {
             for (let i = 0; i < string.data.length; i += 40) {
-              void write(
-                `${(string.start + i).toString().padStart(4)} ${string.data
-                  .subarray(i, i + 40)
-                  .toString('hex')
-                  .padEnd(80)}\n`,
-              );
+              const loc = (string.start + i).toString().padStart(4);
+              const hex = string.data
+                .subarray(i, i + 40)
+                .toString('hex')
+                .padEnd(80);
+              void write(`${loc} ${hex}\n`);
             }
           } else {
-            void write(`${loc} ${hex.length > 80 ? hex.slice(0, 77) + '...' : hex}\n`);
+            void write(`${loc} ${trimEndOfString(hex)}\n`);
           }
         }
       }
@@ -172,4 +177,8 @@ export default function annotationWriter(
       return nextLocation;
     },
   };
+}
+
+function trimEndOfString(str: string, length = 80, replacement = '...') {
+  return str.length > length ? str.slice(0, length - replacement.length) + replacement : str;
 }
