@@ -50,6 +50,7 @@ describe('Samples', { concurrent: true, timeout: 1000 }, async () => {
         expect(() => JSON.stringify(data)).not.toThrow();
       });
 
+      // Not all samples have blueprint strings
       if (blueprintStrings[sample]) {
         it(`should match blueprint strings`, ({ skip }) => {
           if (data === undefined) skip();
