@@ -20,6 +20,7 @@ describe('Samples', { concurrent: true, timeout: 1000 }, async () => {
 
   for (const sample of sampleFiles) {
     const standardizedName = sample.replace('\\', '/').replace(/\.dat$/, '');
+    const majorVersion = +standardizedName.split('/')[0].substring(1);
 
     describe(standardizedName, { concurrent: false }, async () => {
       const path = join(SamplesDir, sample);
@@ -42,6 +43,8 @@ describe('Samples', { concurrent: true, timeout: 1000 }, async () => {
         if (data === undefined) skip();
 
         expect(data).toBeTruthy();
+
+        expect(data.version.major).toBe(majorVersion);
 
         // Verify data is serializable
         expect(() => JSON.stringify(data)).not.toThrow();
