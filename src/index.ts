@@ -330,7 +330,6 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
       await readArray(1, async i => {
         const signal = await readSignal();
         if (!signal) {
-          console.log(`Icon ${i} not found`);
           return;
         }
         if (unknownIcons[i]) {
