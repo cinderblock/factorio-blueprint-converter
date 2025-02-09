@@ -335,16 +335,11 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
 
   async function parseLibraryObjects(): Promise<BlueprintEntry[]> {
     return await wrapLabel('LibObj', () =>
-      readArray<BlueprintEntry>(4, async slot => {
+      readArray<BlueprintEntry>(4, async () => {
         const slotUsed = await wrapLabel('slot-used', readBoolean);
         annotation?.decoded(slotUsed ? 'used' : 'not used');
 
-        if (!slotUsed) {
-          console.log(`Slot ${slot} not used`);
-          return null;
-        }
-
-        console.log('Slot used:', slot);
+        if (!slotUsed) return null;
 
         const parser = await wrapLabel('entity-type', () =>
           readMappedNumber(1, [parseBlueprint, parseBlueprintBook, parseDeconstructionItem, parseUpgradeItem]),
