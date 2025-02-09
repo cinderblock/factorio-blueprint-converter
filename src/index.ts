@@ -50,7 +50,15 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
 
   // Wait for the stream to be readable
   async function readable(): Promise<void> {
-    return new Promise(resolve => stream.once('readable', resolve));
+    return new Promise((resolve, reject) => {
+      stream.once('readable', () => {
+        stream.off('error', reject);
+        stream.off('end', reject);
+        resolve();
+      });
+      stream.once('error', reject);
+      stream.once('end', reject);
+    });
   }
 
   await readable();
