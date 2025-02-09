@@ -210,7 +210,13 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
   }
 
   async function readDate() {
-    return new Date((await readNumberLow(4)) * 1000);
+    let seconds = await readNumberLow(4);
+    if (ret.version.major >= 2) {
+      const more = await readNumberLow(1);
+      await expect([0, 0, 0], '>5-byte timestamp!');
+      seconds |= more << 32;
+    }
+    return new Date(seconds * 1000);
   }
 
   async function readString() {
@@ -647,10 +653,6 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
 
   ret.saveTime = await wrapLabel('saveTime', () => readDate());
   annotation?.decoded(timeToString(ret.saveTime));
-
-  if (ret.version.major >= 2) {
-    await expect([0, 0, 0, 0], 'v2-Unknown1');
-  }
 
   // Unknown purpose. Static
   await expect(1, 'Unknown3');
