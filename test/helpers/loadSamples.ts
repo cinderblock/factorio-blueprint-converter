@@ -8,11 +8,14 @@ export async function loadSamples() {
   const sampleFiles = files.filter(file => file.match(/[^/\\]\.dat$/));
   const exportsFiles = files.filter(file => file.match(/(^|[/\\])exports.yaml$/));
 
-  const blueprintStrings: Record<string, string[]> = {};
+  const blueprintStrings: Record<string, (string | null)[]> = {};
 
   for (const exportsFile of exportsFiles) {
     const dir = dirname(exportsFile);
-    const exports = parse(await readFile(join(SamplesDir, exportsFile), 'utf-8')) as Record<string, string | string[]>;
+    const exports = parse(await readFile(join(SamplesDir, exportsFile), 'utf-8')) as Record<
+      string,
+      string | (string | null)[]
+    >;
     for (let [key, value] of Object.entries(exports)) {
       key = join(dir, key);
       if (blueprintStrings[key]) {
