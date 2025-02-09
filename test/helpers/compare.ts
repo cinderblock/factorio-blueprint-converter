@@ -5,8 +5,12 @@ export function checkBlueprintDataMatchesString(data: BlueprintEntry, blueprint:
   if (!data && !blueprint) return true;
   if (!data || !blueprint) return false;
 
-  console.log('Decoding blueprint:', blueprint);
-  const decoded = new BlueprintString(blueprint);
+  let decoded;
+  try {
+    decoded = new BlueprintString(blueprint);
+  } catch (error) {
+    throw new Error(`Error decoding blueprint: ${error instanceof Error ? error.message : error}`);
+  }
 
   // TODO: finish implementing
   return false;
