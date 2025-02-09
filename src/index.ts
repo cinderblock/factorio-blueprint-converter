@@ -210,13 +210,26 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
   }
 
   async function readDate() {
-    let seconds = await readNumberLow(4);
-    if (ret.version.major >= 2) {
-      const more = await readNumberLow(1);
-      await expect([0, 0, 0], '>5-byte timestamp!');
-      seconds |= more << 32;
+    let date: Date;
+    if (ret.version.major < 2) {
+      date = new Date((await readNumberLow(4)) * 1000);
+    } else {
+      // TODO: Why is this cast necessary?
+      const seconds = ((await readNumberLow(8)) as unknown as bigint) * 1000n;
+
+      const num = Number(seconds);
+
+      // Cast the number back to a bigint to check if we've lost precision
+      if (seconds !== BigInt(num)) {
+        throw new Error(`Timestamp ${seconds} is too large`);
+      }
+
+      date = new Date(num);
     }
-    return new Date(seconds * 1000);
+
+    annotation?.decoded(timeToString(date));
+
+    return date;
   }
 
   async function readString() {
@@ -651,7 +664,6 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
   ret.generationCounter = await wrapLabel('generationCounter', () => readNumber(4));
 
   ret.saveTime = await wrapLabel('saveTime', () => readDate());
-  annotation?.decoded(timeToString(ret.saveTime));
 
   // Unknown purpose. Static
   await expect(1, 'Unknown3');
