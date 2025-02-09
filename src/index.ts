@@ -649,7 +649,9 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
 
   ret.blueprints = await parseLibraryObjects();
 
-  // await wrapLabel('Unknown4', () => read(3));
+  if (ret.version.major >= 2) {
+    await expect([0, 0, 0], 'v2-Unknown2');
+  }
 
   //////// Done Parsing ////////
 
