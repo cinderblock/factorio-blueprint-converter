@@ -1,4 +1,4 @@
-import { createReadStream } from 'fs';
+import { createReadStream } from 'node:fs';
 
 export default function readFileUntil(path: string, until: string) {
   const stream = createReadStream(path);

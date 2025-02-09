@@ -1,5 +1,5 @@
-import { createWriteStream, createReadStream } from 'fs';
-import { stat, rename, writeFile } from 'fs/promises';
+import { createWriteStream, createReadStream } from 'node:fs';
+import { stat, rename, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import readFileUntil from './readFileUntil.js';
 import { getGitHash } from './git.js';

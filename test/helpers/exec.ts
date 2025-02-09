@@ -1,4 +1,4 @@
-import { exec as nodeExec } from 'child_process';
+import { exec as nodeExec } from 'node:child_process';
 
 export function exec(command: string): Promise<{ stdout: string; stderr: string }> {
   return new Promise((resolve, reject) => {
