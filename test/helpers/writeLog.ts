@@ -8,6 +8,8 @@ import { AnnotationsDir } from './dirs.js';
 export const hash = getGitHash().catch(() => 'unknown');
 
 export async function writeLogs(parsedProportion: Record<string, number | string>) {
+  parsedProportion.passed = Object.values(parsedProportion).reduce<number>((b, a) => (a === 1 ? b + 1 : b), 0) + '';
+
   parsedProportion['git hash'] = await hash;
 
   const jobs = [writeJson(parsedProportion), writeLogFile(parsedProportion)];
