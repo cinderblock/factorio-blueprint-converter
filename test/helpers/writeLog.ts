@@ -1,6 +1,6 @@
 import { createWriteStream, createReadStream } from 'fs';
 import { stat, rename, writeFile } from 'fs/promises';
-import { join } from 'path/posix';
+import { join } from 'node:path';
 import readFileUntil from './readFileUntil.js';
 import { getGitHash } from './git.js';
 import { AnnotationsDir } from './dirs.js';

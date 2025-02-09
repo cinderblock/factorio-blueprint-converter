@@ -1,5 +1,5 @@
 import { readdir, readFile } from 'fs/promises';
-import { dirname, join } from 'path/posix';
+import { join, dirname } from 'node:path';
 import { parse } from 'yaml';
 import { SamplesDir } from './dirs.js';
 
