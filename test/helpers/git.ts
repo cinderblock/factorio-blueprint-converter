@@ -6,6 +6,6 @@ export async function getGitHash() {
 }
 
 export async function isGitDirty() {
-  const status = await exec('git status --porcelain --exclude=test/samples');
+  const status = await exec('git status --porcelain "**/*.ts"');
   return status.stdout.trim().length > 0;
 }
