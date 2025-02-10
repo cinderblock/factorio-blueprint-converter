@@ -33,7 +33,7 @@ jobs:
       - name: Generate Standalone Stats
         id: generate
         if: success() || steps.test.conclusion == 'failure'
-        uses: cinderblock/github-action-standalone-stats
+        uses: cinderblock/github-action-standalone-stats@master
         with:
           stats-branch: build-stats
           pages-dir: public/action-stats
