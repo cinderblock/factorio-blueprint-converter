@@ -640,8 +640,7 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
     throw new Error('Blueprint version is less than or equal to 1.0.0');
   }
 
-  // Check bool
-  await expect(0, 'Initial bool false check. aka `branchVersion`');
+  ret.version.branch = await wrapLabel('branchVersion', () => readNumber(1));
 
   // Read expansions
   await wrapLabel('expansions', async () =>

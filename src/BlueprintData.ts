@@ -16,6 +16,15 @@ export class Version {
   patch: number;
   developer: number;
 
+  set branch(x: number) {
+    if (x !== 0) {
+      throw new Error('Branch version must be 0');
+    }
+  }
+  get branch() {
+    return 0;
+  }
+
   constructor(version?: string, developer?: number) {
     if (!version) {
       this.major = 0;
