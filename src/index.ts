@@ -630,7 +630,7 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
   }
 
   // Check bool
-  await expect(0, 'Initial bool false check');
+  await expect(0, 'Initial bool false check. aka `branchVersion`');
 
   // Read expansions
   await wrapLabel('expansions', async () =>
@@ -655,23 +655,33 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
     }),
   );
 
-  // Unknown purpose. Changes
-  await wrapLabel('Unknown1', () => readNumber(1));
+  const playerIndex = await wrapLabel('playerIndex', () => readNumber(2));
 
-  // Unknown purpose. Static
-  await expect(0, 'Unknown2');
-
+  // aka `nextRecordID`
   ret.generationCounter = await wrapLabel('generationCounter', () => readNumber(4));
 
   ret.saveTime = await wrapLabel('saveTime', () => readDate());
 
-  // Unknown purpose. Static
-  await expect(1, 'Unknown3');
+  const synchronized = await wrapLabel('synchronized', readBoolean);
+  if (!synchronized) {
+    // Unknown purpose
+    throw new Error('Unsynchronized blueprints are not (yet?) supported');
+  }
 
   ret.blueprints = await parseLibraryObjects();
 
   if (ret.version.major >= 2) {
-    await expect([0, 0, 0], 'v2-Unknown2');
+    const savedTargetablesCount = await wrapLabel('savedTargetablesCount', () => readNumber());
+    if (savedTargetablesCount !== 0) {
+      throw new Error(`savedTargetablesCount is ${savedTargetablesCount}. Not yet implemented.`);
+    }
+
+    const targeterToTargetableMapping = await readArray(0, () => readNumber(4));
+    if (targeterToTargetableMapping.length !== 0) {
+      throw new Error(`targeterToTargetableMapping is ${targeterToTargetableMapping.length}. Not yet implemented.`);
+    }
+
+    await expect(0, 'v2-Unknown2');
   }
 
   //////// Done Parsing ////////
