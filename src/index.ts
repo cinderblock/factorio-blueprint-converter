@@ -11,6 +11,7 @@ import {
   UpgradePlanner,
   BlueprintBook,
   Sig,
+  Version,
 } from './BlueprintData.js';
 import { typeMap } from './typeMap.js';
 import { FactorioBadStringRegex } from './util/FactorioBadStringRegex.js';
@@ -617,12 +618,14 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
   /////// Start reading data ///////
 
   // See: https://wiki.factorio.com/Version_string_format
-  ret.version = await wrapLabel('version', async () => ({
-    major: await wrapLabel('major', () => readNumber(2)),
-    minor: await wrapLabel('minor', () => readNumber(2)),
-    patch: await wrapLabel('patch', () => readNumber(2)),
-    developer: await wrapLabel('developer', () => readNumber(2)),
-  }));
+  ret.version = await wrapLabel('version', async () => {
+    const ret = new Version();
+    ret.major = await wrapLabel('major', () => readNumber(2));
+    ret.minor = await wrapLabel('minor', () => readNumber(2));
+    ret.patch = await wrapLabel('patch', () => readNumber(2));
+    ret.developer = await wrapLabel('developer', () => readNumber(2));
+    return ret;
+  });
 
   if (ret.version.major > 2) {
     console.error('Warning: Blueprint version is higher than 2');

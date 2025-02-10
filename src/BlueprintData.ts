@@ -10,12 +10,46 @@ export type BlueprintData = {
   generationCounter: number;
   blueprints: BlueprintEntry[];
 };
-type Version = {
+export class Version {
   major: number;
   minor: number;
   patch: number;
   developer: number;
-};
+
+  constructor(version?: string, developer?: number) {
+    if (!version) {
+      this.major = 0;
+      this.minor = 0;
+      this.patch = 0;
+      this.developer = 0;
+      return;
+    }
+
+    const parts = version.split('.');
+    if (parts.length < 3 || parts.length > 4) {
+      throw new Error('Invalid version string format. Expected: major.minor.patch[.developer]');
+    }
+
+    this.major = parseInt(parts[0]);
+    this.minor = parseInt(parts[1]);
+    this.patch = parseInt(parts[2]);
+    this.developer = parts.length === 4 ? parseInt(parts[3]) : (developer ?? 0);
+
+    if (isNaN(this.major) || isNaN(this.minor) || isNaN(this.patch) || isNaN(this.developer)) {
+      throw new Error('Invalid version number format');
+    }
+  }
+
+  compare(other: Version | string): number {
+    if (typeof other === 'string') {
+      other = new Version(other);
+    }
+    if (this.major !== other.major) return this.major - other.major;
+    if (this.minor !== other.minor) return this.minor - other.minor;
+    if (this.patch !== other.patch) return this.patch - other.patch;
+    return this.developer - other.developer;
+  }
+}
 export namespace Index {
   export type Types = 'ITEM' | 'FLUID' | 'VSIGNAL' | 'TILE' | 'ENTITY' | 'RECIPE' | 'EQUIPMENT' | 'QUALITY' | 'PLANET';
   export type Entry = {
