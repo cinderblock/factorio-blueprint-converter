@@ -25,8 +25,27 @@ jobs:
         run: npm ci --color=always
 
       - name: Run tests
-        run: npm test --color=always
+        run: npm test --color=always -- --coverage
         id: test
+
+        # This step will copy coverage reports (and others) to the specified historical branch
+        # and use it to generate some pretty charts
+      - name: Generate Standalone Stats
+        id: generate
+        if: success() || steps.test.conclusion == 'failure'
+        uses: cinderblock/github-action-standalone-stats
+        with:
+          stats-branch: build-stats
+          pages-dir: public/action-stats
+
+      # Publish to gh-pages
+      - name: Publish to gh-pages
+        if: success() || steps.generate.conclusion == 'success'
+        uses: peaceiris/actions-gh-pages@v4
+        env:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          PUBLISH_BRANCH: gh-pages
+          PUBLISH_DIR: public
 
       - name: Print annotated and decoded files
         # Always print annotated files, even on other failure

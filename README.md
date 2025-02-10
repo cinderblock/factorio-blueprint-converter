@@ -9,6 +9,8 @@ This project is in early development and is not yet ready for use.
 
 [![Tests](https://github.com/cinderblock/factorio-blueprint-converter/actions/workflows/test.yml/badge.svg)](https://github.com/cinderblock/factorio-blueprint-converter/actions/workflows/test.yml)
 
+[![Development Stats](https://cinderblock.github.io/factorio-blueprint-converter/action-stats/build-stats/dashboard.svg)](https://cinderblock.github.io/factorio-blueprint-converter/action-stats/build-stats)
+
 ## Usage
 
 Back up your data.
