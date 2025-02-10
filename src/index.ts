@@ -628,7 +628,7 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
   });
 
   if (ret.version.major > 2) {
-    console.error('Warning: Blueprint version is higher than 2');
+    console.error('Warning: Blueprint major version is greater than 2');
   }
 
   // Check bool
