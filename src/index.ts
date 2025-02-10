@@ -631,6 +631,10 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
     console.error('Warning: Blueprint major version is greater than 2');
   }
 
+  if (ret.version.compare('1.0.0') <= 0) {
+    throw new Error('Blueprint version is less than or equal to 1.0.0');
+  }
+
   // Check bool
   await expect(0, 'Initial bool false check. aka `branchVersion`');
 
