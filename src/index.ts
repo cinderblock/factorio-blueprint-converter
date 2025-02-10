@@ -122,12 +122,12 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
    * @param error If true, throw an error if the length is 0xff
    */
   async function readNumberLow(error: true): Promise<number>;
+  async function readNumberLow(length: 8 | -8): Promise<bigint>;
   /**
    * Read a number of bytes from the stream and return it as a number
    * @param length The number of bytes to read. Can be negative to read a signed number
    */
   async function readNumberLow(length: number): Promise<number>;
-  async function readNumberLow(length: 8 | -8): Promise<bigint>;
   async function readNumberLow(length: number | true = 0) {
     // TODO: remove this case?
     if (length === true) {
@@ -214,8 +214,7 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
     if (ret.version.major < 2) {
       date = new Date((await readNumberLow(4)) * 1000);
     } else {
-      // TODO: Why is this cast necessary?
-      const seconds = ((await readNumberLow(8)) as unknown as bigint) * 1000n;
+      const seconds = (await readNumberLow(8)) * 1000n;
 
       const num = Number(seconds);
 
