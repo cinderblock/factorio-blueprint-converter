@@ -31,6 +31,9 @@ jobs:
           path: test/samples-annotated
           ref: annotated-samples
 
+      - name: Check git status
+        run: git status
+
       - name: Run tests
         run: npm test --color=always -- --coverage
         id: test
