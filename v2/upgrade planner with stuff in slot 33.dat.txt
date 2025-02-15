@@ -1,0 +1,201 @@
+Load time: 2025-02-15 09:19:41 AM UTC
+Start time: 2025-02-15 09:19:41 AM UTC
+Time taken: 174ms
+   0 0200                                                                             version major => 2
+   2 0000                                                                             version minor => 0
+   4 1e00                                                                             version patch => 30
+   6 0100                                                                             version developer => 1
+   8 00                                                                               branchVersion => 0
+   9 0d                                                                               expansions => 13
+  10 04                                                                               expansions game str-length => 4
+  11 62617365                                                                         expansions game str => base
+  15 0a                                                                               expansions file str-length => 10
+  16 312e312e302e6a736f6e                                                             expansions file str => 1.1.0.json
+  26 04                                                                               expansions game str-length => 4
+  27 62617365                                                                         expansions game str => base
+  31 20                                                                               expansions file str-length => 32
+  32 312e322e3020737461636b20696e7365727465722072656e616d652e6a736f6e                 expansions file str => 1.2.0 stack inserter rename.json
+  64 04                                                                               expansions game str-length => 4
+  65 62617365                                                                         expansions game str => base
+  69 14                                                                               expansions file str-length => 20
+  70 322e302e302d62697465722d6567672e6a736f6e                                         expansions file str => 2.0.0-biter-egg.json
+  90 04                                                                               expansions game str-length => 4
+  91 62617365                                                                         expansions game str => base
+  95 13                                                                               expansions file str-length => 19
+  96 322e302e302d696e7465726e616c2e6a736f6e                                           expansions file str => 2.0.0-internal.json
+ 115 04                                                                               expansions game str-length => 4
+ 116 62617365                                                                         expansions game str => base
+ 120 14                                                                               expansions file str-length => 20
+ 121 322e302e302d696e7465726e616c322e6a736f6e                                         expansions file str => 2.0.0-internal2.json
+ 141 04                                                                               expansions game str-length => 4
+ 142 62617365                                                                         expansions game str => base
+ 146 14                                                                               expansions file str-length => 20
+ 147 322e302e302d696e7465726e616c332e6a736f6e                                         expansions file str => 2.0.0-internal3.json
+ 167 04                                                                               expansions game str-length => 4
+ 168 62617365                                                                         expansions game str => base
+ 172 0a                                                                               expansions file str-length => 10
+ 173 322e302e302e6a736f6e                                                             expansions file str => 2.0.0.json
+ 183 09                                                                               expansions game str-length => 9
+ 184 73706163652d616765                                                               expansions game str => space-age
+ 193 14                                                                               expansions file str-length => 20
+ 194 617175696c6f2d74696c65736574732e6a736f6e                                         expansions file str => aquilo-tilesets.json
+ 214 09                                                                               expansions game str-length => 9
+ 215 73706163652d616765                                                               expansions game str => space-age
+ 224 0b                                                                               expansions file str-length => 11
+ 225 62696f6c61622e6a736f6e                                                           expansions file str => biolab.json
+ 236 09                                                                               expansions game str-length => 9
+ 237 73706163652d616765                                                               expansions game str => space-age
+ 246 0d                                                                               expansions file str-length => 13
+ 247 696e7465726e616c2e6a736f6e                                                       expansions file str => internal.json
+ 260 09                                                                               expansions game str-length => 9
+ 261 73706163652d616765                                                               expansions game str => space-age
+ 270 15                                                                               expansions file str-length => 21
+ 271 6a656c6c792d79756d2d72656e616d652e6a736f6e                                       expansions file str => jelly-yum-rename.json
+ 292 09                                                                               expansions game str-length => 9
+ 293 73706163652d616765                                                               expansions game str => space-age
+ 302 15                                                                               expansions file str-length => 21
+ 303 7368617474657265642d706c616e65742e6a736f6e                                       expansions file str => shattered-planet.json
+ 324 09                                                                               expansions game str-length => 9
+ 325 73706163652d616765                                                               expansions game str => space-age
+ 334 19                                                                               expansions file str-length => 25
+ 335 74756e677374656e2d62656c742d72656e616d652e6a736f6e                               expansions file str => tungsten-belt-rename.json
+ 360 0500                                                                             IndexSize => 5
+ 362 09                                                                               IndexSize Prototype str-length => 9
+ 363 636f6e7461696e6572                                                               IndexSize Prototype str => container
+ 372 0200                                                                             IndexSize => 2
+ 374 0100                                                                             IndexSize [ 0] id => 1
+ 376 0c                                                                               IndexSize [ 0] name str-length => 12
+ 377 776f6f64656e2d6368657374                                                         IndexSize [ 0] name str => wooden-chest
+ 389 0200                                                                             IndexSize [ 1] id => 2
+ 391 0a                                                                               IndexSize [ 1] name str-length => 10
+ 392 69726f6e2d6368657374                                                             IndexSize [ 1] name str => iron-chest
+ 402 0d                                                                               IndexSize Prototype str-length => 13
+ 403 656c6563747269632d706f6c65                                                       IndexSize Prototype str => electric-pole
+ 416 0200                                                                             IndexSize => 2
+ 418 1b00                                                                             IndexSize [ 0] id => 27
+ 420 13                                                                               IndexSize [ 0] name str-length => 19
+ 421 736d616c6c2d656c6563747269632d706f6c65                                           IndexSize [ 0] name str => small-electric-pole
+ 440 1c00                                                                             IndexSize [ 1] id => 28
+ 442 14                                                                               IndexSize [ 1] name str-length => 20
+ 443 6d656469756d2d656c6563747269632d706f6c65                                         IndexSize [ 1] name str => medium-electric-pole
+ 463 0e                                                                               IndexSize Prototype str-length => 14
+ 464 7472616e73706f72742d62656c74                                                     IndexSize Prototype str => transport-belt
+ 478 0200                                                                             IndexSize => 2
+ 480 0500                                                                             IndexSize [ 0] id => 5
+ 482 0e                                                                               IndexSize [ 0] name str-length => 14
+ 483 7472616e73706f72742d62656c74                                                     IndexSize [ 0] name str => transport-belt
+ 497 0600                                                                             IndexSize [ 1] id => 6
+ 499 13                                                                               IndexSize [ 1] name str-length => 19
+ 500 666173742d7472616e73706f72742d62656c74                                           IndexSize [ 1] name str => fast-transport-belt
+ 519 0c                                                                               IndexSize Prototype str-length => 12
+ 520 757067726164652d6974656d                                                         IndexSize Prototype str => upgrade-item
+ 532 0100                                                                             IndexSize => 1
+ 534 4f00                                                                             IndexSize [ 0] id => 79
+ 536 0f                                                                               IndexSize [ 0] name str-length => 15
+ 537 757067726164652d706c616e6e6572                                                   IndexSize [ 0] name str => upgrade-planner
+ 552 07                                                                               IndexSize Prototype str-length => 7
+ 553 7175616c697479                                                                   IndexSize Prototype str => quality
+ 560 01                                                                               IndexSize => 1
+ 561 01                                                                               IndexSize [ 0] id => 1
+ 562 06                                                                               IndexSize [ 0] name str-length => 6
+ 563 6e6f726d616c                                                                     IndexSize [ 0] name str => normal
+ 569 0000                                                                             playerIndex => 0
+ 571 6e000000                                                                         generationCounter => 110
+ 575 0da6906700000000                                                                 saveTime => 2025-01-22 08:02:21 AM UTC
+ 583 01                                                                               synchronized => true
+ 584 01000000                                                                         LibObj => 1
+ 588 01                                                                               LibObj slot-used => true => used
+ 589 03                                                                               LibObj entity-type => 3 => parseUpgradeItem()
+ 590 6d000000                                                                         LibObj UpgradeItem header generation => 109
+ 594 4f00                                                                             LibObj UpgradeItem header entry => 79 => upgrade-planner
+ 596 0d                                                                               LibObj UpgradeItem header label str-length => 13
+ 597 4c6172676520506c616e6e6572                                                       LibObj UpgradeItem header label str => Large Planner
+ 610 72                                                                               LibObj UpgradeItem description str-length => 114
+ 611 2d2049726f6e20636865737420746f20576f6f64656e20436865737420696e20536c6f7420310... LibObj UpgradeItem description str => - Iron chest to Wooden Chest in Slot 1\n- Red belt to Yellow belt in Slot 21\n- Small pole to Medium pole in Slot 33
+ 725 00                                                                               LibObj UpgradeItem unknownIcons => 0
+ 726 00                                                                               LibObj UpgradeItem icons => 0
+ 727 00                                                                               LibObj UpgradeItem unknowns => 0
+ 728 2c                                                                               LibObj UpgradeItem mappers => 44
+ 729 00                                                                               LibObj UpgradeItem mappers isItem => false
+ 730 0200                                                                             LibObj UpgradeItem mappers entry => 2 => iron-chest
+ 732 01                                                                               LibObj UpgradeItem mappers isItem => true
+ 733 0200                                                                             LibObj UpgradeItem mappers entry => 2 => null
+ 735 00000001000100000001000000000000010000000000010000000000000100000000000100000000
+ 775 00000100000000000100000000000001000000000001000000000000010000000000010000000000
+ 815 00010000000000010000000000000100000000000100000000000001000000000001000000000000
+ 855 01000000000001000000000000010000000000010000000000000100000000000100000000000001
+ 895 00000000000100000000000001000000000001000000000000010000000000010000000000000100
+ 935 00000000010000000000000100000000000100000000000001000000000001000000000000010000
+ 975 00000001000000000000010000000000010000000000000100000000000100000000000001000000
+1015 00000100000000000001000000000001000000000000010000000000010000000000000100000000
+1055 00010000000000000100000000000100000000000001000000000000060001020000000005000100
+1095 00000100000000000001000000000001000000000000010000000000010000000000000100000000
+1135 00010000000000000100000000000100000000000001000000000001000000000000010000000000
+1175 01000000000000010000000000010000000000000100000000000100000000000001000000000001
+1215 00000000000001000000000001000000000000010000000000010000000000000100000000000100
+1255 00000000000100000000000100000000000001000000000001000000000000010000000000001b00
+1295 0102000000001c0001000000000000
+
+Unparsed bytes: 575
+Original file size: 1310
+Errors: 1
+  Unknown entry
+Note: undefined
+
+Found Strings:
+   0 020000001e000100000d                                                            
+  10 0462617365                                                                       => base
+  15 0a312e312e302e6a736f6e                                                           => 1.1.0.json
+  26 0462617365                                                                       => base
+  31 20312e322e3020737461636b20696e7365727465722072656e616d652e6a736f6e               => 1.2.0 stack inserter rename.json
+  64 0462617365                                                                       => base
+  69 14322e302e302d62697465722d6567672e6a736f6e                                       => 2.0.0-biter-egg.json
+  90 0462617365                                                                       => base
+  95 13322e302e302d696e7465726e616c2e6a736f6e                                         => 2.0.0-internal.json
+ 115 0462617365                                                                       => base
+ 120 14322e302e302d696e7465726e616c322e6a736f6e                                       => 2.0.0-internal2.json
+ 141 0462617365                                                                       => base
+ 146 14322e302e302d696e7465726e616c332e6a736f6e                                       => 2.0.0-internal3.json
+ 167 0462617365                                                                       => base
+ 172 0a322e302e302e6a736f6e                                                           => 2.0.0.json
+ 183 0973706163652d616765                                                             => space-age
+ 193 14617175696c6f2d74696c65736574732e6a736f6e                                       => aquilo-tilesets.json
+ 214 0973706163652d616765                                                             => space-age
+ 224 0b62696f6c61622e6a736f6e                                                         => biolab.json
+ 236 0973706163652d616765                                                             => space-age
+ 246 0d696e7465726e616c2e6a736f6e                                                     => internal.json
+ 260 0973706163652d616765                                                             => space-age
+ 270 156a656c6c792d79756d2d72656e616d652e6a736f6e                                     => jelly-yum-rename.json
+ 292 0973706163652d616765                                                             => space-age
+ 302 157368617474657265642d706c616e65742e6a736f6e                                     => shattered-planet.json
+ 324 0973706163652d616765                                                             => space-age
+ 334 1974756e677374656e2d62656c742d72656e616d652e6a736f6e                             => tungsten-belt-rename.json
+ 360 0500                                                                            
+ 362 09636f6e7461696e6572                                                             => container
+ 372 02000100                                                                        
+ 376 0c776f6f64656e2d6368657374                                                       => wooden-chest
+ 389 0200                                                                            
+ 391 0a69726f6e2d6368657374                                                           => iron-chest
+ 402 0d656c6563747269632d706f6c65                                                     => electric-pole
+ 416 02001b00                                                                        
+ 420 13736d616c6c2d656c6563747269632d706f6c65                                         => small-electric-pole
+ 440 1c00                                                                            
+ 442 146d656469756d2d656c6563747269632d706f6c65                                       => medium-electric-pole
+ 463 0e7472616e73706f72742d62656c74                                                   => transport-belt
+ 478 02000500                                                                        
+ 482 0e7472616e73706f72742d62656c74                                                   => transport-belt
+ 497 0600                                                                            
+ 499 13666173742d7472616e73706f72742d62656c74                                         => fast-transport-belt
+ 519 0c757067726164652d6974656d                                                       => upgrade-item
+ 532 01004f00                                                                        
+ 536 0f757067726164652d706c616e6e6572                                                 => upgrade-planner
+ 552 077175616c697479                                                                 => quality
+ 560 0101                                                                            
+ 562 066e6f726d616c                                                                   => normal
+ 569 00006e0000000da6906700000000010100000001036d0000004f00                          
+ 596 0d4c6172676520506c616e6e6572                                                     => Large Planner
+ 610 722d2049726f6e20636865737420746f20576f6f64656e20436865737420696e20536c6f74203... => - Iron chest to Wooden Chest in Slot 1\n- Red belt to Yellow belt in Slot 21\n- Small pole to Medium pole in Slot 33
+ 725 0000002c000200010200000000010001000000010000000000000100000000000100000000000...
+
+End time: 2025-02-15 09:19:41 AM UTC
+Time taken: 187ms

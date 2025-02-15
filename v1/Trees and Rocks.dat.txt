@@ -1,0 +1,124 @@
+Load time: 2025-02-15 09:19:41 AM UTC
+Start time: 2025-02-15 09:19:41 AM UTC
+Time taken: 198ms
+   0 0100                                                                             version major => 1
+   2 0100                                                                             version minor => 1
+   4 6e00                                                                             version patch => 110
+   6 0000                                                                             version developer => 0
+   8 00                                                                               branchVersion => 0
+   9 01                                                                               expansions => 1
+  10 04                                                                               expansions game str-length => 4
+  11 62617365                                                                         expansions game str => base
+  15 0a                                                                               expansions file str-length => 10
+  16 312e312e302e6a736f6e                                                             expansions file str => 1.1.0.json
+  26 0100                                                                             IndexSize => 1
+  28 13                                                                               IndexSize Prototype str-length => 19
+  29 6465636f6e737472756374696f6e2d6974656d                                           IndexSize Prototype str => deconstruction-item
+  48 0100                                                                             IndexSize => 1
+  50 4500                                                                             IndexSize [ 0] id => 69
+  52 16                                                                               IndexSize [ 0] name str-length => 22
+  53 6465636f6e737472756374696f6e2d706c616e6e6572                                     IndexSize [ 0] name str => deconstruction-planner
+  75 0000                                                                             playerIndex => 0
+  77 01000000                                                                         generationCounter => 1
+  81 b7359f67                                                                         saveTime => 2025-02-02 09:07:03 AM UTC
+  85 01                                                                               synchronized => true
+  86 01000000                                                                         LibObj => 1
+  90 01                                                                               LibObj slot-used => true => used
+  91 02                                                                               LibObj entity-type => 2 => parseDeconstructionItem()
+  92 00000000                                                                         LibObj Decon header generation => 0
+  96 4500                                                                             LibObj Decon header entry => 69 => deconstruction-planner
+  98 0f                                                                               LibObj Decon header label str-length => 15
+  99 547265657320616e6420526f636b73                                                   LibObj Decon header label str => Trees and Rocks
+ 114 34                                                                               LibObj Decon description str-length => 52
+ 115 5354415254204445534352495054494f4e0a2d2054726565732f726f636b73206f6e6c790a454... LibObj Decon description str => START DESCRIPTION\n- Trees/rocks only\nEND DESCRIPTION
+ 167 00                                                                               LibObj Decon unknownIcons => 0
+ 168 00                                                                               LibObj Decon icons => 0
+ 169 00                                                                               LibObj Decon EFMode => 0
+ 170 00                                                                               LibObj Decon EF readFilters(ENTITY) unknowns => 0
+ 171 1e                                                                               LibObj Decon EF readFilters(ENTITY) Filters => 30
+ 172 0000                                                                             LibObj Decon EF readFilters(ENTITY) Filters UnknownEntry => 0 => null
+ 174 0000                                                                             LibObj Decon EF readFilters(ENTITY) Filters UnknownEntry => 0 => null
+ 176 0000                                                                             LibObj Decon EF readFilters(ENTITY) Filters UnknownEntry => 0 => null
+ 178 0000                                                                             LibObj Decon EF readFilters(ENTITY) Filters UnknownEntry => 0 => null
+ 180 0000                                                                             LibObj Decon EF readFilters(ENTITY) Filters UnknownEntry => 0 => null
+ 182 0000                                                                             LibObj Decon EF readFilters(ENTITY) Filters UnknownEntry => 0 => null
+ 184 0000                                                                             LibObj Decon EF readFilters(ENTITY) Filters UnknownEntry => 0 => null
+ 186 0000                                                                             LibObj Decon EF readFilters(ENTITY) Filters UnknownEntry => 0 => null
+ 188 0000                                                                             LibObj Decon EF readFilters(ENTITY) Filters UnknownEntry => 0 => null
+ 190 0000                                                                             LibObj Decon EF readFilters(ENTITY) Filters UnknownEntry => 0 => null
+ 192 0000                                                                             LibObj Decon EF readFilters(ENTITY) Filters UnknownEntry => 0 => null
+ 194 0000                                                                             LibObj Decon EF readFilters(ENTITY) Filters UnknownEntry => 0 => null
+ 196 0000                                                                             LibObj Decon EF readFilters(ENTITY) Filters UnknownEntry => 0 => null
+ 198 0000                                                                             LibObj Decon EF readFilters(ENTITY) Filters UnknownEntry => 0 => null
+ 200 0000                                                                             LibObj Decon EF readFilters(ENTITY) Filters UnknownEntry => 0 => null
+ 202 0000                                                                             LibObj Decon EF readFilters(ENTITY) Filters UnknownEntry => 0 => null
+ 204 0000                                                                             LibObj Decon EF readFilters(ENTITY) Filters UnknownEntry => 0 => null
+ 206 0000                                                                             LibObj Decon EF readFilters(ENTITY) Filters UnknownEntry => 0 => null
+ 208 0000                                                                             LibObj Decon EF readFilters(ENTITY) Filters UnknownEntry => 0 => null
+ 210 0000                                                                             LibObj Decon EF readFilters(ENTITY) Filters UnknownEntry => 0 => null
+ 212 0000                                                                             LibObj Decon EF readFilters(ENTITY) Filters UnknownEntry => 0 => null
+ 214 0000                                                                             LibObj Decon EF readFilters(ENTITY) Filters UnknownEntry => 0 => null
+ 216 0000                                                                             LibObj Decon EF readFilters(ENTITY) Filters UnknownEntry => 0 => null
+ 218 0000                                                                             LibObj Decon EF readFilters(ENTITY) Filters UnknownEntry => 0 => null
+ 220 0000                                                                             LibObj Decon EF readFilters(ENTITY) Filters UnknownEntry => 0 => null
+ 222 0000                                                                             LibObj Decon EF readFilters(ENTITY) Filters UnknownEntry => 0 => null
+ 224 0000                                                                             LibObj Decon EF readFilters(ENTITY) Filters UnknownEntry => 0 => null
+ 226 0000                                                                             LibObj Decon EF readFilters(ENTITY) Filters UnknownEntry => 0 => null
+ 228 0000                                                                             LibObj Decon EF readFilters(ENTITY) Filters UnknownEntry => 0 => null
+ 230 0000                                                                             LibObj Decon EF readFilters(ENTITY) Filters UnknownEntry => 0 => null
+ 232 01                                                                               LibObj Decon TROnly => true
+ 233 00                                                                               LibObj Decon TFMode => 0
+ 234 00                                                                               LibObj Decon TSMode => 0
+ 235 00                                                                               LibObj Decon TF readFilters(TILE) unknowns => 0
+ 236 1e                                                                               LibObj Decon TF readFilters(TILE) Filters => 30
+ 237 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 238 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 239 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 240 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 241 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 242 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 243 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 244 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 245 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 246 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 247 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 248 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 249 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 250 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 251 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 252 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 253 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 254 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 255 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 256 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 257 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 258 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 259 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 260 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 261 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 262 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 263 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 264 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 265 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 266 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+
+Unparsed bytes: 0
+Original file size: 267
+Errors: undefined
+Note: undefined
+
+Found Strings:
+   0 010001006e0000000001                                                            
+  10 0462617365                                                                       => base
+  15 0a312e312e302e6a736f6e                                                           => 1.1.0.json
+  26 0100                                                                            
+  28 136465636f6e737472756374696f6e2d6974656d                                         => deconstruction-item
+  48 01004500                                                                        
+  52 166465636f6e737472756374696f6e2d706c616e6e6572                                   => deconstruction-planner
+  75 000001000000b7359f6701010000000102000000004500                                  
+  98 0f547265657320616e6420526f636b73                                                 => Trees and Rocks
+ 114 345354415254204445534352495054494f4e0a2d2054726565732f726f636b73206f6e6c790a4... => START DESCRIPTION\n- Trees/rocks only\nEND DESCRIPTION
+ 167 000000001e0000000000000000000000000000000000000000000000000000000000000000000...
+
+End time: 2025-02-15 09:19:41 AM UTC
+Time taken: 223ms

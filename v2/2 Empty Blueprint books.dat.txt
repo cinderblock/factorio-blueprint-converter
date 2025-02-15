@@ -1,0 +1,150 @@
+Load time: 2025-02-15 09:19:41 AM UTC
+Start time: 2025-02-15 09:19:41 AM UTC
+Time taken: 144ms
+   0 0200                                                                             version major => 2
+   2 0000                                                                             version minor => 0
+   4 2000                                                                             version patch => 32
+   6 0000                                                                             version developer => 0
+   8 00                                                                               branchVersion => 0
+   9 0d                                                                               expansions => 13
+  10 04                                                                               expansions game str-length => 4
+  11 62617365                                                                         expansions game str => base
+  15 0a                                                                               expansions file str-length => 10
+  16 312e312e302e6a736f6e                                                             expansions file str => 1.1.0.json
+  26 04                                                                               expansions game str-length => 4
+  27 62617365                                                                         expansions game str => base
+  31 20                                                                               expansions file str-length => 32
+  32 312e322e3020737461636b20696e7365727465722072656e616d652e6a736f6e                 expansions file str => 1.2.0 stack inserter rename.json
+  64 04                                                                               expansions game str-length => 4
+  65 62617365                                                                         expansions game str => base
+  69 14                                                                               expansions file str-length => 20
+  70 322e302e302d62697465722d6567672e6a736f6e                                         expansions file str => 2.0.0-biter-egg.json
+  90 04                                                                               expansions game str-length => 4
+  91 62617365                                                                         expansions game str => base
+  95 13                                                                               expansions file str-length => 19
+  96 322e302e302d696e7465726e616c2e6a736f6e                                           expansions file str => 2.0.0-internal.json
+ 115 04                                                                               expansions game str-length => 4
+ 116 62617365                                                                         expansions game str => base
+ 120 14                                                                               expansions file str-length => 20
+ 121 322e302e302d696e7465726e616c322e6a736f6e                                         expansions file str => 2.0.0-internal2.json
+ 141 04                                                                               expansions game str-length => 4
+ 142 62617365                                                                         expansions game str => base
+ 146 14                                                                               expansions file str-length => 20
+ 147 322e302e302d696e7465726e616c332e6a736f6e                                         expansions file str => 2.0.0-internal3.json
+ 167 04                                                                               expansions game str-length => 4
+ 168 62617365                                                                         expansions game str => base
+ 172 0a                                                                               expansions file str-length => 10
+ 173 322e302e302e6a736f6e                                                             expansions file str => 2.0.0.json
+ 183 09                                                                               expansions game str-length => 9
+ 184 73706163652d616765                                                               expansions game str => space-age
+ 193 14                                                                               expansions file str-length => 20
+ 194 617175696c6f2d74696c65736574732e6a736f6e                                         expansions file str => aquilo-tilesets.json
+ 214 09                                                                               expansions game str-length => 9
+ 215 73706163652d616765                                                               expansions game str => space-age
+ 224 0b                                                                               expansions file str-length => 11
+ 225 62696f6c61622e6a736f6e                                                           expansions file str => biolab.json
+ 236 09                                                                               expansions game str-length => 9
+ 237 73706163652d616765                                                               expansions game str => space-age
+ 246 0d                                                                               expansions file str-length => 13
+ 247 696e7465726e616c2e6a736f6e                                                       expansions file str => internal.json
+ 260 09                                                                               expansions game str-length => 9
+ 261 73706163652d616765                                                               expansions game str => space-age
+ 270 15                                                                               expansions file str-length => 21
+ 271 6a656c6c792d79756d2d72656e616d652e6a736f6e                                       expansions file str => jelly-yum-rename.json
+ 292 09                                                                               expansions game str-length => 9
+ 293 73706163652d616765                                                               expansions game str => space-age
+ 302 15                                                                               expansions file str-length => 21
+ 303 7368617474657265642d706c616e65742e6a736f6e                                       expansions file str => shattered-planet.json
+ 324 09                                                                               expansions game str-length => 9
+ 325 73706163652d616765                                                               expansions game str => space-age
+ 334 19                                                                               expansions file str-length => 25
+ 335 74756e677374656e2d62656c742d72656e616d652e6a736f6e                               expansions file str => tungsten-belt-rename.json
+ 360 0100                                                                             IndexSize => 1
+ 362 0e                                                                               IndexSize Prototype str-length => 14
+ 363 626c75657072696e742d626f6f6b                                                     IndexSize Prototype str => blueprint-book
+ 377 0100                                                                             IndexSize => 1
+ 379 5000                                                                             IndexSize [ 0] id => 80
+ 381 0e                                                                               IndexSize [ 0] name str-length => 14
+ 382 626c75657072696e742d626f6f6b                                                     IndexSize [ 0] name str => blueprint-book
+ 396 0000                                                                             playerIndex => 0
+ 398 73000000                                                                         generationCounter => 115
+ 402 7e5ca86700000000                                                                 saveTime => 2025-02-09 07:42:54 AM UTC
+ 410 01                                                                               synchronized => true
+ 411 02000000                                                                         LibObj => 2
+ 415 01                                                                               LibObj slot-used => true => used
+ 416 01                                                                               LibObj entity-type => 1 => parseBlueprintBook()
+ 417 71000000                                                                         LibObj BB header generation => 113
+ 421 5000                                                                             LibObj BB header entry => 80 => blueprint-book
+ 423 14                                                                               LibObj BB header label str-length => 20
+ 424 456d70747920426c75657072696e7420626f6f6b                                         LibObj BB header label str => Empty Blueprint book
+ 444 21                                                                               LibObj BB description str-length => 33
+ 445 5354415254204445534352495054494f4e0a454e44204445534352495054494f4e               LibObj BB description str => START DESCRIPTION\nEND DESCRIPTION
+ 478 00                                                                               LibObj BB unknownIcons => 0
+ 479 00                                                                               LibObj BB icons => 0
+ 480 00000000                                                                         LibObj BB LibObj => 0
+ 484 00                                                                               LibObj BB activeIndex => 0
+ 485 00                                                                               LibObj BB Expect 0 => 0x00 ✅
+ 486 01                                                                               LibObj slot-used => true => used
+ 487 01                                                                               LibObj entity-type => 1 => parseBlueprintBook()
+ 488 72000000                                                                         LibObj BB header generation => 114
+ 492 5000                                                                             LibObj BB header entry => 80 => blueprint-book
+ 494 14                                                                               LibObj BB header label str-length => 20
+ 495 456d70747920426c75657072696e7420626f6f6b                                         LibObj BB header label str => Empty Blueprint book
+ 515 21                                                                               LibObj BB description str-length => 33
+ 516 5354415254204445534352495054494f4e0a454e44204445534352495054494f4e               LibObj BB description str => START DESCRIPTION\nEND DESCRIPTION
+ 549 00                                                                               LibObj BB unknownIcons => 0
+ 550 00                                                                               LibObj BB icons => 0
+ 551 00000000                                                                         LibObj BB LibObj => 0
+ 555 00                                                                               LibObj BB activeIndex => 0
+ 556 00                                                                               LibObj BB Expect 0 => 0x00 ✅
+ 557 00                                                                               savedTargetablesCount => 0
+ 558 00                                                                                => 0
+ 559 00                                                                               v2-Unknown2 => 0x00 ✅
+
+Unparsed bytes: 0
+Original file size: 560
+Errors: undefined
+Note: undefined
+
+Found Strings:
+   0 0200000020000000000d                                                            
+  10 0462617365                                                                       => base
+  15 0a312e312e302e6a736f6e                                                           => 1.1.0.json
+  26 0462617365                                                                       => base
+  31 20312e322e3020737461636b20696e7365727465722072656e616d652e6a736f6e               => 1.2.0 stack inserter rename.json
+  64 0462617365                                                                       => base
+  69 14322e302e302d62697465722d6567672e6a736f6e                                       => 2.0.0-biter-egg.json
+  90 0462617365                                                                       => base
+  95 13322e302e302d696e7465726e616c2e6a736f6e                                         => 2.0.0-internal.json
+ 115 0462617365                                                                       => base
+ 120 14322e302e302d696e7465726e616c322e6a736f6e                                       => 2.0.0-internal2.json
+ 141 0462617365                                                                       => base
+ 146 14322e302e302d696e7465726e616c332e6a736f6e                                       => 2.0.0-internal3.json
+ 167 0462617365                                                                       => base
+ 172 0a322e302e302e6a736f6e                                                           => 2.0.0.json
+ 183 0973706163652d616765                                                             => space-age
+ 193 14617175696c6f2d74696c65736574732e6a736f6e                                       => aquilo-tilesets.json
+ 214 0973706163652d616765                                                             => space-age
+ 224 0b62696f6c61622e6a736f6e                                                         => biolab.json
+ 236 0973706163652d616765                                                             => space-age
+ 246 0d696e7465726e616c2e6a736f6e                                                     => internal.json
+ 260 0973706163652d616765                                                             => space-age
+ 270 156a656c6c792d79756d2d72656e616d652e6a736f6e                                     => jelly-yum-rename.json
+ 292 0973706163652d616765                                                             => space-age
+ 302 157368617474657265642d706c616e65742e6a736f6e                                     => shattered-planet.json
+ 324 0973706163652d616765                                                             => space-age
+ 334 1974756e677374656e2d62656c742d72656e616d652e6a736f6e                             => tungsten-belt-rename.json
+ 360 0100                                                                            
+ 362 0e626c75657072696e742d626f6f6b                                                   => blueprint-book
+ 377 01005000                                                                        
+ 381 0e626c75657072696e742d626f6f6b                                                   => blueprint-book
+ 396 0000730000007e5ca8670000000001020000000101710000005000                          
+ 423 14456d70747920426c75657072696e7420626f6f6b                                       => Empty Blueprint book
+ 444 215354415254204445534352495054494f4e0a454e44204445534352495054494f4e             => START DESCRIPTION\nEND DESCRIPTION
+ 478 00000000000000000101720000005000                                                
+ 494 14456d70747920426c75657072696e7420626f6f6b                                       => Empty Blueprint book
+ 515 215354415254204445534352495054494f4e0a454e44204445534352495054494f4e             => START DESCRIPTION\nEND DESCRIPTION
+ 549 0000000000000000000000                                                          
+
+End time: 2025-02-15 09:19:41 AM UTC
+Time taken: 94ms

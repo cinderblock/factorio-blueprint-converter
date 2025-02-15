@@ -1,0 +1,130 @@
+Load time: 2025-02-15 09:19:41 AM UTC
+Start time: 2025-02-15 09:19:41 AM UTC
+Time taken: 161ms
+   0 0200                                                                             version major => 2
+   2 0000                                                                             version minor => 0
+   4 1e00                                                                             version patch => 30
+   6 0100                                                                             version developer => 1
+   8 00                                                                               branchVersion => 0
+   9 0d                                                                               expansions => 13
+  10 04                                                                               expansions game str-length => 4
+  11 62617365                                                                         expansions game str => base
+  15 0a                                                                               expansions file str-length => 10
+  16 312e312e302e6a736f6e                                                             expansions file str => 1.1.0.json
+  26 04                                                                               expansions game str-length => 4
+  27 62617365                                                                         expansions game str => base
+  31 20                                                                               expansions file str-length => 32
+  32 312e322e3020737461636b20696e7365727465722072656e616d652e6a736f6e                 expansions file str => 1.2.0 stack inserter rename.json
+  64 04                                                                               expansions game str-length => 4
+  65 62617365                                                                         expansions game str => base
+  69 14                                                                               expansions file str-length => 20
+  70 322e302e302d62697465722d6567672e6a736f6e                                         expansions file str => 2.0.0-biter-egg.json
+  90 04                                                                               expansions game str-length => 4
+  91 62617365                                                                         expansions game str => base
+  95 13                                                                               expansions file str-length => 19
+  96 322e302e302d696e7465726e616c2e6a736f6e                                           expansions file str => 2.0.0-internal.json
+ 115 04                                                                               expansions game str-length => 4
+ 116 62617365                                                                         expansions game str => base
+ 120 14                                                                               expansions file str-length => 20
+ 121 322e302e302d696e7465726e616c322e6a736f6e                                         expansions file str => 2.0.0-internal2.json
+ 141 04                                                                               expansions game str-length => 4
+ 142 62617365                                                                         expansions game str => base
+ 146 14                                                                               expansions file str-length => 20
+ 147 322e302e302d696e7465726e616c332e6a736f6e                                         expansions file str => 2.0.0-internal3.json
+ 167 04                                                                               expansions game str-length => 4
+ 168 62617365                                                                         expansions game str => base
+ 172 0a                                                                               expansions file str-length => 10
+ 173 322e302e302e6a736f6e                                                             expansions file str => 2.0.0.json
+ 183 09                                                                               expansions game str-length => 9
+ 184 73706163652d616765                                                               expansions game str => space-age
+ 193 14                                                                               expansions file str-length => 20
+ 194 617175696c6f2d74696c65736574732e6a736f6e                                         expansions file str => aquilo-tilesets.json
+ 214 09                                                                               expansions game str-length => 9
+ 215 73706163652d616765                                                               expansions game str => space-age
+ 224 0b                                                                               expansions file str-length => 11
+ 225 62696f6c61622e6a736f6e                                                           expansions file str => biolab.json
+ 236 09                                                                               expansions game str-length => 9
+ 237 73706163652d616765                                                               expansions game str => space-age
+ 246 0d                                                                               expansions file str-length => 13
+ 247 696e7465726e616c2e6a736f6e                                                       expansions file str => internal.json
+ 260 09                                                                               expansions game str-length => 9
+ 261 73706163652d616765                                                               expansions game str => space-age
+ 270 15                                                                               expansions file str-length => 21
+ 271 6a656c6c792d79756d2d72656e616d652e6a736f6e                                       expansions file str => jelly-yum-rename.json
+ 292 09                                                                               expansions game str-length => 9
+ 293 73706163652d616765                                                               expansions game str => space-age
+ 302 15                                                                               expansions file str-length => 21
+ 303 7368617474657265642d706c616e65742e6a736f6e                                       expansions file str => shattered-planet.json
+ 324 09                                                                               expansions game str-length => 9
+ 325 73706163652d616765                                                               expansions game str => space-age
+ 334 19                                                                               expansions file str-length => 25
+ 335 74756e677374656e2d62656c742d72656e616d652e6a736f6e                               expansions file str => tungsten-belt-rename.json
+ 360 0100                                                                             IndexSize => 1
+ 362 0c                                                                               IndexSize Prototype str-length => 12
+ 363 757067726164652d6974656d                                                         IndexSize Prototype str => upgrade-item
+ 375 0100                                                                             IndexSize => 1
+ 377 4f00                                                                             IndexSize [ 0] id => 79
+ 379 0f                                                                               IndexSize [ 0] name str-length => 15
+ 380 757067726164652d706c616e6e6572                                                   IndexSize [ 0] name str => upgrade-planner
+ 395 0000                                                                             playerIndex => 0
+ 397 6e000000                                                                         generationCounter => 110
+ 401 0aa4906700000000                                                                 saveTime => 2025-01-22 07:53:46 AM UTC
+ 409 01                                                                               synchronized => true
+ 410 01000000                                                                         LibObj => 1
+ 414 01                                                                               LibObj slot-used => true => used
+ 415 03                                                                               LibObj entity-type => 3 => parseUpgradeItem()
+ 416 6d000000                                                                         LibObj UpgradeItem header generation => 109
+ 420 4f00                                                                             LibObj UpgradeItem header entry => 79 => upgrade-planner
+ 422 00                                                                               LibObj UpgradeItem header label str-length => 0
+ 423                                                                                  LibObj UpgradeItem header label str => 
+ 423 00                                                                               LibObj UpgradeItem description str-length => 0
+ 424                                                                                  LibObj UpgradeItem description str => 
+ 424 00                                                                               LibObj UpgradeItem unknownIcons => 0
+ 425 00                                                                               LibObj UpgradeItem icons => 0
+ 426 00                                                                               LibObj UpgradeItem unknowns => 0
+ 427 00                                                                               LibObj UpgradeItem mappers => 0
+ 428 00                                                                               savedTargetablesCount => 0
+ 429 00                                                                                => 0
+ 430 00                                                                               v2-Unknown2 => 0x00 ✅
+
+Unparsed bytes: 0
+Original file size: 431
+Errors: undefined
+Note: undefined
+
+Found Strings:
+   0 020000001e000100000d                                                            
+  10 0462617365                                                                       => base
+  15 0a312e312e302e6a736f6e                                                           => 1.1.0.json
+  26 0462617365                                                                       => base
+  31 20312e322e3020737461636b20696e7365727465722072656e616d652e6a736f6e               => 1.2.0 stack inserter rename.json
+  64 0462617365                                                                       => base
+  69 14322e302e302d62697465722d6567672e6a736f6e                                       => 2.0.0-biter-egg.json
+  90 0462617365                                                                       => base
+  95 13322e302e302d696e7465726e616c2e6a736f6e                                         => 2.0.0-internal.json
+ 115 0462617365                                                                       => base
+ 120 14322e302e302d696e7465726e616c322e6a736f6e                                       => 2.0.0-internal2.json
+ 141 0462617365                                                                       => base
+ 146 14322e302e302d696e7465726e616c332e6a736f6e                                       => 2.0.0-internal3.json
+ 167 0462617365                                                                       => base
+ 172 0a322e302e302e6a736f6e                                                           => 2.0.0.json
+ 183 0973706163652d616765                                                             => space-age
+ 193 14617175696c6f2d74696c65736574732e6a736f6e                                       => aquilo-tilesets.json
+ 214 0973706163652d616765                                                             => space-age
+ 224 0b62696f6c61622e6a736f6e                                                         => biolab.json
+ 236 0973706163652d616765                                                             => space-age
+ 246 0d696e7465726e616c2e6a736f6e                                                     => internal.json
+ 260 0973706163652d616765                                                             => space-age
+ 270 156a656c6c792d79756d2d72656e616d652e6a736f6e                                     => jelly-yum-rename.json
+ 292 0973706163652d616765                                                             => space-age
+ 302 157368617474657265642d706c616e65742e6a736f6e                                     => shattered-planet.json
+ 324 0973706163652d616765                                                             => space-age
+ 334 1974756e677374656e2d62656c742d72656e616d652e6a736f6e                             => tungsten-belt-rename.json
+ 360 0100                                                                            
+ 362 0c757067726164652d6974656d                                                       => upgrade-item
+ 375 01004f00                                                                        
+ 379 0f757067726164652d706c616e6e6572                                                 => upgrade-planner
+ 395 00006e0000000aa4906700000000010100000001036d0000004f00000000000000000000        
+
+End time: 2025-02-15 09:19:41 AM UTC
+Time taken: 152ms

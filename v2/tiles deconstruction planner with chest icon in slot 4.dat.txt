@@ -1,0 +1,298 @@
+Load time: 2025-02-15 09:19:41 AM UTC
+Start time: 2025-02-15 09:19:41 AM UTC
+Time taken: 171ms
+   0 0200                                                                             version major => 2
+   2 0000                                                                             version minor => 0
+   4 1e00                                                                             version patch => 30
+   6 0100                                                                             version developer => 1
+   8 00                                                                               branchVersion => 0
+   9 0d                                                                               expansions => 13
+  10 04                                                                               expansions game str-length => 4
+  11 62617365                                                                         expansions game str => base
+  15 0a                                                                               expansions file str-length => 10
+  16 312e312e302e6a736f6e                                                             expansions file str => 1.1.0.json
+  26 04                                                                               expansions game str-length => 4
+  27 62617365                                                                         expansions game str => base
+  31 20                                                                               expansions file str-length => 32
+  32 312e322e3020737461636b20696e7365727465722072656e616d652e6a736f6e                 expansions file str => 1.2.0 stack inserter rename.json
+  64 04                                                                               expansions game str-length => 4
+  65 62617365                                                                         expansions game str => base
+  69 14                                                                               expansions file str-length => 20
+  70 322e302e302d62697465722d6567672e6a736f6e                                         expansions file str => 2.0.0-biter-egg.json
+  90 04                                                                               expansions game str-length => 4
+  91 62617365                                                                         expansions game str => base
+  95 13                                                                               expansions file str-length => 19
+  96 322e302e302d696e7465726e616c2e6a736f6e                                           expansions file str => 2.0.0-internal.json
+ 115 04                                                                               expansions game str-length => 4
+ 116 62617365                                                                         expansions game str => base
+ 120 14                                                                               expansions file str-length => 20
+ 121 322e302e302d696e7465726e616c322e6a736f6e                                         expansions file str => 2.0.0-internal2.json
+ 141 04                                                                               expansions game str-length => 4
+ 142 62617365                                                                         expansions game str => base
+ 146 14                                                                               expansions file str-length => 20
+ 147 322e302e302d696e7465726e616c332e6a736f6e                                         expansions file str => 2.0.0-internal3.json
+ 167 04                                                                               expansions game str-length => 4
+ 168 62617365                                                                         expansions game str => base
+ 172 0a                                                                               expansions file str-length => 10
+ 173 322e302e302e6a736f6e                                                             expansions file str => 2.0.0.json
+ 183 09                                                                               expansions game str-length => 9
+ 184 73706163652d616765                                                               expansions game str => space-age
+ 193 14                                                                               expansions file str-length => 20
+ 194 617175696c6f2d74696c65736574732e6a736f6e                                         expansions file str => aquilo-tilesets.json
+ 214 09                                                                               expansions game str-length => 9
+ 215 73706163652d616765                                                               expansions game str => space-age
+ 224 0b                                                                               expansions file str-length => 11
+ 225 62696f6c61622e6a736f6e                                                           expansions file str => biolab.json
+ 236 09                                                                               expansions game str-length => 9
+ 237 73706163652d616765                                                               expansions game str => space-age
+ 246 0d                                                                               expansions file str-length => 13
+ 247 696e7465726e616c2e6a736f6e                                                       expansions file str => internal.json
+ 260 09                                                                               expansions game str-length => 9
+ 261 73706163652d616765                                                               expansions game str => space-age
+ 270 15                                                                               expansions file str-length => 21
+ 271 6a656c6c792d79756d2d72656e616d652e6a736f6e                                       expansions file str => jelly-yum-rename.json
+ 292 09                                                                               expansions game str-length => 9
+ 293 73706163652d616765                                                               expansions game str => space-age
+ 302 15                                                                               expansions file str-length => 21
+ 303 7368617474657265642d706c616e65742e6a736f6e                                       expansions file str => shattered-planet.json
+ 324 09                                                                               expansions game str-length => 9
+ 325 73706163652d616765                                                               expansions game str => space-age
+ 334 19                                                                               expansions file str-length => 25
+ 335 74756e677374656e2d62656c742d72656e616d652e6a736f6e                               expansions file str => tungsten-belt-rename.json
+ 360 0400                                                                             IndexSize => 4
+ 362 13                                                                               IndexSize Prototype str-length => 19
+ 363 6465636f6e737472756374696f6e2d6974656d                                           IndexSize Prototype str => deconstruction-item
+ 382 0100                                                                             IndexSize => 1
+ 384 4e00                                                                             IndexSize [ 0] id => 78
+ 386 16                                                                               IndexSize [ 0] name str-length => 22
+ 387 6465636f6e737472756374696f6e2d706c616e6e6572                                     IndexSize [ 0] name str => deconstruction-planner
+ 409 04                                                                               IndexSize Prototype str-length => 4
+ 410 6974656d                                                                         IndexSize Prototype str => item
+ 414 0100                                                                             IndexSize => 1
+ 416 0100                                                                             IndexSize [ 0] id => 1
+ 418 0c                                                                               IndexSize [ 0] name str-length => 12
+ 419 776f6f64656e2d6368657374                                                         IndexSize [ 0] name str => wooden-chest
+ 431 04                                                                               IndexSize Prototype str-length => 4
+ 432 74696c65                                                                         IndexSize Prototype str => tile
+ 436 0100                                                                             IndexSize => 1
+ 438 0100                                                                             IndexSize [ 0] id => 1
+ 440 0a                                                                               IndexSize [ 0] name str-length => 10
+ 441 73746f6e652d70617468                                                             IndexSize [ 0] name str => stone-path
+ 451 07                                                                               IndexSize Prototype str-length => 7
+ 452 7175616c697479                                                                   IndexSize Prototype str => quality
+ 459 01                                                                               IndexSize => 1
+ 460 01                                                                               IndexSize [ 0] id => 1
+ 461 06                                                                               IndexSize [ 0] name str-length => 6
+ 462 6e6f726d616c                                                                     IndexSize [ 0] name str => normal
+ 468 0000                                                                             playerIndex => 0
+ 470 6d000000                                                                         generationCounter => 109
+ 474 0ea2906700000000                                                                 saveTime => 2025-01-22 07:45:18 AM UTC
+ 482 01                                                                               synchronized => true
+ 483 01000000                                                                         LibObj => 1
+ 487 01                                                                               LibObj slot-used => true => used
+ 488 02                                                                               LibObj entity-type => 2 => parseDeconstructionItem()
+ 489 6c000000                                                                         LibObj Decon header generation => 108
+ 493 4e00                                                                             LibObj Decon header entry => 78 => deconstruction-planner
+ 495 21                                                                               LibObj Decon header label str-length => 33
+ 496 49636f6e2054696c6573204465636f6e737472756374696f6e20506c616e6e6572               LibObj Decon header label str => Icon Tiles Deconstruction Planner
+ 529 39                                                                               LibObj Decon description str-length => 57
+ 530 2d2049636f6e2023343a20576f6f64656e2063686573740a2d2053746f6e6520706174680a2d2... LibObj Decon description str => - Icon #4: Wooden chest\n- Stone path\n- Normal\n- Whitelist
+ 587 00                                                                               LibObj Decon unknownIcons => 0
+ 588 04                                                                               LibObj Decon icons => 4
+ 589 00                                                                               LibObj Decon icons signal type => 0 => ITEM
+ 590 0000                                                                             LibObj Decon icons signal entry => 0 => null => null
+ 592 00                                                                               LibObj Decon icons signal type => 0 => ITEM
+ 593 0000                                                                             LibObj Decon icons signal entry => 0 => null => null
+ 595 00                                                                               LibObj Decon icons signal type => 0 => ITEM
+ 596 0000                                                                             LibObj Decon icons signal entry => 0 => null => null
+ 598 00                                                                               LibObj Decon icons signal type => 0 => ITEM
+ 599 0100                                                                             LibObj Decon icons signal entry => 1 => wooden-chest => wooden-chest
+ 601 01                                                                               LibObj Decon EFMode => 1
+ 602 00                                                                               LibObj Decon EF readFilters(ENTITY) unknowns => 0
+ 603 00                                                                               LibObj Decon EF readFilters(ENTITY) Filters => 0
+ 604 1e                                                                               LibObj Decon EF readFilters(ENTITY) Quality => 30
+ 605 0000                                                                             LibObj Decon EF readFilters(ENTITY) Quality index => 0
+ 607 00                                                                               LibObj Decon EF readFilters(ENTITY) Quality name str-length => 0
+ 608                                                                                  LibObj Decon EF readFilters(ENTITY) Quality name str => 
+ 608 0000                                                                             LibObj Decon EF readFilters(ENTITY) Quality index => 0
+ 610 00                                                                               LibObj Decon EF readFilters(ENTITY) Quality name str-length => 0
+ 611                                                                                  LibObj Decon EF readFilters(ENTITY) Quality name str => 
+ 611 0000                                                                             LibObj Decon EF readFilters(ENTITY) Quality index => 0
+ 613 00                                                                               LibObj Decon EF readFilters(ENTITY) Quality name str-length => 0
+ 614                                                                                  LibObj Decon EF readFilters(ENTITY) Quality name str => 
+ 614 0000                                                                             LibObj Decon EF readFilters(ENTITY) Quality index => 0
+ 616 00                                                                               LibObj Decon EF readFilters(ENTITY) Quality name str-length => 0
+ 617                                                                                  LibObj Decon EF readFilters(ENTITY) Quality name str => 
+ 617 0000                                                                             LibObj Decon EF readFilters(ENTITY) Quality index => 0
+ 619 00                                                                               LibObj Decon EF readFilters(ENTITY) Quality name str-length => 0
+ 620                                                                                  LibObj Decon EF readFilters(ENTITY) Quality name str => 
+ 620 0000                                                                             LibObj Decon EF readFilters(ENTITY) Quality index => 0
+ 622 00                                                                               LibObj Decon EF readFilters(ENTITY) Quality name str-length => 0
+ 623                                                                                  LibObj Decon EF readFilters(ENTITY) Quality name str => 
+ 623 0000                                                                             LibObj Decon EF readFilters(ENTITY) Quality index => 0
+ 625 00                                                                               LibObj Decon EF readFilters(ENTITY) Quality name str-length => 0
+ 626                                                                                  LibObj Decon EF readFilters(ENTITY) Quality name str => 
+ 626 0000                                                                             LibObj Decon EF readFilters(ENTITY) Quality index => 0
+ 628 00                                                                               LibObj Decon EF readFilters(ENTITY) Quality name str-length => 0
+ 629                                                                                  LibObj Decon EF readFilters(ENTITY) Quality name str => 
+ 629 0000                                                                             LibObj Decon EF readFilters(ENTITY) Quality index => 0
+ 631 00                                                                               LibObj Decon EF readFilters(ENTITY) Quality name str-length => 0
+ 632                                                                                  LibObj Decon EF readFilters(ENTITY) Quality name str => 
+ 632 0000                                                                             LibObj Decon EF readFilters(ENTITY) Quality index => 0
+ 634 00                                                                               LibObj Decon EF readFilters(ENTITY) Quality name str-length => 0
+ 635                                                                                  LibObj Decon EF readFilters(ENTITY) Quality name str => 
+ 635 0000                                                                             LibObj Decon EF readFilters(ENTITY) Quality index => 0
+ 637 00                                                                               LibObj Decon EF readFilters(ENTITY) Quality name str-length => 0
+ 638                                                                                  LibObj Decon EF readFilters(ENTITY) Quality name str => 
+ 638 0000                                                                             LibObj Decon EF readFilters(ENTITY) Quality index => 0
+ 640 00                                                                               LibObj Decon EF readFilters(ENTITY) Quality name str-length => 0
+ 641                                                                                  LibObj Decon EF readFilters(ENTITY) Quality name str => 
+ 641 0000                                                                             LibObj Decon EF readFilters(ENTITY) Quality index => 0
+ 643 00                                                                               LibObj Decon EF readFilters(ENTITY) Quality name str-length => 0
+ 644                                                                                  LibObj Decon EF readFilters(ENTITY) Quality name str => 
+ 644 0000                                                                             LibObj Decon EF readFilters(ENTITY) Quality index => 0
+ 646 00                                                                               LibObj Decon EF readFilters(ENTITY) Quality name str-length => 0
+ 647                                                                                  LibObj Decon EF readFilters(ENTITY) Quality name str => 
+ 647 0000                                                                             LibObj Decon EF readFilters(ENTITY) Quality index => 0
+ 649 00                                                                               LibObj Decon EF readFilters(ENTITY) Quality name str-length => 0
+ 650                                                                                  LibObj Decon EF readFilters(ENTITY) Quality name str => 
+ 650 0000                                                                             LibObj Decon EF readFilters(ENTITY) Quality index => 0
+ 652 00                                                                               LibObj Decon EF readFilters(ENTITY) Quality name str-length => 0
+ 653                                                                                  LibObj Decon EF readFilters(ENTITY) Quality name str => 
+ 653 0000                                                                             LibObj Decon EF readFilters(ENTITY) Quality index => 0
+ 655 00                                                                               LibObj Decon EF readFilters(ENTITY) Quality name str-length => 0
+ 656                                                                                  LibObj Decon EF readFilters(ENTITY) Quality name str => 
+ 656 0000                                                                             LibObj Decon EF readFilters(ENTITY) Quality index => 0
+ 658 00                                                                               LibObj Decon EF readFilters(ENTITY) Quality name str-length => 0
+ 659                                                                                  LibObj Decon EF readFilters(ENTITY) Quality name str => 
+ 659 0000                                                                             LibObj Decon EF readFilters(ENTITY) Quality index => 0
+ 661 00                                                                               LibObj Decon EF readFilters(ENTITY) Quality name str-length => 0
+ 662                                                                                  LibObj Decon EF readFilters(ENTITY) Quality name str => 
+ 662 0000                                                                             LibObj Decon EF readFilters(ENTITY) Quality index => 0
+ 664 00                                                                               LibObj Decon EF readFilters(ENTITY) Quality name str-length => 0
+ 665                                                                                  LibObj Decon EF readFilters(ENTITY) Quality name str => 
+ 665 0000                                                                             LibObj Decon EF readFilters(ENTITY) Quality index => 0
+ 667 00                                                                               LibObj Decon EF readFilters(ENTITY) Quality name str-length => 0
+ 668                                                                                  LibObj Decon EF readFilters(ENTITY) Quality name str => 
+ 668 0000                                                                             LibObj Decon EF readFilters(ENTITY) Quality index => 0
+ 670 00                                                                               LibObj Decon EF readFilters(ENTITY) Quality name str-length => 0
+ 671                                                                                  LibObj Decon EF readFilters(ENTITY) Quality name str => 
+ 671 0000                                                                             LibObj Decon EF readFilters(ENTITY) Quality index => 0
+ 673 00                                                                               LibObj Decon EF readFilters(ENTITY) Quality name str-length => 0
+ 674                                                                                  LibObj Decon EF readFilters(ENTITY) Quality name str => 
+ 674 0000                                                                             LibObj Decon EF readFilters(ENTITY) Quality index => 0
+ 676 00                                                                               LibObj Decon EF readFilters(ENTITY) Quality name str-length => 0
+ 677                                                                                  LibObj Decon EF readFilters(ENTITY) Quality name str => 
+ 677 0000                                                                             LibObj Decon EF readFilters(ENTITY) Quality index => 0
+ 679 00                                                                               LibObj Decon EF readFilters(ENTITY) Quality name str-length => 0
+ 680                                                                                  LibObj Decon EF readFilters(ENTITY) Quality name str => 
+ 680 0000                                                                             LibObj Decon EF readFilters(ENTITY) Quality index => 0
+ 682 00                                                                               LibObj Decon EF readFilters(ENTITY) Quality name str-length => 0
+ 683                                                                                  LibObj Decon EF readFilters(ENTITY) Quality name str => 
+ 683 0000                                                                             LibObj Decon EF readFilters(ENTITY) Quality index => 0
+ 685 00                                                                               LibObj Decon EF readFilters(ENTITY) Quality name str-length => 0
+ 686                                                                                  LibObj Decon EF readFilters(ENTITY) Quality name str => 
+ 686 0000                                                                             LibObj Decon EF readFilters(ENTITY) Quality index => 0
+ 688 00                                                                               LibObj Decon EF readFilters(ENTITY) Quality name str-length => 0
+ 689                                                                                  LibObj Decon EF readFilters(ENTITY) Quality name str => 
+ 689 0000                                                                             LibObj Decon EF readFilters(ENTITY) Quality index => 0
+ 691 00                                                                               LibObj Decon EF readFilters(ENTITY) Quality name str-length => 0
+ 692                                                                                  LibObj Decon EF readFilters(ENTITY) Quality name str => 
+ 692 0000                                                                             LibObj Decon EF readFilters(ENTITY) Quality index => 0
+ 694 00                                                                               LibObj Decon EF readFilters(ENTITY) Quality name str-length => 0
+ 695                                                                                  LibObj Decon EF readFilters(ENTITY) Quality name str => 
+ 695 00                                                                               LibObj Decon TROnly => false
+ 696 00                                                                               LibObj Decon TFMode => 0
+ 697 00                                                                               LibObj Decon TSMode => 0
+ 698 00                                                                               LibObj Decon TF readFilters(TILE) unknowns => 0
+ 699 1e                                                                               LibObj Decon TF readFilters(TILE) Filters => 30
+ 700 01                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 1 => stone-path
+ 701 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 702 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 703 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 704 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 705 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 706 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 707 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 708 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 709 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 710 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 711 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 712 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 713 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 714 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 715 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 716 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 717 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 718 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 719 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 720 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 721 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 722 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 723 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 724 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 725 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 726 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 727 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 728 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 729 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 730 00                                                                               LibObj Decon TF readFilters(TILE) Quality => 0
+ 731 00                                                                               savedTargetablesCount => 0
+ 732 00                                                                                => 0
+ 733 00                                                                               v2-Unknown2 => 0x00 ✅
+ 734 0000000000000000000000000000000000000000000000000000000000                       RemainingData
+
+Unparsed bytes: 0
+Original file size: 763
+Errors: 1
+  Unexpected 29 bytes remaining in stream
+Note: undefined
+
+Found Strings:
+   0 020000001e000100000d                                                            
+  10 0462617365                                                                       => base
+  15 0a312e312e302e6a736f6e                                                           => 1.1.0.json
+  26 0462617365                                                                       => base
+  31 20312e322e3020737461636b20696e7365727465722072656e616d652e6a736f6e               => 1.2.0 stack inserter rename.json
+  64 0462617365                                                                       => base
+  69 14322e302e302d62697465722d6567672e6a736f6e                                       => 2.0.0-biter-egg.json
+  90 0462617365                                                                       => base
+  95 13322e302e302d696e7465726e616c2e6a736f6e                                         => 2.0.0-internal.json
+ 115 0462617365                                                                       => base
+ 120 14322e302e302d696e7465726e616c322e6a736f6e                                       => 2.0.0-internal2.json
+ 141 0462617365                                                                       => base
+ 146 14322e302e302d696e7465726e616c332e6a736f6e                                       => 2.0.0-internal3.json
+ 167 0462617365                                                                       => base
+ 172 0a322e302e302e6a736f6e                                                           => 2.0.0.json
+ 183 0973706163652d616765                                                             => space-age
+ 193 14617175696c6f2d74696c65736574732e6a736f6e                                       => aquilo-tilesets.json
+ 214 0973706163652d616765                                                             => space-age
+ 224 0b62696f6c61622e6a736f6e                                                         => biolab.json
+ 236 0973706163652d616765                                                             => space-age
+ 246 0d696e7465726e616c2e6a736f6e                                                     => internal.json
+ 260 0973706163652d616765                                                             => space-age
+ 270 156a656c6c792d79756d2d72656e616d652e6a736f6e                                     => jelly-yum-rename.json
+ 292 0973706163652d616765                                                             => space-age
+ 302 157368617474657265642d706c616e65742e6a736f6e                                     => shattered-planet.json
+ 324 0973706163652d616765                                                             => space-age
+ 334 1974756e677374656e2d62656c742d72656e616d652e6a736f6e                             => tungsten-belt-rename.json
+ 360 0400                                                                            
+ 362 136465636f6e737472756374696f6e2d6974656d                                         => deconstruction-item
+ 382 01004e00                                                                        
+ 386 166465636f6e737472756374696f6e2d706c616e6e6572                                   => deconstruction-planner
+ 409 046974656d                                                                       => item
+ 414 01000100                                                                        
+ 418 0c776f6f64656e2d6368657374                                                       => wooden-chest
+ 431 0474696c65                                                                       => tile
+ 436 01000100                                                                        
+ 440 0a73746f6e652d70617468                                                           => stone-path
+ 451 077175616c697479                                                                 => quality
+ 459 0101                                                                            
+ 461 066e6f726d616c                                                                   => normal
+ 468 00006d0000000ea2906700000000010100000001026c0000004e00                          
+ 495 2149636f6e2054696c6573204465636f6e737472756374696f6e20506c616e6e6572             => Icon Tiles Deconstruction Planner
+ 529 392d2049636f6e2023343a20576f6f64656e2063686573740a2d2053746f6e6520706174680a2... => - Icon #4: Wooden chest\n- Stone path\n- Normal\n- Whitelist
+ 587 00040000000000000000000001000100001e00000000000000000000000000000000000000000...
+
+End time: 2025-02-15 09:19:41 AM UTC
+Time taken: 172ms

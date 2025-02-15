@@ -1,0 +1,75 @@
+Load time: 2025-02-15 09:19:41 AM UTC
+Start time: 2025-02-15 09:19:41 AM UTC
+Time taken: 181ms
+   0 0100                                                                             version major => 1
+   2 0100                                                                             version minor => 1
+   4 6e00                                                                             version patch => 110
+   6 0000                                                                             version developer => 0
+   8 00                                                                               branchVersion => 0
+   9 01                                                                               expansions => 1
+  10 04                                                                               expansions game str-length => 4
+  11 62617365                                                                         expansions game str => base
+  15 0a                                                                               expansions file str-length => 10
+  16 312e312e302e6a736f6e                                                             expansions file str => 1.1.0.json
+  26 0100                                                                             IndexSize => 1
+  28 0e                                                                               IndexSize Prototype str-length => 14
+  29 626c75657072696e742d626f6f6b                                                     IndexSize Prototype str => blueprint-book
+  43 0100                                                                             IndexSize => 1
+  45 4700                                                                             IndexSize [ 0] id => 71
+  47 0e                                                                               IndexSize [ 0] name str-length => 14
+  48 626c75657072696e742d626f6f6b                                                     IndexSize [ 0] name str => blueprint-book
+  62 0000                                                                             playerIndex => 0
+  64 02000000                                                                         generationCounter => 2
+  68 f1d1a567                                                                         saveTime => 2025-02-07 09:27:13 AM UTC
+  72 01                                                                               synchronized => true
+  73 02000000                                                                         LibObj => 2
+  77 01                                                                               LibObj slot-used => true => used
+  78 01                                                                               LibObj entity-type => 1 => parseBlueprintBook()
+  79 00000000                                                                         LibObj BB header generation => 0
+  83 4700                                                                             LibObj BB header entry => 71 => blueprint-book
+  85 14                                                                               LibObj BB header label str-length => 20
+  86 456d70747920426c75657072696e7420626f6f6b                                         LibObj BB header label str => Empty Blueprint book
+ 106 21                                                                               LibObj BB description str-length => 33
+ 107 5354415254204445534352495054494f4e0a454e44204445534352495054494f4e               LibObj BB description str => START DESCRIPTION\nEND DESCRIPTION
+ 140 00                                                                               LibObj BB unknownIcons => 0
+ 141 00                                                                               LibObj BB icons => 0
+ 142 00000000                                                                         LibObj BB LibObj => 0
+ 146 00                                                                               LibObj BB activeIndex => 0
+ 147 00                                                                               LibObj BB Expect 0 => 0x00 ✅
+ 148 01                                                                               LibObj slot-used => true => used
+ 149 01                                                                               LibObj entity-type => 1 => parseBlueprintBook()
+ 150 01000000                                                                         LibObj BB header generation => 1
+ 154 4700                                                                             LibObj BB header entry => 71 => blueprint-book
+ 156 14                                                                               LibObj BB header label str-length => 20
+ 157 456d70747920426c75657072696e7420626f6f6b                                         LibObj BB header label str => Empty Blueprint book
+ 177 21                                                                               LibObj BB description str-length => 33
+ 178 5354415254204445534352495054494f4e0a454e44204445534352495054494f4e               LibObj BB description str => START DESCRIPTION\nEND DESCRIPTION
+ 211 00                                                                               LibObj BB unknownIcons => 0
+ 212 00                                                                               LibObj BB icons => 0
+ 213 00000000                                                                         LibObj BB LibObj => 0
+ 217 00                                                                               LibObj BB activeIndex => 0
+ 218 00                                                                               LibObj BB Expect 0 => 0x00 ✅
+
+Unparsed bytes: 0
+Original file size: 219
+Errors: undefined
+Note: undefined
+
+Found Strings:
+   0 010001006e0000000001                                                            
+  10 0462617365                                                                       => base
+  15 0a312e312e302e6a736f6e                                                           => 1.1.0.json
+  26 0100                                                                            
+  28 0e626c75657072696e742d626f6f6b                                                   => blueprint-book
+  43 01004700                                                                        
+  47 0e626c75657072696e742d626f6f6b                                                   => blueprint-book
+  62 000002000000f1d1a56701020000000101000000004700                                  
+  85 14456d70747920426c75657072696e7420626f6f6b                                       => Empty Blueprint book
+ 106 215354415254204445534352495054494f4e0a454e44204445534352495054494f4e             => START DESCRIPTION\nEND DESCRIPTION
+ 140 00000000000000000101010000004700                                                
+ 156 14456d70747920426c75657072696e7420626f6f6b                                       => Empty Blueprint book
+ 177 215354415254204445534352495054494f4e0a454e44204445534352495054494f4e             => START DESCRIPTION\nEND DESCRIPTION
+ 211 0000000000000000                                                                
+
+End time: 2025-02-15 09:19:41 AM UTC
+Time taken: 204ms
