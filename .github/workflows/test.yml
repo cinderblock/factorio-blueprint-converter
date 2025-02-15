@@ -54,6 +54,7 @@ jobs:
           branch: annotated-samples
 
       - name: Generate progress graphs
+        if: success() || steps.test.conclusion == 'failure'
         run: npm run samples-progress
 
       # Publish to gh-pages
