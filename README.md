@@ -10,6 +10,8 @@ This project is in early development and is not yet ready for use.
 [![Tests](https://github.com/cinderblock/factorio-blueprint-converter/actions/workflows/test.yml/badge.svg)](https://github.com/cinderblock/factorio-blueprint-converter/actions/workflows/test.yml)
 [![Vitest](https://img.shields.io/badge/vitest-6E9F18?style=for-the-badge&logo=vitest&logoColor=white)](https://cinderblock.github.io/factorio-blueprint-converter)
 
+![Progress](https://cinderblock.github.io/factorio-blueprint-converter/progress.svg)
+
 ## Usage
 
 Back up your data.

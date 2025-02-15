@@ -53,6 +53,9 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: annotated-samples
 
+      - name: Generate progress graphs
+        run: npm run samples-progress
+
       # Publish to gh-pages
       - name: Publish to gh-pages
         if: success() || steps.test.conclusion == 'failure'
