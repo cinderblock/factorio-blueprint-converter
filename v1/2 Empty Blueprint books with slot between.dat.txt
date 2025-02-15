@@ -1,6 +1,6 @@
-Load time: 2025-02-15 09:19:54 AM UTC
-Start time: 2025-02-15 09:19:54 AM UTC
-Time taken: 181ms
+Load time: 2025-02-15 09:23:21 AM UTC
+Start time: 2025-02-15 09:23:22 AM UTC
+Time taken: 729ms
    0 0100                                                                             version major => 1
    2 0100                                                                             version minor => 1
    4 6e00                                                                             version patch => 110
@@ -72,5 +72,5 @@ Found Strings:
  178 215354415254204445534352495054494f4e0a454e44204445534352495054494f4e             => START DESCRIPTION\nEND DESCRIPTION
  212 0000000000000000                                                                
 
-End time: 2025-02-15 09:19:54 AM UTC
-Time taken: 192ms
+End time: 2025-02-15 09:23:22 AM UTC
+Time taken: 187ms
