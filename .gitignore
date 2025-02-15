@@ -1,2 +1,4 @@
 # Vitest Reports
 html
+
+/node_modules/
