@@ -8,8 +8,7 @@ The initial goal is to be able to have a file per blueprint that can be committe
 This project is in early development and is not yet ready for use.
 
 [![Tests](https://github.com/cinderblock/factorio-blueprint-converter/actions/workflows/test.yml/badge.svg)](https://github.com/cinderblock/factorio-blueprint-converter/actions/workflows/test.yml)
-
-[![Development Stats](https://cinderblock.github.io/factorio-blueprint-converter/action-stats/build-stats/dashboard.svg)](https://cinderblock.github.io/factorio-blueprint-converter/action-stats/build-stats)
+[![Vitest](https://img.shields.io/badge/vitest-6E9F18?style=for-the-badge&logo=vitest&logoColor=white)](https://cinderblock.github.io/factorio-blueprint-converter)
 
 ## Usage
 
