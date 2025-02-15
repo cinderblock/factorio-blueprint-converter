@@ -24,28 +24,42 @@ jobs:
       - name: Install dependencies
         run: npm ci --color=always
 
+      - name: Checkout annotated samples sibling branch
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          path: test/samples-annotated
+          ref: annotated-samples
+
       - name: Run tests
         run: npm test --color=always -- --coverage
         id: test
 
-        # This step will copy coverage reports (and others) to the specified historical branch
-        # and use it to generate some pretty charts
-      - name: Generate Standalone Stats
-        id: generate
+      - name: Commit annotated samples
         if: success() || steps.test.conclusion == 'failure'
-        uses: cinderblock/github-action-standalone-stats@master
+        id: commitAnnotatedSamples
+        working-directory: test/samples-annotated
+        run: |
+          git config --local user.email "github-actions[bot]@noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add .
+          git commit -m "${{ github.ref }} ${{ github.sha }}"
+
+      - name: Push annotated samples sibling branch
+        if: success() || steps.commitAnnotatedSamples.conclusion == 'success'
+        uses: ad-m/github-push-action@master
         with:
-          stats-branch: build-stats
-          pages-dir: public/action-stats
+          directory: test/samples-annotated
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
 
       # Publish to gh-pages
       - name: Publish to gh-pages
-        if: success() || steps.generate.conclusion == 'success'
+        if: success() || steps.test.conclusion == 'failure'
         uses: peaceiris/actions-gh-pages@v4
-        env:
+        with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          PUBLISH_BRANCH: gh-pages
-          PUBLISH_DIR: public
+          publish_dir: html
 
       - name: Print annotated and decoded files
         # Always print annotated files, even on other failure
