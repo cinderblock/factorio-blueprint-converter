@@ -33,7 +33,7 @@ async function main() {
   // const series = data.map((row, index) => ({ name: headers[index], value: row.map(Number) }));
   const series = data.map(row => row.map(Number).map(n => n * 100));
 
-  const svg = await chartist(
+  let svg = await chartist(
     'line',
     { labels, series, title: 'Percent complete' },
     {
@@ -65,6 +65,24 @@ async function main() {
       css: '',
     },
   );
+
+  // Define the XML declaration
+  const xmlDeclaration = `<?xml version="1.0" encoding="UTF-8" standalone="no"?>\n`;
+
+  // Check if svgContent already starts with the XML declaration
+  if (!svg.trim().startsWith('<?xml')) {
+    // Prepend the XML declaration
+    svg = `${xmlDeclaration}${svg}`;
+  }
+
+  // Ensure the root <svg> tag has the default xmlns
+  if (!/xmlns="http:\/\/www\.w3\.org\/2000\/svg"/.test(svg)) {
+    // Insert xmlns before any existing attributes in the <svg> tag
+    svg = svg.replace(/<svg ([^>]*?)>/, `<svg xmlns="http://www.w3.org/2000/svg" $1>`);
+  }
+
+  // Remove duplicate stroke-dasharray and stroke-width
+  svg = svg.replace(/(stroke-dasharray:\d+px;)\s*\1/g, '$1').replace(/(stroke-width:\d+px;)\s*\1/g, '$1');
 
   await mkdir('html', { recursive: true });
 
