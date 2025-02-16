@@ -1,6 +1,5 @@
 // Generate progress graphs from samples-annotated/parsedProportion.log.tsv
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
-import chartist from 'chartist-svg';
 
 async function main() {
   const file = await readFile('test/samples-annotated/parsedProportion.log.tsv', 'utf-8');
@@ -10,6 +9,9 @@ async function main() {
     .filter(Boolean)
     .map(line => line.split('\t'));
   const headers = lines.shift();
+  if (!headers) {
+    throw new Error('No headers found');
+  }
 
   const data = transpose(lines);
 
@@ -26,63 +28,100 @@ async function main() {
     return removed;
   }
 
-  const labels = spliceData('git hash').map(l => l?.slice(0, 6));
+  const hashes = spliceData('git hash');
   const dates = spliceData('date');
   const complete = spliceData('passed');
 
-  // const series = data.map((row, index) => ({ name: headers[index], value: row.map(Number) }));
-  const series = data.map(row => row.map(Number).map(n => n * 100));
+  const rows = transpose(data);
 
-  let svg = await chartist(
-    'line',
-    { labels, series, title: 'Percent complete' },
-    {
-      chart: {
-        width: 800,
-        height: 200,
-        chartPadding: { left: 0, right: 0 },
-      },
-      title: {
-        x: 0,
-        y: 0,
-        height: 48,
-        'font-size': '18px',
-        'font-family': 'Verdana',
-        'font-weight': 'bold',
-        fill: 'crimson',
-        'text-anchor': 'middle', //(... other svg attributes)
-      },
-      //   subtitle: {
-      //     x: 0,
-      //     y: 0,
-      //     height: 24,
-      //     'font-size': '12px',
-      //     'font-family': 'Verdana',
-      //     'font-weight': 'bold',
-      //     fill: 'indianred',
-      //     'text-anchor': 'middle', //(... other svg attrbiutes)
-      //   },
-      css: '',
-    },
-  );
+  let svg = '';
 
-  // Define the XML declaration
-  const xmlDeclaration = `<?xml version="1.0" encoding="UTF-8" standalone="no"?>\n`;
+  const Left = 55;
+  const Right = 40;
+  const Header = 20;
+  const CellHeight = 10;
+  const Width = 800;
+  const Height = hashes.length * CellHeight + Header;
 
-  // Check if svgContent already starts with the XML declaration
-  if (!svg.trim().startsWith('<?xml')) {
-    // Prepend the XML declaration
-    svg = `${xmlDeclaration}${svg}`;
+  const legendX = Left + 20;
+  const legendY = Header + 100;
+  const legendHeight = 20;
+  const legendFont = `font-size="${legendHeight}px" alignment-baseline="top"`;
+  const legendChars = 30;
+
+  const majorMarks = [0, 0.5, 1];
+  const minorMarks = [0.25, 0.75];
+
+  function rowY(rowIndex: number) {
+    return Height - (rowIndex + 0.5) * CellHeight;
+  }
+  function map(x: number | string, outMin = Left, outMax = Width - Right) {
+    if (typeof x === 'string') {
+      x = parseFloat(x);
+      if (isNaN(x)) {
+        throw new Error(`Invalid number: ${x}`);
+      }
+    }
+
+    return x * (outMax - outMin) + outMin;
   }
 
-  // Ensure the root <svg> tag has the default xmlns
-  if (!/xmlns="http:\/\/www\.w3\.org\/2000\/svg"/.test(svg)) {
-    // Insert xmlns before any existing attributes in the <svg> tag
-    svg = svg.replace(/<svg ([^>]*?)>/, `<svg xmlns="http://www.w3.org/2000/svg" $1>`);
+  function getColor(index: number) {
+    return `hsl(${(index * 360) / (headers?.length ?? 50)}, 100%, 50%)`;
   }
 
-  // Remove duplicate stroke-dasharray and stroke-width
-  svg = svg.replace(/(stroke-dasharray:\d+px;)\s*\1/g, '$1').replace(/(stroke-width:\d+px;)\s*\1/g, '$1');
+  svg += '<?xml version="1.0" encoding="UTF-8" standalone="no"?>';
+  svg += `<svg xmlns="http://www.w3.org/2000/svg" width="${Width}" height="${Height}">`;
+
+  // Major mark lines
+  majorMarks.forEach(x => {
+    x = map(x);
+    svg += `<line x1="${x}" y1="${Header}" x2="${x}" y2="${Height}" stroke="black" stroke-width="3px" stroke-dasharray="8,3" />`;
+  });
+
+  // Minor mark lines
+  minorMarks.forEach(x => {
+    x = map(x);
+    svg += `<line x1="${x}" y1="${Header}" x2="${x}" y2="${Height}" stroke="grey" stroke-width="1px" stroke-dasharray="3,3" />`;
+  });
+
+  // Hash labels
+  hashes.forEach((hash, index) => {
+    const dirty = hash.includes('-dirty');
+    svg += `<text x="0" y="${rowY(index)}" alignment-baseline="middle" fill="${dirty ? 'grey' : 'black'}" font-size="12px" font-family="monospace"${dirty ? ' font-style="italic"' : ''}>${hash.slice(0, 7)}</text>`;
+  });
+
+  // Sample points/chart
+  rows.forEach((row, rowIndex, rows) => {
+    // Skip the first row. Picket fence error.
+    row.forEach((cell, colIndex) => {
+      const color = getColor(colIndex);
+      const x = map(cell);
+      const y = rowY(rowIndex);
+      svg += `<circle cx="${x}" cy="${y}" r="2" fill="${color}" />`;
+      if (!rowIndex) return;
+      svg += `<line x1="${map(rows[rowIndex - 1][colIndex])}" y1="${rowY(rowIndex - 1)}" x2="${x}" y2="${y}" stroke="${color}" stroke-width="2px" />`;
+    });
+  });
+
+  // Major mark labels
+  majorMarks.forEach(x => {
+    svg += `<text x="${map(x)}" y="20" fill="black" font-size="20px" font-weight="bold" text-anchor="${x === 0 ? 'start' : x === 1 ? 'end' : 'middle'}" alignment-baseline="top">${(x * 100).toFixed(0)}%</text>`;
+  });
+
+  // Legend
+  //   svg += `<text x="${legendX}" y="${legendY - legendHeight}" fill="black" ${legendFont}>Legend</text>`;
+  headers.forEach((header, index) => {
+    svg += `<text x="${legendX}" y="${legendY + index * legendHeight}" fill="${getColor(index)}" ${legendFont}>${limitLength(header, legendChars)}</text>`;
+  });
+
+  // Number of passing samples
+  svg += `<text x="${Width}" y="${rowY(complete.length)}" alignment-baseline="middle" fill="black" font-size="12px" text-anchor="end">done</text>`;
+  complete.forEach((finished, index) => {
+    svg += `<text x="${Width}" y="${rowY(index)}" alignment-baseline="middle" fill="black" font-size="12px" text-anchor="end">${Number(finished).toFixed(0)}</text>`;
+  });
+
+  svg += '</svg>';
 
   await mkdir('html', { recursive: true });
 
@@ -100,4 +139,8 @@ main().catch(e => {
 
 function transpose<T>(matrix: T[][]): T[][] {
   return matrix[0].map((_, colIndex) => matrix.map(row => row[colIndex]));
+}
+
+function limitLength(str: string, length = 10) {
+  return str.length > length ? str.slice(0, length - 3) + '...' : str;
 }
