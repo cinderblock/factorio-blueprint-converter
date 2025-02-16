@@ -73,17 +73,19 @@ async function main() {
   svg += '<?xml version="1.0" encoding="UTF-8" standalone="no"?>';
   svg += `<svg xmlns="http://www.w3.org/2000/svg" width="${Width}" height="${Height}">`;
 
-  // Invert for dark mode
+  // Dark mode support
   svg += `<style>
+    svg { color-scheme: light dark; }
     @media (prefers-color-scheme: dark) {
-      svg { filter: invert(1) hue-rotate(180deg); }
+      .dark-mode-invert { stroke: white; }
+      .dark-mode-invert-fill { fill: white; }
     }
   </style>`;
 
   // Major mark lines
   majorMarks.forEach(x => {
     x = map(x);
-    svg += `<line x1="${x}" y1="${Header}" x2="${x}" y2="${Height}" stroke="black" stroke-width="3px" stroke-dasharray="8,3" />`;
+    svg += `<line x1="${x}" y1="${Header}" x2="${x}" y2="${Height}" stroke="currentColor" class="dark-mode-invert" stroke-width="3px" stroke-dasharray="8,3" />`;
   });
 
   // Minor mark lines
@@ -95,7 +97,7 @@ async function main() {
   // Hash labels
   hashes.forEach((hash, index) => {
     const dirty = hash.includes('-dirty');
-    svg += `<text x="0" y="${rowY(index)}" alignment-baseline="middle" fill="${dirty ? 'grey' : 'black'}" font-size="12px" font-family="monospace"${dirty ? ' font-style="italic"' : ''}>${hash.slice(0, 7)}</text>`;
+    svg += `<text x="0" y="${rowY(index)}" alignment-baseline="middle" class="${dirty ? '' : 'dark-mode-invert-fill'}" fill="${dirty ? 'grey' : 'currentColor'}" font-size="12px" font-family="monospace"${dirty ? ' font-style="italic"' : ''}>${hash.slice(0, 7)}</text>`;
   });
 
   // Sample points/chart
@@ -113,21 +115,21 @@ async function main() {
 
   // Major mark labels
   majorMarks.forEach(x => {
-    svg += `<text x="${map(x)}" y="30" fill="black" font-size="20px" font-weight="bold" text-anchor="${x === 0 ? 'start' : x === 1 ? 'end' : 'middle'}" alignment-baseline="top">${(x * 100).toFixed(0)}%</text>`;
+    svg += `<text x="${map(x)}" y="30" class="dark-mode-invert-fill" fill="currentColor" font-size="20px" font-weight="bold" text-anchor="${x === 0 ? 'start' : x === 1 ? 'end' : 'middle'}" alignment-baseline="top">${(x * 100).toFixed(0)}%</text>`;
   });
-  svg += `<text x="${map(0.75)}" y="20" fill="black" font-size="20px" font-weight="bold" text-anchor="middle" alignment-baseline="top">Sample Parsing Progress</text>`;
-  svg += `<text x="${Left}" y="10" fill="black" font-size="12px" alignment-baseline="top">Parsed Proportion</text>`;
+  svg += `<text x="${map(0.75)}" y="20" class="dark-mode-invert-fill" fill="currentColor" font-size="20px" font-weight="bold" text-anchor="middle" alignment-baseline="top">Sample Parsing Progress</text>`;
+  svg += `<text x="${Left}" y="10" class="dark-mode-invert-fill" fill="currentColor" font-size="12px" alignment-baseline="top">Parsed Proportion</text>`;
 
   // Legend
-  svg += `<text x="${legendX}" y="${legendY - legendHeight}" fill="black" ${legendFont}>Legend</text>`;
+  svg += `<text x="${legendX}" y="${legendY - legendHeight}" class="dark-mode-invert-fill" fill="currentColor" ${legendFont}>Legend</text>`;
   headers.forEach((header, index) => {
     svg += `<text x="${legendX}" y="${legendY + index * legendHeight}" fill="${getColor(index)}" ${legendFont}>${limitLength(header, legendChars)}</text>`;
   });
 
   // Number of passing samples
-  svg += `<text x="${Width}" y="${rowY(complete.length)}" alignment-baseline="middle" fill="black" font-size="12px" text-anchor="end">done</text>`;
+  svg += `<text x="${Width}" y="${rowY(complete.length)}" alignment-baseline="middle" class="dark-mode-invert-fill" fill="currentColor" font-size="12px" text-anchor="end">done</text>`;
   complete.forEach((finished, index) => {
-    svg += `<text x="${Width}" y="${rowY(index)}" alignment-baseline="middle" fill="black" font-size="12px" text-anchor="end">${Number(finished).toFixed(0)}</text>`;
+    svg += `<text x="${Width}" y="${rowY(index)}" alignment-baseline="middle" class="dark-mode-invert-fill" fill="currentColor" font-size="12px" text-anchor="end">${Number(finished).toFixed(0)}</text>`;
   });
 
   svg += '</svg>';
