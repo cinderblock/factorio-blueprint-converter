@@ -73,6 +73,13 @@ async function main() {
   svg += '<?xml version="1.0" encoding="UTF-8" standalone="no"?>';
   svg += `<svg xmlns="http://www.w3.org/2000/svg" width="${Width}" height="${Height}">`;
 
+  // Invert for dark mode
+  svg += `<style>
+    @media (prefers-color-scheme: dark) {
+      svg { filter: invert(1) hue-rotate(180deg); }
+    }
+  </style>`;
+
   // Major mark lines
   majorMarks.forEach(x => {
     x = map(x);
