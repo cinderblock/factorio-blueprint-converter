@@ -44,7 +44,7 @@ async function main() {
   const Height = hashes.length * CellHeight + Header;
 
   const legendX = Left + 35;
-  const legendY = Header;
+  const legendY = Header + 20;
   const legendHeight = 20;
   const legendFont = `font-size="${legendHeight}px" alignment-baseline="top"`;
   const legendChars = 30;
