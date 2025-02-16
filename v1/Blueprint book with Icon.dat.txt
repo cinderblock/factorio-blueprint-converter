@@ -1,6 +1,6 @@
-Load time: 2025-02-16 09:42:33 AM UTC
-Start time: 2025-02-16 09:42:34 AM UTC
-Time taken: 174ms
+Load time: 2025-02-16 09:47:40 AM UTC
+Start time: 2025-02-16 09:47:40 AM UTC
+Time taken: 183ms
    0 0100                                                                             version major => 1
    2 0100                                                                             version minor => 1
    4 6e00                                                                             version patch => 110
@@ -66,5 +66,5 @@ Found Strings:
  133 475354415254204445534352495054494f4e0a2d20456d7074790a2d2046697273742069636f6... => START DESCRIPTION\n- Empty\n- First icon is Stone furnace\nEND DESCRIPTION
  205 0001005600000000000000                                                          
 
-End time: 2025-02-16 09:42:34 AM UTC
-Time taken: 197ms
+End time: 2025-02-16 09:47:41 AM UTC
+Time taken: 195ms
