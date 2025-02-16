@@ -57,6 +57,7 @@ async function main() {
   }
   function map(x: number | string, outMin = Left, outMax = Width - Right) {
     if (typeof x === 'string') {
+      if (x === '') return undefined;
       x = parseFloat(x);
       if (isNaN(x)) {
         throw new Error(`Invalid number: ${x}`);
@@ -102,15 +103,18 @@ async function main() {
   });
 
   // Sample points/chart
-  rows.forEach((row, rowIndex, rows) => {
-    // Skip the first row. Picket fence error.
+  const last: { x: number; y: number }[] = [];
+  rows.forEach((row, rowIndex) => {
     row.forEach((cell, colIndex) => {
       const color = getColor(colIndex);
       const x = map(cell);
+      if (x === undefined) return;
       const y = rowY(rowIndex);
       svg += `<circle cx="${x}" cy="${y}" r="2" fill="${color}" />`;
-      if (!rowIndex) return;
-      svg += `<line x1="${map(rows[rowIndex - 1][colIndex])}" y1="${rowY(rowIndex - 1)}" x2="${x}" y2="${y}" stroke="${color}" stroke-width="2px" />`;
+      if (last[colIndex]) {
+        svg += `<line x1="${last[colIndex].x}" y1="${last[colIndex].y}" x2="${x}" y2="${y}" stroke="${color}" stroke-width="2px" />`;
+      }
+      last[colIndex] = { x, y };
     });
   });
 
