@@ -119,7 +119,7 @@ async function main() {
   svg += `<text x="${Left}" y="10" fill="black" font-size="12px" alignment-baseline="top">Parsed Proportion</text>`;
 
   // Legend
-  //   svg += `<text x="${legendX}" y="${legendY - legendHeight}" fill="black" ${legendFont}>Legend</text>`;
+  svg += `<text x="${legendX}" y="${legendY - legendHeight}" fill="black" ${legendFont}>Legend</text>`;
   headers.forEach((header, index) => {
     svg += `<text x="${legendX}" y="${legendY + index * legendHeight}" fill="${getColor(index)}" ${legendFont}>${limitLength(header, legendChars)}</text>`;
   });
