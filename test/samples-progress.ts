@@ -43,8 +43,8 @@ async function main() {
   const Width = 800;
   const Height = hashes.length * CellHeight + Header;
 
-  const legendX = Left + 20;
-  const legendY = Header + 100;
+  const legendX = Left + 35;
+  const legendY = Header;
   const legendHeight = 20;
   const legendFont = `font-size="${legendHeight}px" alignment-baseline="top"`;
   const legendChars = 30;
