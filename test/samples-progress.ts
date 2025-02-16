@@ -95,6 +95,7 @@ async function main() {
   });
 
   // Hash labels
+  svg += `<text x="0" y="${rowY(hashes.length)}" alignment-baseline="middle" fill="grey" font-size="12px" font-family="monospace">newest</text>`;
   hashes.forEach((hash, index) => {
     const dirty = hash.includes('-dirty');
     svg += `<text x="0" y="${rowY(index)}" alignment-baseline="middle" class="${dirty ? '' : 'dark-mode-invert-fill'}" fill="${dirty ? 'grey' : 'currentColor'}" font-size="12px" font-family="monospace"${dirty ? ' font-style="italic"' : ''}>${hash.slice(0, 7)}</text>`;
