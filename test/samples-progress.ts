@@ -119,7 +119,7 @@ async function main() {
     svg += `<text x="${map(x)}" y="30" class="dark-mode-invert-fill" fill="currentColor" font-size="20px" font-weight="bold" text-anchor="${x === 0 ? 'start' : x === 1 ? 'end' : 'middle'}" alignment-baseline="top">${(x * 100).toFixed(0)}%</text>`;
   });
   svg += `<text x="${map(0.75)}" y="20" class="dark-mode-invert-fill" fill="currentColor" font-size="20px" font-weight="bold" text-anchor="middle" alignment-baseline="top">Sample Parsing Progress</text>`;
-  svg += `<text x="${Left}" y="10" class="dark-mode-invert-fill" fill="currentColor" font-size="12px" alignment-baseline="top">Parsed Proportion</text>`;
+  svg += `<text x="${Left}" y="10" fill="grey" font-size="12px" alignment-baseline="top">Parsed Proportion</text>`;
 
   // Legend
   svg += `<text x="${legendX}" y="${legendY - legendHeight}" class="dark-mode-invert-fill" fill="currentColor" ${legendFont}>Legend</text>`;
