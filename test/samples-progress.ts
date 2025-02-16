@@ -38,7 +38,7 @@ async function main() {
 
   const Left = 55;
   const Right = 40;
-  const Header = 20;
+  const Header = 30;
   const CellHeight = 10;
   const Width = 800;
   const Height = hashes.length * CellHeight + Header;
@@ -106,8 +106,10 @@ async function main() {
 
   // Major mark labels
   majorMarks.forEach(x => {
-    svg += `<text x="${map(x)}" y="20" fill="black" font-size="20px" font-weight="bold" text-anchor="${x === 0 ? 'start' : x === 1 ? 'end' : 'middle'}" alignment-baseline="top">${(x * 100).toFixed(0)}%</text>`;
+    svg += `<text x="${map(x)}" y="30" fill="black" font-size="20px" font-weight="bold" text-anchor="${x === 0 ? 'start' : x === 1 ? 'end' : 'middle'}" alignment-baseline="top">${(x * 100).toFixed(0)}%</text>`;
   });
+  svg += `<text x="${map(0.75)}" y="20" fill="black" font-size="20px" font-weight="bold" text-anchor="middle" alignment-baseline="top">Sample Parsing Progress</text>`;
+  svg += `<text x="${Left}" y="10" fill="black" font-size="12px" alignment-baseline="top">Parsed Proportion</text>`;
 
   // Legend
   //   svg += `<text x="${legendX}" y="${legendY - legendHeight}" fill="black" ${legendFont}>Legend</text>`;
