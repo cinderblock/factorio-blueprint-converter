@@ -84,16 +84,18 @@ async function main() {
   </style>`;
 
   // Major mark lines
-  majorMarks.forEach(x => {
-    x = map(x);
-    svg += `<line x1="${x}" y1="${Header}" x2="${x}" y2="${Height}" stroke="currentColor" class="dark-mode-invert" stroke-width="3px" stroke-dasharray="8,3" />`;
-  });
+  majorMarks
+    .map(x => map(x))
+    .forEach(x => {
+      svg += `<line x1="${x}" y1="${Header}" x2="${x}" y2="${Height}" stroke="currentColor" class="dark-mode-invert" stroke-width="3px" stroke-dasharray="8,3" />`;
+    });
 
   // Minor mark lines
-  minorMarks.forEach(x => {
-    x = map(x);
-    svg += `<line x1="${x}" y1="${Header}" x2="${x}" y2="${Height}" stroke="grey" stroke-width="1px" stroke-dasharray="3,3" />`;
-  });
+  minorMarks
+    .map(x => map(x))
+    .forEach(x => {
+      svg += `<line x1="${x}" y1="${Header}" x2="${x}" y2="${Height}" stroke="grey" stroke-width="1px" stroke-dasharray="3,3" />`;
+    });
 
   // Hash labels
   svg += `<text x="0" y="${rowY(hashes.length)}" alignment-baseline="middle" fill="grey" font-size="12px" font-family="monospace">newest</text>`;
