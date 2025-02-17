@@ -110,6 +110,8 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
     return copy;
   }
 
+  void peek; // make eslint happy
+
   /**
    * Read a generic number from the stream
    *

@@ -32,6 +32,9 @@ async function main() {
   const dates = spliceData('date');
   const complete = spliceData('passed');
 
+  // TODO: do something with dates?
+  void dates;
+
   const rows = transpose(data);
 
   let svg = '';
