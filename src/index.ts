@@ -597,9 +597,7 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
 
     const blueprints = await parseLibraryObjects();
 
-    const activeIndex = await wrapLabel('activeIndex', () => readNumber(1));
-
-    await expect(0, 'Expect 0');
+    const activeIndex = await wrapLabel('activeIndex', () => readNumber(2));
 
     annotation?.clearLabel('BB');
 
@@ -677,6 +675,10 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
   }
 
   ret.blueprints = await parseLibraryObjects();
+
+  // TODO: match MapDeserialiser::loadLoadHelpers
+
+  // TODO: match WireConnectorDeserialiser::loadAllWireConnections
 
   const versionSplit = new Version('1.2.0', 0xa7);
   if (ret.version.compare(versionSplit) >= 0) {
