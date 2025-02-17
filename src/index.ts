@@ -678,10 +678,13 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
 
   ret.blueprints = await parseLibraryObjects();
 
-  if (ret.version.major >= 2) {
-    const savedTargetablesCount = await wrapLabel('savedTargetablesCount', () => readNumber());
-    if (savedTargetablesCount !== 0) {
-      throw new Error(`savedTargetablesCount is ${savedTargetablesCount}. Not yet implemented.`);
+  const versionSplit = new Version('1.2.0', 0xa7);
+  if (ret.version.compare(versionSplit) >= 0) {
+    if (ret.version.compare(versionSplit) > 0) {
+      const savedTargetablesCount = await wrapLabel('savedTargetablesCount', () => readNumber());
+      if (savedTargetablesCount !== 0) {
+        throw new Error(`savedTargetablesCount is ${savedTargetablesCount}. Not yet implemented.`);
+      }
     }
 
     const targeterToTargetableMapping = await readArray(0, () => readNumber(4));
