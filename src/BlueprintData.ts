@@ -125,3 +125,5 @@ export function isUpgradeItem(entry: BlueprintEntry): entry is UpgradePlanner {
 export function isEmpty(entry: BlueprintEntry): entry is null {
   return entry === null;
 }
+
+// cSpell:ignore VSIGNAL

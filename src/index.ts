@@ -726,3 +726,5 @@ if (esMain(import.meta)) {
     process.exitCode = 1;
   });
 }
+
+// cSpell:ignore VSIGNAL decon targetable targetables targeter unsynchronized

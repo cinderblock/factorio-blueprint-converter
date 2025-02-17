@@ -4,5 +4,6 @@ words:
   - Factorio
   - Wube
   - asheiduk
+  - Vitest
 ignorePaths:
-  - test/samples/annotated
+  - test/samples-annotated
