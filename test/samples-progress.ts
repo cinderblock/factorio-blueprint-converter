@@ -134,6 +134,7 @@ async function main() {
   // Number of passing samples
   svg += `<text x="${Width}" y="${rowY(complete.length)}" alignment-baseline="middle" class="dark-mode-invert-fill" fill="currentColor" font-size="12px" text-anchor="end">done</text>`;
   complete.forEach((finished, index) => {
+    if (!finished) return;
     svg += `<text x="${Width}" y="${rowY(index)}" alignment-baseline="middle" class="dark-mode-invert-fill" fill="currentColor" font-size="12px" text-anchor="end">${Number(finished).toFixed(0)}</text>`;
   });
 
