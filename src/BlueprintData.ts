@@ -8,6 +8,7 @@ export type BlueprintData = {
   expansions: Record<string, string[]>;
   saveTime: Date;
   generationCounter: number;
+  playerIndex: number;
   blueprints: BlueprintEntry[];
 };
 export class Version {

@@ -661,7 +661,7 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
     }),
   );
 
-  const playerIndex = await wrapLabel('playerIndex', () => readNumber(2));
+  ret.playerIndex = await wrapLabel('playerIndex', () => readNumber(2));
 
   // aka `nextRecordID`
   ret.generationCounter = await wrapLabel('generationCounter', () => readNumber(4));
