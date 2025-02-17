@@ -76,6 +76,7 @@ export type Blueprint = {
   generation: number;
   label: string;
   description: string;
+  // The rest of these keys are not 100% confirmed
   removedMods: boolean;
   data: Buffer;
 };
@@ -85,6 +86,7 @@ export type BlueprintBook = {
   generation: number;
   label: string;
   description: string;
+  // The rest of these keys are not 100% confirmed
   icons: { index: number; signal: Sig }[];
   blueprints: BlueprintEntry[];
   activeIndex: number;
@@ -94,6 +96,7 @@ export type DeconstructionPlanner = {
   generation: number;
   label: string;
   description: string;
+  // The rest of these keys are not 100% confirmed
   icons: { index: number; signal: Sig }[];
   entityFilterMode: number;
   entityFilters: { index: number; name: string }[];
@@ -107,6 +110,7 @@ export type UpgradePlanner = {
   generation: number;
   label: string;
   description: string;
+  // The rest of these keys are not 100% confirmed
   icons: { index: number; signal: Sig }[];
   mappers: { index: number; from: { type: Index.Types; name: string }; to: { type: Index.Types; name: string } }[];
 };
