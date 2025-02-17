@@ -408,10 +408,6 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
 
     const header = await parseBlueprintEntityHeader('blueprint');
 
-    // blueprint-book
-    // deconstruction-item
-    // upgrade-item
-
     await expect(0, 'Expect 0');
 
     const removedMods = await wrapLabel('removed mods', readBoolean);
