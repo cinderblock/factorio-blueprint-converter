@@ -4,9 +4,9 @@ import { parse } from 'yaml';
 import { SamplesDir } from './dirs.js';
 
 export async function loadSamples() {
-  const files = await readdir(SamplesDir, { recursive: true });
-  const sampleFiles = files.filter(file => file.match(/[^/\\]\.dat$/));
-  const exportsFiles = files.filter(file => file.match(/(^|[/\\])exports.yaml$/));
+  const files = (await readdir(SamplesDir, { recursive: true })).map(p => p.replace('\\', '/'));
+  const sampleFiles = files.filter(file => file.match(/[^/]\.dat$/));
+  const exportsFiles = files.filter(file => file.match(/(^|[/])exports.yaml$/));
 
   const blueprintStrings: Record<string, (string | null)[]> = {};
 
