@@ -445,8 +445,8 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
 
     const unknowns: Record<number, string> = {};
 
-    await wrapLabel('unknowns', async () =>
-      readArray(1, async () => {
+    await wrapLabel('entityFilterBackups', async () =>
+      readArray(0, async () => {
         const index = await wrapLabel('index', () => readNumber(2));
 
         const name = await wrapLabel('name', readString);
@@ -462,7 +462,7 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
     }[] = [];
 
     await wrapLabel('Filters', () =>
-      readArray(1, async index => {
+      readArray(0, async index => {
         let name = (await wrapLabel('UnknownEntry', () => readEntry(type)))?.name;
         if (!name) return;
 
@@ -482,7 +482,7 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
 
     if (ret.version.major >= 2) {
       await wrapLabel('Quality', () =>
-        readArray(1, async () => {
+        readArray(0, async () => {
           const index = await wrapLabel('index', () => readNumber(2));
           const name = await wrapLabel('name', () => readString());
           quality.push({ index, name });
