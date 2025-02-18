@@ -340,8 +340,15 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
 
   async function parseIcons() {
     const usesQuality = ret.version.compare(new Version('1.2.0')) >= 0;
-    const [prototypeNames, qualityPrototypeNames] = await wrapLabel('unknownIcons', () =>
-      readArray(0, async () => [await readString(), usesQuality && (await readString())]),
+    const prototypeNames: string[] = [];
+    const qualityPrototypeNames: string[] = [];
+    await wrapLabel('unknownIcons', () =>
+      readArray(0, async () => {
+        prototypeNames.push(await readString());
+        if (usesQuality) {
+          qualityPrototypeNames.push(await readString());
+        }
+      }),
     );
 
     const icons: {
