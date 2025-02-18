@@ -1,6 +1,6 @@
-Load time: 2025-02-17 05:49:55 AM UTC
-Start time: 2025-02-17 05:49:55 AM UTC
-Time taken: 146ms
+Load time: 2025-02-18 06:50:56 AM UTC
+Start time: 2025-02-18 06:50:56 AM UTC
+Time taken: 132ms
    0 0200                                                                             version major => 2
    2 0000                                                                             version minor => 0
    4 1e00                                                                             version patch => 30
@@ -101,25 +101,12 @@ Time taken: 146ms
  557 04                                                                               LibObj BB icons => 4
  558 00                                                                               LibObj BB icons signal type => 0 => ITEM
  559 4b00                                                                             LibObj BB icons signal entry => 75 => cliff-explosives => cliff-explosives
- 561 01                                                                               LibObj BB icons signal type => 1 => FLUID
- 562 0000                                                                             LibObj BB icons signal entry => 0 => null => null
- 564 00                                                                               LibObj BB icons signal type => 0 => ITEM
- 565 0000                                                                             LibObj BB icons signal entry => 0 => null => null
- 567 00                                                                               LibObj BB icons signal type => 0 => ITEM
- 568 0001                                                                             LibObj BB icons signal entry => 256 => null => null
- 570 00010000                                                                         LibObj BB LibObj => 256
- 574 00                                                                               LibObj BB LibObj slot-used => false => not used
- 575 00                                                                               LibObj BB LibObj slot-used => false => not used
- 576 00                                                                               LibObj BB LibObj slot-used => false => not used
- 577 00                                                                               LibObj BB LibObj slot-used => false => not used
- 578 00                                                                               LibObj BB LibObj slot-used => false => not used
- 579 00                                                                               LibObj BB LibObj slot-used => false => not used
- 580 00                                                                               LibObj BB LibObj slot-used => false => not used
+ 561 0100000000000000010001000000000000000000
 
-Unparsed bytes: 0
+Unparsed bytes: 20
 Original file size: 581
 Errors: 1
-  undefined
+  Cannot read properties of undefined (reading '0')
 Note: undefined
 
 Found Strings:
@@ -168,5 +155,5 @@ Found Strings:
  506 312d2049636f6e20313a20436c696666206578706c6f73697665730a2d2049636f6e20343a205... => - Icon 1: Cliff explosives\n- Icon 4: Wooden chest
  556 0004004b000100000000000000010001000000000000000000                              
 
-End time: 2025-02-17 05:49:55 AM UTC
-Time taken: 110ms
+End time: 2025-02-18 06:50:56 AM UTC
+Time taken: 116ms

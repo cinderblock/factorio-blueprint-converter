@@ -1,6 +1,6 @@
-Load time: 2025-02-17 05:49:55 AM UTC
-Start time: 2025-02-17 05:49:55 AM UTC
-Time taken: 145ms
+Load time: 2025-02-18 06:50:56 AM UTC
+Start time: 2025-02-18 06:50:56 AM UTC
+Time taken: 130ms
    0 0200                                                                             version major => 2
    2 0000                                                                             version minor => 0
    4 2000                                                                             version patch => 32
@@ -82,8 +82,7 @@ Time taken: 145ms
  478 00                                                                               LibObj BB unknownIcons => 0
  479 00                                                                               LibObj BB icons => 0
  480 00000000                                                                         LibObj BB LibObj => 0
- 484 00                                                                               LibObj BB activeIndex => 0
- 485 00                                                                               LibObj BB Expect 0 => 0x00 ✅
+ 484 0000                                                                             LibObj BB activeIndex => 0
  486 01                                                                               LibObj slot-used => true => used
  487 01                                                                               LibObj entity-type => 1 => parseBlueprintBook()
  488 72000000                                                                         LibObj BB header generation => 114
@@ -95,8 +94,7 @@ Time taken: 145ms
  549 00                                                                               LibObj BB unknownIcons => 0
  550 00                                                                               LibObj BB icons => 0
  551 00000000                                                                         LibObj BB LibObj => 0
- 555 00                                                                               LibObj BB activeIndex => 0
- 556 00                                                                               LibObj BB Expect 0 => 0x00 ✅
+ 555 0000                                                                             LibObj BB activeIndex => 0
  557 01                                                                               LibObj slot-used => true => used
  558 01                                                                               LibObj entity-type => 1 => parseBlueprintBook()
  559 73000000                                                                         LibObj BB header generation => 115
@@ -108,8 +106,7 @@ Time taken: 145ms
  620 00                                                                               LibObj BB unknownIcons => 0
  621 00                                                                               LibObj BB icons => 0
  622 00000000                                                                         LibObj BB LibObj => 0
- 626 00                                                                               LibObj BB activeIndex => 0
- 627 00                                                                               LibObj BB Expect 0 => 0x00 ✅
+ 626 0000                                                                             LibObj BB activeIndex => 0
  628 00                                                                               savedTargetablesCount => 0
  629 00                                                                                => 0
  630 00                                                                               v2-Unknown2 => 0x00 ✅
@@ -162,5 +159,5 @@ Found Strings:
  586 215354415254204445534352495054494f4e0a454e44204445534352495054494f4e             => START DESCRIPTION\nEND DESCRIPTION
  620 0000000000000000000000                                                          
 
-End time: 2025-02-17 05:49:55 AM UTC
-Time taken: 99ms
+End time: 2025-02-18 06:50:56 AM UTC
+Time taken: 103ms

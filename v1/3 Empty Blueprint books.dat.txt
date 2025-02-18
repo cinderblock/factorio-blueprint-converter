@@ -1,6 +1,6 @@
-Load time: 2025-02-17 05:49:55 AM UTC
-Start time: 2025-02-17 05:49:55 AM UTC
-Time taken: 181ms
+Load time: 2025-02-18 06:50:56 AM UTC
+Start time: 2025-02-18 06:50:56 AM UTC
+Time taken: 169ms
    0 0100                                                                             version major => 1
    2 0100                                                                             version minor => 1
    4 6e00                                                                             version patch => 110
@@ -34,8 +34,7 @@ Time taken: 181ms
  140 00                                                                               LibObj BB unknownIcons => 0
  141 00                                                                               LibObj BB icons => 0
  142 00000000                                                                         LibObj BB LibObj => 0
- 146 00                                                                               LibObj BB activeIndex => 0
- 147 00                                                                               LibObj BB Expect 0 => 0x00 ✅
+ 146 0000                                                                             LibObj BB activeIndex => 0
  148 01                                                                               LibObj slot-used => true => used
  149 01                                                                               LibObj entity-type => 1 => parseBlueprintBook()
  150 01000000                                                                         LibObj BB header generation => 1
@@ -47,8 +46,7 @@ Time taken: 181ms
  211 00                                                                               LibObj BB unknownIcons => 0
  212 00                                                                               LibObj BB icons => 0
  213 00000000                                                                         LibObj BB LibObj => 0
- 217 00                                                                               LibObj BB activeIndex => 0
- 218 00                                                                               LibObj BB Expect 0 => 0x00 ✅
+ 217 0000                                                                             LibObj BB activeIndex => 0
  219 01                                                                               LibObj slot-used => true => used
  220 01                                                                               LibObj entity-type => 1 => parseBlueprintBook()
  221 02000000                                                                         LibObj BB header generation => 2
@@ -60,8 +58,7 @@ Time taken: 181ms
  282 00                                                                               LibObj BB unknownIcons => 0
  283 00                                                                               LibObj BB icons => 0
  284 00000000                                                                         LibObj BB LibObj => 0
- 288 00                                                                               LibObj BB activeIndex => 0
- 289 00                                                                               LibObj BB Expect 0 => 0x00 ✅
+ 288 0000                                                                             LibObj BB activeIndex => 0
 
 Unparsed bytes: 0
 Original file size: 290
@@ -87,5 +84,5 @@ Found Strings:
  248 215354415254204445534352495054494f4e0a454e44204445534352495054494f4e             => START DESCRIPTION\nEND DESCRIPTION
  282 0000000000000000                                                                
 
-End time: 2025-02-17 05:49:55 AM UTC
-Time taken: 198ms
+End time: 2025-02-18 06:50:56 AM UTC
+Time taken: 187ms

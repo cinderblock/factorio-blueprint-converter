@@ -1,6 +1,6 @@
-Load time: 2025-02-17 05:49:55 AM UTC
-Start time: 2025-02-17 05:49:55 AM UTC
-Time taken: 151ms
+Load time: 2025-02-18 06:50:56 AM UTC
+Start time: 2025-02-18 06:50:56 AM UTC
+Time taken: 137ms
    0 0200                                                                             version major => 2
    2 0000                                                                             version minor => 0
    4 1e00                                                                             version patch => 30
@@ -82,8 +82,7 @@ Time taken: 151ms
  425 00                                                                               LibObj BB unknownIcons => 0
  426 00                                                                               LibObj BB icons => 0
  427 00000000                                                                         LibObj BB LibObj => 0
- 431 00                                                                               LibObj BB activeIndex => 0
- 432 00                                                                               LibObj BB Expect 0 => 0x00 ✅
+ 431 0000                                                                             LibObj BB activeIndex => 0
  433 00                                                                               savedTargetablesCount => 0
  434 00                                                                                => 0
  435 00                                                                               v2-Unknown2 => 0x00 ✅
@@ -127,5 +126,5 @@ Found Strings:
  381 0e626c75657072696e742d626f6f6b                                                   => blueprint-book
  396 00006b00000095a0906700000000010100000001016a000000500000000000000000000000000000
 
-End time: 2025-02-17 05:49:55 AM UTC
-Time taken: 126ms
+End time: 2025-02-18 06:50:56 AM UTC
+Time taken: 128ms
