@@ -1,11 +1,11 @@
 {
-  "date": "2025-02-18 06:50:56 AM UTC",
+  "date": "2025-02-18 07:39:01 AM UTC",
   "v2/2 Empty Blueprint books with slot between.dat": 1,
   "v2/2 Empty Blueprint books.dat": 1,
   "v2/3 Empty Blueprint books.dat": 1,
-  "v2/Blueprint book with Icons.dat": 0.9655765920826161,
+  "v2/Blueprint book with Icons.dat": 1,
   "v2/Empty Blueprint book.new.dat": 1,
-  "v2/chest deconstruction planner with icons.dat": 0.7793367346938775,
+  "v2/chest deconstruction planner with icons.dat": 0.8354591836734694,
   "v2/empty blueprint book.dat": 1,
   "v2/empty deconstruction planner blacklist.dat": 1,
   "v2/empty deconstruction planner trees and rocks blacklist.dat": 1,
@@ -16,7 +16,7 @@
   "v2/stone furnace snap absolute.dat": 1,
   "v2/stone furnace snap relative.dat": 1,
   "v2/stone furnace.dat": 1,
-  "v2/tiles deconstruction planner with chest icon in slot 4.dat": 0.7876802096985583,
+  "v2/tiles deconstruction planner with chest icon in slot 4.dat": 1,
   "v2/tiles deconstruction planner.dat": 1,
   "v2/upgrade planner with stuff in slot 21.dat": 0.635,
   "v2/upgrade planner with stuff in slot 33.dat": 0.5610687022900763,
@@ -28,7 +28,7 @@
   "v1/2 Empty Blueprint books.dat": 1,
   "v1/3 Empty Blueprint books.dat": 1,
   "v1/Blacklist Deconstruction planner.dat": 1,
-  "v1/Blueprint book with Icon.dat": 0.9722222222222222,
+  "v1/Blueprint book with Icon.dat": 1,
   "v1/Empty Blueprint book.dat": 1,
   "v1/Empty Deconstruction planner.dat": 1,
   "v1/Empty Upgrade planner.dat": 0.5104166666666666,
@@ -37,6 +37,6 @@
   "v1/Single Stone furnace.dat": 1,
   "v1/Trees and Rocks.dat": 1,
   "v1/Yellow belt to Red belt.dat": 0.6502590673575129,
-  "passed": "25",
-  "git hash": "254f6bbd8d8d5e9d15e348f91da0f8dbdfb65432"
+  "passed": "28",
+  "git hash": "4706d1eb2df70070988c8d2108470b3f59956c43"
 }

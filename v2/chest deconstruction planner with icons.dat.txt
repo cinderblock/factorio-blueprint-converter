@@ -1,6 +1,6 @@
-Load time: 2025-02-18 06:50:56 AM UTC
-Start time: 2025-02-18 06:50:56 AM UTC
-Time taken: 135ms
+Load time: 2025-02-18 07:39:01 AM UTC
+Start time: 2025-02-18 07:39:01 AM UTC
+Time taken: 178ms
    0 0200                                                                             version major => 2
    2 0000                                                                             version minor => 0
    4 1e00                                                                             version patch => 30
@@ -101,16 +101,26 @@ Time taken: 135ms
  607 04                                                                               LibObj Decon icons => 4
  608 00                                                                               LibObj Decon icons signal type => 0 => ITEM
  609 0100                                                                             LibObj Decon icons signal entry => 1 => wooden-chest => wooden-chest
- 611 010000000000000001000100001e0100010200000000000000000000000000000000000000000000
- 651 00000000000000000000000000000000000000000000000000000000000000000000000000000000
- 691 00000000000000000000000000000000000000000000000000000002001e00000000000000000000
- 731 00000000000000000000000000000000000000000000000000000000000000000000000000000000
- 771 00000000000000000000000000
+ 611 01                                                                               LibObj Decon icons signal type => 1 => FLUID
+ 612 0000                                                                             LibObj Decon icons signal entry => 0 => null => null
+ 614 00                                                                               LibObj Decon icons signal type => 0 => ITEM
+ 615 0000                                                                             LibObj Decon icons signal entry => 0 => null => null
+ 617 00                                                                               LibObj Decon icons signal type => 0 => ITEM
+ 618 0001                                                                             LibObj Decon icons signal entry => 256 => null => null
+ 620 00                                                                               LibObj Decon EFMode => 0
+ 621 01                                                                               LibObj Decon EF readFilters(ENTITY) entityFilterBackups => 1
+ 622 0000                                                                             LibObj Decon EF readFilters(ENTITY) entityFilterBackups index => 0
+ 624 1e                                                                               LibObj Decon EF readFilters(ENTITY) entityFilterBackups name str-length => 30
+ 625 010001020000000000000000000000000000000000000000000000000000                     LibObj Decon EF readFilters(ENTITY) entityFilterBackups name str => \x01\x00\x01\x02\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00 => Invalid name
+ 655 00000000000000000000000000000000000000000000000000000000000000000000000000000000
+ 695 000000000000000000000000000000000000000000000002001e0000000000000000000000000000
+ 735 00000000000000000000000000000000000000000000000000000000000000000000000000000000
+ 775 000000000000000000
 
-Unparsed bytes: 173
+Unparsed bytes: 129
 Original file size: 784
 Errors: 1
-  Cannot read properties of undefined (reading '0')
+  Invalid name \x01\x00\x01\x02\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00
 Note: undefined
 
 Found Strings:
@@ -159,5 +169,5 @@ Found Strings:
  531 4a2d2049636f6e2023313a20576f6f64656e2063686573740a2d2049636f6e2023343a20576f6... => - Icon #1: Wooden chest\n- Icon #4: Wooden chest\n- Wooden chest\n- Whitelist
  606 0004000100010000000000000001000100001e010001020000000000000000000000000000000...
 
-End time: 2025-02-18 06:50:56 AM UTC
-Time taken: 125ms
+End time: 2025-02-18 07:39:01 AM UTC
+Time taken: 137ms

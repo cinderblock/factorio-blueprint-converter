@@ -1,6 +1,6 @@
-Load time: 2025-02-18 06:50:56 AM UTC
-Start time: 2025-02-18 06:50:56 AM UTC
-Time taken: 152ms
+Load time: 2025-02-18 07:39:01 AM UTC
+Start time: 2025-02-18 07:39:01 AM UTC
+Time taken: 199ms
    0 0200                                                                             version major => 2
    2 0000                                                                             version minor => 0
    4 1e00                                                                             version patch => 30
@@ -107,16 +107,145 @@ Time taken: 152ms
  596 0000                                                                             LibObj Decon icons signal entry => 0 => null => null
  598 00                                                                               LibObj Decon icons signal type => 0 => ITEM
  599 0100                                                                             LibObj Decon icons signal entry => 1 => wooden-chest => wooden-chest
- 601 0100001e000000000000000000000000000000000000000000000000000000000000000000000000
- 641 00000000000000000000000000000000000000000000000000000000000000000000000000000000
- 681 0000000000000000000000000000000000001e010000000000000000000000000000000000000000
- 721 00000000000000000000000000000000000000000000000000000000000000000000000000000000
- 761 0000
+ 601 01                                                                               LibObj Decon EFMode => 1
+ 602 00                                                                               LibObj Decon EF readFilters(ENTITY) entityFilterBackups => 0
+ 603 00                                                                               LibObj Decon EF readFilters(ENTITY) Filters => 0
+ 604 1e                                                                               LibObj Decon EF readFilters(ENTITY) Quality => 30
+ 605 0000                                                                             LibObj Decon EF readFilters(ENTITY) Quality index => 0
+ 607 00                                                                               LibObj Decon EF readFilters(ENTITY) Quality name str-length => 0
+ 608                                                                                  LibObj Decon EF readFilters(ENTITY) Quality name str => 
+ 608 0000                                                                             LibObj Decon EF readFilters(ENTITY) Quality index => 0
+ 610 00                                                                               LibObj Decon EF readFilters(ENTITY) Quality name str-length => 0
+ 611                                                                                  LibObj Decon EF readFilters(ENTITY) Quality name str => 
+ 611 0000                                                                             LibObj Decon EF readFilters(ENTITY) Quality index => 0
+ 613 00                                                                               LibObj Decon EF readFilters(ENTITY) Quality name str-length => 0
+ 614                                                                                  LibObj Decon EF readFilters(ENTITY) Quality name str => 
+ 614 0000                                                                             LibObj Decon EF readFilters(ENTITY) Quality index => 0
+ 616 00                                                                               LibObj Decon EF readFilters(ENTITY) Quality name str-length => 0
+ 617                                                                                  LibObj Decon EF readFilters(ENTITY) Quality name str => 
+ 617 0000                                                                             LibObj Decon EF readFilters(ENTITY) Quality index => 0
+ 619 00                                                                               LibObj Decon EF readFilters(ENTITY) Quality name str-length => 0
+ 620                                                                                  LibObj Decon EF readFilters(ENTITY) Quality name str => 
+ 620 0000                                                                             LibObj Decon EF readFilters(ENTITY) Quality index => 0
+ 622 00                                                                               LibObj Decon EF readFilters(ENTITY) Quality name str-length => 0
+ 623                                                                                  LibObj Decon EF readFilters(ENTITY) Quality name str => 
+ 623 0000                                                                             LibObj Decon EF readFilters(ENTITY) Quality index => 0
+ 625 00                                                                               LibObj Decon EF readFilters(ENTITY) Quality name str-length => 0
+ 626                                                                                  LibObj Decon EF readFilters(ENTITY) Quality name str => 
+ 626 0000                                                                             LibObj Decon EF readFilters(ENTITY) Quality index => 0
+ 628 00                                                                               LibObj Decon EF readFilters(ENTITY) Quality name str-length => 0
+ 629                                                                                  LibObj Decon EF readFilters(ENTITY) Quality name str => 
+ 629 0000                                                                             LibObj Decon EF readFilters(ENTITY) Quality index => 0
+ 631 00                                                                               LibObj Decon EF readFilters(ENTITY) Quality name str-length => 0
+ 632                                                                                  LibObj Decon EF readFilters(ENTITY) Quality name str => 
+ 632 0000                                                                             LibObj Decon EF readFilters(ENTITY) Quality index => 0
+ 634 00                                                                               LibObj Decon EF readFilters(ENTITY) Quality name str-length => 0
+ 635                                                                                  LibObj Decon EF readFilters(ENTITY) Quality name str => 
+ 635 0000                                                                             LibObj Decon EF readFilters(ENTITY) Quality index => 0
+ 637 00                                                                               LibObj Decon EF readFilters(ENTITY) Quality name str-length => 0
+ 638                                                                                  LibObj Decon EF readFilters(ENTITY) Quality name str => 
+ 638 0000                                                                             LibObj Decon EF readFilters(ENTITY) Quality index => 0
+ 640 00                                                                               LibObj Decon EF readFilters(ENTITY) Quality name str-length => 0
+ 641                                                                                  LibObj Decon EF readFilters(ENTITY) Quality name str => 
+ 641 0000                                                                             LibObj Decon EF readFilters(ENTITY) Quality index => 0
+ 643 00                                                                               LibObj Decon EF readFilters(ENTITY) Quality name str-length => 0
+ 644                                                                                  LibObj Decon EF readFilters(ENTITY) Quality name str => 
+ 644 0000                                                                             LibObj Decon EF readFilters(ENTITY) Quality index => 0
+ 646 00                                                                               LibObj Decon EF readFilters(ENTITY) Quality name str-length => 0
+ 647                                                                                  LibObj Decon EF readFilters(ENTITY) Quality name str => 
+ 647 0000                                                                             LibObj Decon EF readFilters(ENTITY) Quality index => 0
+ 649 00                                                                               LibObj Decon EF readFilters(ENTITY) Quality name str-length => 0
+ 650                                                                                  LibObj Decon EF readFilters(ENTITY) Quality name str => 
+ 650 0000                                                                             LibObj Decon EF readFilters(ENTITY) Quality index => 0
+ 652 00                                                                               LibObj Decon EF readFilters(ENTITY) Quality name str-length => 0
+ 653                                                                                  LibObj Decon EF readFilters(ENTITY) Quality name str => 
+ 653 0000                                                                             LibObj Decon EF readFilters(ENTITY) Quality index => 0
+ 655 00                                                                               LibObj Decon EF readFilters(ENTITY) Quality name str-length => 0
+ 656                                                                                  LibObj Decon EF readFilters(ENTITY) Quality name str => 
+ 656 0000                                                                             LibObj Decon EF readFilters(ENTITY) Quality index => 0
+ 658 00                                                                               LibObj Decon EF readFilters(ENTITY) Quality name str-length => 0
+ 659                                                                                  LibObj Decon EF readFilters(ENTITY) Quality name str => 
+ 659 0000                                                                             LibObj Decon EF readFilters(ENTITY) Quality index => 0
+ 661 00                                                                               LibObj Decon EF readFilters(ENTITY) Quality name str-length => 0
+ 662                                                                                  LibObj Decon EF readFilters(ENTITY) Quality name str => 
+ 662 0000                                                                             LibObj Decon EF readFilters(ENTITY) Quality index => 0
+ 664 00                                                                               LibObj Decon EF readFilters(ENTITY) Quality name str-length => 0
+ 665                                                                                  LibObj Decon EF readFilters(ENTITY) Quality name str => 
+ 665 0000                                                                             LibObj Decon EF readFilters(ENTITY) Quality index => 0
+ 667 00                                                                               LibObj Decon EF readFilters(ENTITY) Quality name str-length => 0
+ 668                                                                                  LibObj Decon EF readFilters(ENTITY) Quality name str => 
+ 668 0000                                                                             LibObj Decon EF readFilters(ENTITY) Quality index => 0
+ 670 00                                                                               LibObj Decon EF readFilters(ENTITY) Quality name str-length => 0
+ 671                                                                                  LibObj Decon EF readFilters(ENTITY) Quality name str => 
+ 671 0000                                                                             LibObj Decon EF readFilters(ENTITY) Quality index => 0
+ 673 00                                                                               LibObj Decon EF readFilters(ENTITY) Quality name str-length => 0
+ 674                                                                                  LibObj Decon EF readFilters(ENTITY) Quality name str => 
+ 674 0000                                                                             LibObj Decon EF readFilters(ENTITY) Quality index => 0
+ 676 00                                                                               LibObj Decon EF readFilters(ENTITY) Quality name str-length => 0
+ 677                                                                                  LibObj Decon EF readFilters(ENTITY) Quality name str => 
+ 677 0000                                                                             LibObj Decon EF readFilters(ENTITY) Quality index => 0
+ 679 00                                                                               LibObj Decon EF readFilters(ENTITY) Quality name str-length => 0
+ 680                                                                                  LibObj Decon EF readFilters(ENTITY) Quality name str => 
+ 680 0000                                                                             LibObj Decon EF readFilters(ENTITY) Quality index => 0
+ 682 00                                                                               LibObj Decon EF readFilters(ENTITY) Quality name str-length => 0
+ 683                                                                                  LibObj Decon EF readFilters(ENTITY) Quality name str => 
+ 683 0000                                                                             LibObj Decon EF readFilters(ENTITY) Quality index => 0
+ 685 00                                                                               LibObj Decon EF readFilters(ENTITY) Quality name str-length => 0
+ 686                                                                                  LibObj Decon EF readFilters(ENTITY) Quality name str => 
+ 686 0000                                                                             LibObj Decon EF readFilters(ENTITY) Quality index => 0
+ 688 00                                                                               LibObj Decon EF readFilters(ENTITY) Quality name str-length => 0
+ 689                                                                                  LibObj Decon EF readFilters(ENTITY) Quality name str => 
+ 689 0000                                                                             LibObj Decon EF readFilters(ENTITY) Quality index => 0
+ 691 00                                                                               LibObj Decon EF readFilters(ENTITY) Quality name str-length => 0
+ 692                                                                                  LibObj Decon EF readFilters(ENTITY) Quality name str => 
+ 692 0000                                                                             LibObj Decon EF readFilters(ENTITY) Quality index => 0
+ 694 00                                                                               LibObj Decon EF readFilters(ENTITY) Quality name str-length => 0
+ 695                                                                                  LibObj Decon EF readFilters(ENTITY) Quality name str => 
+ 695 00                                                                               LibObj Decon TROnly => false
+ 696 00                                                                               LibObj Decon TFMode => 0
+ 697 00                                                                               LibObj Decon TSMode => 0
+ 698 00                                                                               LibObj Decon TF readFilters(TILE) entityFilterBackups => 0
+ 699 1e                                                                               LibObj Decon TF readFilters(TILE) Filters => 30
+ 700 01                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 1 => stone-path
+ 701 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 702 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 703 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 704 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 705 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 706 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 707 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 708 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 709 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 710 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 711 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 712 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 713 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 714 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 715 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 716 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 717 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 718 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 719 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 720 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 721 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 722 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 723 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 724 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 725 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 726 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 727 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 728 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 729 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 730 00                                                                               LibObj Decon TF readFilters(TILE) Quality => 0
+ 731 00                                                                               savedTargetablesCount => 0
+ 732 00                                                                                => 0
+ 733 00                                                                               v2-Unknown2 => 0x00 ✅
+ 734 0000000000000000000000000000000000000000000000000000000000                       RemainingData
 
-Unparsed bytes: 162
+Unparsed bytes: 0
 Original file size: 763
 Errors: 1
-  Cannot read properties of undefined (reading '3')
+  Unexpected 29 bytes remaining in stream
 Note: undefined
 
 Found Strings:
@@ -165,5 +294,5 @@ Found Strings:
  529 392d2049636f6e2023343a20576f6f64656e2063686573740a2d2053746f6e6520706174680a2... => - Icon #4: Wooden chest\n- Stone path\n- Normal\n- Whitelist
  587 00040000000000000000000001000100001e00000000000000000000000000000000000000000...
 
-End time: 2025-02-18 06:50:56 AM UTC
-Time taken: 166ms
+End time: 2025-02-18 07:39:01 AM UTC
+Time taken: 180ms
