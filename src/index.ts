@@ -339,7 +339,10 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
   }
 
   async function parseIcons() {
-    const unknownIcons = await wrapLabel('unknownIcons', () => readArray(1, readString));
+    const usesQuality = ret.version.compare(new Version('1.2.0')) >= 0;
+    const [prototypeNames, qualityPrototypeNames] = await wrapLabel('unknownIcons', () =>
+      readArray(1, async () => [await readString(), usesQuality && (await readString())]),
+    );
 
     const icons: {
       index: number;
@@ -352,8 +355,8 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
         if (!signal) {
           return;
         }
-        if (unknownIcons[i]) {
-          signal.name = unknownIcons[i];
+        if (prototypeNames[i]) {
+          signal.name = prototypeNames[i];
         }
         icons.push({
           // 1-based index
