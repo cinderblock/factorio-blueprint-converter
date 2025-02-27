@@ -76,8 +76,8 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
     let bytesRead = 0;
 
     while (bytesRead < length) {
-      if (!stream.readableLength && chunks.length) {
-        throw new Error(`Stream ended after reading ${bytesRead} of ${length} bytes`);
+      if (!stream.readableLength) {
+        throw new Error(`Stream ended while reading ${bytesRead} of ${length} bytes`);
       }
       const chunk = stream.read(Math.min(stream.readableLength, length - bytesRead)) as Buffer | null;
 
