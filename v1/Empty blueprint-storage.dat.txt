@@ -1,22 +1,22 @@
-Load time: 2025-02-18 07:39:01 AM UTC
-Start time: 2025-02-18 07:39:01 AM UTC
-Time taken: 232ms
+Load time: 2025-02-27 05:28:52 PM UTC
+Start time: 2025-02-27 05:28:52 PM UTC
+Time taken: 213ms
    0 0100                                                                             version major => 1
    2 0100                                                                             version minor => 1
    4 6e00                                                                             version patch => 110
-   6 0000                                                                             version developer => 0
+   6 0000                                                                             version developer => 0 => 10001006e0000
    8 00                                                                               branchVersion => 0
-   9 01                                                                               expansions => 1
+   9 01                                                                               expansions array-length => 1
   10 04                                                                               expansions game str-length => 4
   11 62617365                                                                         expansions game str => base
   15 0a                                                                               expansions file str-length => 10
   16 312e312e302e6a736f6e                                                             expansions file str => 1.1.0.json
-  26 0000                                                                             IndexSize => 0
+  26 0000                                                                             IndexSize array-length => 0
   28 0000                                                                             playerIndex => 0
   30 00000000                                                                         generationCounter => 0
   34 d52f9f67                                                                         saveTime => 2025-02-02 08:41:57 AM UTC
   38 01                                                                               synchronized => true
-  39 00000000                                                                         LibObj => 0
+  39 00000000                                                                         LibObj array-length => 0
 
 Unparsed bytes: 0
 Original file size: 43
@@ -29,5 +29,5 @@ Found Strings:
   15 0a312e312e302e6a736f6e                                                           => 1.1.0.json
   26 0000000000000000d52f9f670100000000                                              
 
-End time: 2025-02-18 07:39:01 AM UTC
-Time taken: 208ms
+End time: 2025-02-27 05:28:52 PM UTC
+Time taken: 195ms

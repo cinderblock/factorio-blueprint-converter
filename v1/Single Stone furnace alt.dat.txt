@@ -1,32 +1,32 @@
-Load time: 2025-02-18 07:39:01 AM UTC
-Start time: 2025-02-18 07:39:01 AM UTC
-Time taken: 233ms
+Load time: 2025-02-27 05:28:52 PM UTC
+Start time: 2025-02-27 05:28:52 PM UTC
+Time taken: 217ms
    0 0100                                                                             version major => 1
    2 0100                                                                             version minor => 1
    4 6e00                                                                             version patch => 110
-   6 0000                                                                             version developer => 0
+   6 0000                                                                             version developer => 0 => 10001006e0000
    8 00                                                                               branchVersion => 0
-   9 01                                                                               expansions => 1
+   9 01                                                                               expansions array-length => 1
   10 04                                                                               expansions game str-length => 4
   11 62617365                                                                         expansions game str => base
   15 0a                                                                               expansions file str-length => 10
   16 312e312e302e6a736f6e                                                             expansions file str => 1.1.0.json
-  26 0300                                                                             IndexSize => 3
+  26 0300                                                                             IndexSize array-length => 3
   28 07                                                                               IndexSize Prototype str-length => 7
   29 6675726e616365                                                                   IndexSize Prototype str => furnace
-  36 0100                                                                             IndexSize => 1
+  36 0100                                                                             IndexSize array-length => 1
   38 e900                                                                             IndexSize [ 0] id => 233
   40 0d                                                                               IndexSize [ 0] name str-length => 13
   41 73746f6e652d6675726e616365                                                       IndexSize [ 0] name str => stone-furnace
   54 09                                                                               IndexSize Prototype str-length => 9
   55 626c75657072696e74                                                               IndexSize Prototype str => blueprint
-  64 0100                                                                             IndexSize => 1
+  64 0100                                                                             IndexSize array-length => 1
   66 4400                                                                             IndexSize [ 0] id => 68
   68 09                                                                               IndexSize [ 0] name str-length => 9
   69 626c75657072696e74                                                               IndexSize [ 0] name str => blueprint
   78 04                                                                               IndexSize Prototype str-length => 4
   79 6974656d                                                                         IndexSize Prototype str => item
-  83 0100                                                                             IndexSize => 1
+  83 0100                                                                             IndexSize array-length => 1
   85 5600                                                                             IndexSize [ 0] id => 86
   87 0d                                                                               IndexSize [ 0] name str-length => 13
   88 73746f6e652d6675726e616365                                                       IndexSize [ 0] name str => stone-furnace
@@ -34,7 +34,7 @@ Time taken: 233ms
  103 01000000                                                                         generationCounter => 1
  107 fb309f67                                                                         saveTime => 2025-02-02 08:46:51 AM UTC
  111 01                                                                               synchronized => true
- 112 01000000                                                                         LibObj => 1
+ 112 01000000                                                                         LibObj array-length => 1
  116 01                                                                               LibObj slot-used => true => used
  117 00                                                                               LibObj entity-type => 0 => parseBlueprint()
  118 00000000                                                                         LibObj Blueprint header generation => 0
@@ -73,5 +73,5 @@ Found Strings:
  174 355354415254204445534352495054494f4e0a2d204f6e652053746f6e65206675726e6163650... => START DESCRIPTION\n- One Stone furnace\nEND DESCRIPTION
  228 0001000000e90000e500082000000000000000000000000000000000000001005600            
 
-End time: 2025-02-18 07:39:01 AM UTC
-Time taken: 209ms
+End time: 2025-02-27 05:28:52 PM UTC
+Time taken: 193ms

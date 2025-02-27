@@ -1,12 +1,12 @@
-Load time: 2025-02-18 07:39:01 AM UTC
-Start time: 2025-02-18 07:39:01 AM UTC
-Time taken: 199ms
+Load time: 2025-02-27 05:28:52 PM UTC
+Start time: 2025-02-27 05:28:52 PM UTC
+Time taken: 189ms
    0 0200                                                                             version major => 2
    2 0000                                                                             version minor => 0
    4 1e00                                                                             version patch => 30
-   6 0100                                                                             version developer => 1
+   6 0100                                                                             version developer => 1 => 20000001e0001
    8 00                                                                               branchVersion => 0
-   9 0d                                                                               expansions => 13
+   9 0d                                                                               expansions array-length => 13
   10 04                                                                               expansions game str-length => 4
   11 62617365                                                                         expansions game str => base
   15 0a                                                                               expansions file str-length => 10
@@ -59,28 +59,28 @@ Time taken: 199ms
  325 73706163652d616765                                                               expansions game str => space-age
  334 19                                                                               expansions file str-length => 25
  335 74756e677374656e2d62656c742d72656e616d652e6a736f6e                               expansions file str => tungsten-belt-rename.json
- 360 0400                                                                             IndexSize => 4
+ 360 0400                                                                             IndexSize array-length => 4
  362 13                                                                               IndexSize Prototype str-length => 19
  363 6465636f6e737472756374696f6e2d6974656d                                           IndexSize Prototype str => deconstruction-item
- 382 0100                                                                             IndexSize => 1
+ 382 0100                                                                             IndexSize array-length => 1
  384 4e00                                                                             IndexSize [ 0] id => 78
  386 16                                                                               IndexSize [ 0] name str-length => 22
  387 6465636f6e737472756374696f6e2d706c616e6e6572                                     IndexSize [ 0] name str => deconstruction-planner
  409 04                                                                               IndexSize Prototype str-length => 4
  410 6974656d                                                                         IndexSize Prototype str => item
- 414 0100                                                                             IndexSize => 1
+ 414 0100                                                                             IndexSize array-length => 1
  416 0100                                                                             IndexSize [ 0] id => 1
  418 0c                                                                               IndexSize [ 0] name str-length => 12
  419 776f6f64656e2d6368657374                                                         IndexSize [ 0] name str => wooden-chest
  431 04                                                                               IndexSize Prototype str-length => 4
  432 74696c65                                                                         IndexSize Prototype str => tile
- 436 0100                                                                             IndexSize => 1
+ 436 0100                                                                             IndexSize array-length => 1
  438 0100                                                                             IndexSize [ 0] id => 1
  440 0a                                                                               IndexSize [ 0] name str-length => 10
  441 73746f6e652d70617468                                                             IndexSize [ 0] name str => stone-path
  451 07                                                                               IndexSize Prototype str-length => 7
  452 7175616c697479                                                                   IndexSize Prototype str => quality
- 459 01                                                                               IndexSize => 1
+ 459 01                                                                               IndexSize array-length => 1
  460 01                                                                               IndexSize [ 0] id => 1
  461 06                                                                               IndexSize [ 0] name str-length => 6
  462 6e6f726d616c                                                                     IndexSize [ 0] name str => normal
@@ -88,7 +88,7 @@ Time taken: 199ms
  470 6d000000                                                                         generationCounter => 109
  474 0ea2906700000000                                                                 saveTime => 2025-01-22 07:45:18 AM UTC
  482 01                                                                               synchronized => true
- 483 01000000                                                                         LibObj => 1
+ 483 01000000                                                                         LibObj array-length => 1
  487 01                                                                               LibObj slot-used => true => used
  488 02                                                                               LibObj entity-type => 2 => parseDeconstructionItem()
  489 6c000000                                                                         LibObj Decon header generation => 108
@@ -97,8 +97,8 @@ Time taken: 199ms
  496 49636f6e2054696c6573204465636f6e737472756374696f6e20506c616e6e6572               LibObj Decon header label str => Icon Tiles Deconstruction Planner
  529 39                                                                               LibObj Decon description str-length => 57
  530 2d2049636f6e2023343a20576f6f64656e2063686573740a2d2053746f6e6520706174680a2d2... LibObj Decon description str => - Icon #4: Wooden chest\n- Stone path\n- Normal\n- Whitelist
- 587 00                                                                               LibObj Decon unknownIcons => 0
- 588 04                                                                               LibObj Decon icons => 4
+ 587 00                                                                               LibObj Decon unknownIcons array-length => 0
+ 588 04                                                                               LibObj Decon icons array-length => 4
  589 00                                                                               LibObj Decon icons signal type => 0 => ITEM
  590 0000                                                                             LibObj Decon icons signal entry => 0 => null => null
  592 00                                                                               LibObj Decon icons signal type => 0 => ITEM
@@ -108,9 +108,9 @@ Time taken: 199ms
  598 00                                                                               LibObj Decon icons signal type => 0 => ITEM
  599 0100                                                                             LibObj Decon icons signal entry => 1 => wooden-chest => wooden-chest
  601 01                                                                               LibObj Decon EFMode => 1
- 602 00                                                                               LibObj Decon EF readFilters(ENTITY) entityFilterBackups => 0
- 603 00                                                                               LibObj Decon EF readFilters(ENTITY) Filters => 0
- 604 1e                                                                               LibObj Decon EF readFilters(ENTITY) Quality => 30
+ 602 00                                                                               LibObj Decon EF readFilters(ENTITY) entityFilterBackups array-length => 0
+ 603 00                                                                               LibObj Decon EF readFilters(ENTITY) Filters array-length => 0
+ 604 1e                                                                               LibObj Decon EF readFilters(ENTITY) Quality array-length => 30
  605 0000                                                                             LibObj Decon EF readFilters(ENTITY) Quality index => 0
  607 00                                                                               LibObj Decon EF readFilters(ENTITY) Quality name str-length => 0
  608                                                                                  LibObj Decon EF readFilters(ENTITY) Quality name str => 
@@ -204,48 +204,46 @@ Time taken: 199ms
  695 00                                                                               LibObj Decon TROnly => false
  696 00                                                                               LibObj Decon TFMode => 0
  697 00                                                                               LibObj Decon TSMode => 0
- 698 00                                                                               LibObj Decon TF readFilters(TILE) entityFilterBackups => 0
- 699 1e                                                                               LibObj Decon TF readFilters(TILE) Filters => 30
- 700 01                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 1 => stone-path
- 701 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
- 702 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
- 703 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
- 704 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
- 705 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
- 706 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
- 707 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
- 708 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
- 709 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
- 710 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
- 711 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
- 712 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
- 713 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
- 714 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
- 715 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
- 716 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
- 717 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
- 718 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
- 719 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
- 720 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
- 721 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
- 722 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
- 723 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
- 724 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
- 725 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
- 726 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
- 727 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
- 728 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
- 729 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
- 730 00                                                                               LibObj Decon TF readFilters(TILE) Quality => 0
- 731 00                                                                               savedTargetablesCount => 0
- 732 00                                                                                => 0
- 733 00                                                                               v2-Unknown2 => 0x00 ✅
- 734 0000000000000000000000000000000000000000000000000000000000                       RemainingData
+ 698 00                                                                               LibObj Decon TF readFilters(TILE) entityFilterBackups array-length => 0
+ 699 1e                                                                               LibObj Decon TF readFilters(TILE) Filters array-length => 30
+ 700 0100                                                                             LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 1 => stone-path
+ 702 0000                                                                             LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 704 0000                                                                             LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 706 0000                                                                             LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 708 0000                                                                             LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 710 0000                                                                             LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 712 0000                                                                             LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 714 0000                                                                             LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 716 0000                                                                             LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 718 0000                                                                             LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 720 0000                                                                             LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 722 0000                                                                             LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 724 0000                                                                             LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 726 0000                                                                             LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 728 0000                                                                             LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 730 0000                                                                             LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 732 0000                                                                             LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 734 0000                                                                             LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 736 0000                                                                             LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 738 0000                                                                             LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 740 0000                                                                             LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 742 0000                                                                             LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 744 0000                                                                             LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 746 0000                                                                             LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 748 0000                                                                             LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 750 0000                                                                             LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 752 0000                                                                             LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 754 0000                                                                             LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 756 0000                                                                             LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 758 0000                                                                             LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
+ 760 00                                                                               LibObj Decon TF readFilters(TILE) Quality array-length => 0
+ 761 00                                                                               savedTargetablesCount => 0
+ 762 00                                                                               targeterToTargetableMapping array-length => 0
 
 Unparsed bytes: 0
 Original file size: 763
 Errors: 1
-  Unexpected 29 bytes remaining in stream
+  Stream ended while reading 0 of 1 bytes
 Note: undefined
 
 Found Strings:
@@ -294,5 +292,5 @@ Found Strings:
  529 392d2049636f6e2023343a20576f6f64656e2063686573740a2d2053746f6e6520706174680a2... => - Icon #4: Wooden chest\n- Stone path\n- Normal\n- Whitelist
  587 00040000000000000000000001000100001e00000000000000000000000000000000000000000...
 
-End time: 2025-02-18 07:39:01 AM UTC
-Time taken: 180ms
+End time: 2025-02-27 05:28:52 PM UTC
+Time taken: 159ms

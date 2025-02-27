@@ -1,20 +1,20 @@
-Load time: 2025-02-18 07:39:01 AM UTC
-Start time: 2025-02-18 07:39:01 AM UTC
-Time taken: 228ms
+Load time: 2025-02-27 05:28:52 PM UTC
+Start time: 2025-02-27 05:28:52 PM UTC
+Time taken: 209ms
    0 0100                                                                             version major => 1
    2 0100                                                                             version minor => 1
    4 6e00                                                                             version patch => 110
-   6 0000                                                                             version developer => 0
+   6 0000                                                                             version developer => 0 => 10001006e0000
    8 00                                                                               branchVersion => 0
-   9 01                                                                               expansions => 1
+   9 01                                                                               expansions array-length => 1
   10 04                                                                               expansions game str-length => 4
   11 62617365                                                                         expansions game str => base
   15 0a                                                                               expansions file str-length => 10
   16 312e312e302e6a736f6e                                                             expansions file str => 1.1.0.json
-  26 0100                                                                             IndexSize => 1
+  26 0100                                                                             IndexSize array-length => 1
   28 0e                                                                               IndexSize Prototype str-length => 14
   29 626c75657072696e742d626f6f6b                                                     IndexSize Prototype str => blueprint-book
-  43 0100                                                                             IndexSize => 1
+  43 0100                                                                             IndexSize array-length => 1
   45 4700                                                                             IndexSize [ 0] id => 71
   47 0e                                                                               IndexSize [ 0] name str-length => 14
   48 626c75657072696e742d626f6f6b                                                     IndexSize [ 0] name str => blueprint-book
@@ -22,7 +22,7 @@ Time taken: 228ms
   64 01000000                                                                         generationCounter => 1
   68 ad339f67                                                                         saveTime => 2025-02-02 08:58:21 AM UTC
   72 01                                                                               synchronized => true
-  73 01000000                                                                         LibObj => 1
+  73 01000000                                                                         LibObj array-length => 1
   77 01                                                                               LibObj slot-used => true => used
   78 01                                                                               LibObj entity-type => 1 => parseBlueprintBook()
   79 00000000                                                                         LibObj BB header generation => 0
@@ -31,9 +31,9 @@ Time taken: 228ms
   86 456d70747920426c75657072696e7420626f6f6b                                         LibObj BB header label str => Empty Blueprint book
  106 21                                                                               LibObj BB description str-length => 33
  107 5354415254204445534352495054494f4e0a454e44204445534352495054494f4e               LibObj BB description str => START DESCRIPTION\nEND DESCRIPTION
- 140 00                                                                               LibObj BB unknownIcons => 0
- 141 00                                                                               LibObj BB icons => 0
- 142 00000000                                                                         LibObj BB LibObj => 0
+ 140 00                                                                               LibObj BB unknownIcons array-length => 0
+ 141 00                                                                               LibObj BB icons array-length => 0
+ 142 00000000                                                                         LibObj BB LibObj array-length => 0
  146 0000                                                                             LibObj BB activeIndex => 0
 
 Unparsed bytes: 0
@@ -54,5 +54,5 @@ Found Strings:
  106 215354415254204445534352495054494f4e0a454e44204445534352495054494f4e             => START DESCRIPTION\nEND DESCRIPTION
  140 0000000000000000                                                                
 
-End time: 2025-02-18 07:39:01 AM UTC
-Time taken: 202ms
+End time: 2025-02-27 05:28:52 PM UTC
+Time taken: 191ms

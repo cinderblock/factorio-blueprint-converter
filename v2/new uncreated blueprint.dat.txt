@@ -1,12 +1,12 @@
-Load time: 2025-02-18 07:39:01 AM UTC
-Start time: 2025-02-18 07:39:01 AM UTC
-Time taken: 191ms
+Load time: 2025-02-27 05:28:52 PM UTC
+Start time: 2025-02-27 05:28:52 PM UTC
+Time taken: 184ms
    0 0200                                                                             version major => 2
    2 0000                                                                             version minor => 0
    4 1e00                                                                             version patch => 30
-   6 0100                                                                             version developer => 1
+   6 0100                                                                             version developer => 1 => 20000001e0001
    8 00                                                                               branchVersion => 0
-   9 0d                                                                               expansions => 13
+   9 0d                                                                               expansions array-length => 13
   10 04                                                                               expansions game str-length => 4
   11 62617365                                                                         expansions game str => base
   15 0a                                                                               expansions file str-length => 10
@@ -59,10 +59,10 @@ Time taken: 191ms
  325 73706163652d616765                                                               expansions game str => space-age
  334 19                                                                               expansions file str-length => 25
  335 74756e677374656e2d62656c742d72656e616d652e6a736f6e                               expansions file str => tungsten-belt-rename.json
- 360 0100                                                                             IndexSize => 1
+ 360 0100                                                                             IndexSize array-length => 1
  362 09                                                                               IndexSize Prototype str-length => 9
  363 626c75657072696e74                                                               IndexSize Prototype str => blueprint
- 372 0100                                                                             IndexSize => 1
+ 372 0100                                                                             IndexSize array-length => 1
  374 4d00                                                                             IndexSize [ 0] id => 77
  376 09                                                                               IndexSize [ 0] name str-length => 9
  377 626c75657072696e74                                                               IndexSize [ 0] name str => blueprint
@@ -70,7 +70,7 @@ Time taken: 191ms
  388 6a000000                                                                         generationCounter => 106
  392 289e906700000000                                                                 saveTime => 2025-01-22 07:28:40 AM UTC
  400 01                                                                               synchronized => true
- 401 01000000                                                                         LibObj => 1
+ 401 01000000                                                                         LibObj array-length => 1
  405 01                                                                               LibObj slot-used => true => used
  406 00                                                                               LibObj entity-type => 0 => parseBlueprint()
  407 69000000                                                                         LibObj Blueprint header generation => 105
@@ -83,7 +83,7 @@ Time taken: 191ms
  417 8e010000                                                                         LibObj Blueprint DataLength => 398
  421 020000001e000100000d04626173650a312e312e302e6a736f6e046261736520312e322e30207... LibObj Blueprint UnparsedData
  819 00                                                                               savedTargetablesCount => 0
- 820 00                                                                                => 0
+ 820 00                                                                               targeterToTargetableMapping array-length => 0
  821 00                                                                               v2-Unknown2 => 0x00 ✅
 
 Unparsed bytes: 0
@@ -152,5 +152,5 @@ Found Strings:
  755 1974756e677374656e2d62656c742d72656e616d652e6a736f6e                             => tungsten-belt-rename.json
  781 8a939cf576a9d2211f1ae27ad1f1fca07f872c5f0000000000000000000000000000000000000...
 
-End time: 2025-02-18 07:39:01 AM UTC
-Time taken: 168ms
+End time: 2025-02-27 05:28:52 PM UTC
+Time taken: 143ms

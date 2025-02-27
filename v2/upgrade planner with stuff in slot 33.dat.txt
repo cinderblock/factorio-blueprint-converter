@@ -1,12 +1,12 @@
-Load time: 2025-02-18 07:39:01 AM UTC
-Start time: 2025-02-18 07:39:01 AM UTC
-Time taken: 204ms
+Load time: 2025-02-27 05:28:52 PM UTC
+Start time: 2025-02-27 05:28:52 PM UTC
+Time taken: 193ms
    0 0200                                                                             version major => 2
    2 0000                                                                             version minor => 0
    4 1e00                                                                             version patch => 30
-   6 0100                                                                             version developer => 1
+   6 0100                                                                             version developer => 1 => 20000001e0001
    8 00                                                                               branchVersion => 0
-   9 0d                                                                               expansions => 13
+   9 0d                                                                               expansions array-length => 13
   10 04                                                                               expansions game str-length => 4
   11 62617365                                                                         expansions game str => base
   15 0a                                                                               expansions file str-length => 10
@@ -59,10 +59,10 @@ Time taken: 204ms
  325 73706163652d616765                                                               expansions game str => space-age
  334 19                                                                               expansions file str-length => 25
  335 74756e677374656e2d62656c742d72656e616d652e6a736f6e                               expansions file str => tungsten-belt-rename.json
- 360 0500                                                                             IndexSize => 5
+ 360 0500                                                                             IndexSize array-length => 5
  362 09                                                                               IndexSize Prototype str-length => 9
  363 636f6e7461696e6572                                                               IndexSize Prototype str => container
- 372 0200                                                                             IndexSize => 2
+ 372 0200                                                                             IndexSize array-length => 2
  374 0100                                                                             IndexSize [ 0] id => 1
  376 0c                                                                               IndexSize [ 0] name str-length => 12
  377 776f6f64656e2d6368657374                                                         IndexSize [ 0] name str => wooden-chest
@@ -71,7 +71,7 @@ Time taken: 204ms
  392 69726f6e2d6368657374                                                             IndexSize [ 1] name str => iron-chest
  402 0d                                                                               IndexSize Prototype str-length => 13
  403 656c6563747269632d706f6c65                                                       IndexSize Prototype str => electric-pole
- 416 0200                                                                             IndexSize => 2
+ 416 0200                                                                             IndexSize array-length => 2
  418 1b00                                                                             IndexSize [ 0] id => 27
  420 13                                                                               IndexSize [ 0] name str-length => 19
  421 736d616c6c2d656c6563747269632d706f6c65                                           IndexSize [ 0] name str => small-electric-pole
@@ -80,7 +80,7 @@ Time taken: 204ms
  443 6d656469756d2d656c6563747269632d706f6c65                                         IndexSize [ 1] name str => medium-electric-pole
  463 0e                                                                               IndexSize Prototype str-length => 14
  464 7472616e73706f72742d62656c74                                                     IndexSize Prototype str => transport-belt
- 478 0200                                                                             IndexSize => 2
+ 478 0200                                                                             IndexSize array-length => 2
  480 0500                                                                             IndexSize [ 0] id => 5
  482 0e                                                                               IndexSize [ 0] name str-length => 14
  483 7472616e73706f72742d62656c74                                                     IndexSize [ 0] name str => transport-belt
@@ -89,13 +89,13 @@ Time taken: 204ms
  500 666173742d7472616e73706f72742d62656c74                                           IndexSize [ 1] name str => fast-transport-belt
  519 0c                                                                               IndexSize Prototype str-length => 12
  520 757067726164652d6974656d                                                         IndexSize Prototype str => upgrade-item
- 532 0100                                                                             IndexSize => 1
+ 532 0100                                                                             IndexSize array-length => 1
  534 4f00                                                                             IndexSize [ 0] id => 79
  536 0f                                                                               IndexSize [ 0] name str-length => 15
  537 757067726164652d706c616e6e6572                                                   IndexSize [ 0] name str => upgrade-planner
  552 07                                                                               IndexSize Prototype str-length => 7
  553 7175616c697479                                                                   IndexSize Prototype str => quality
- 560 01                                                                               IndexSize => 1
+ 560 01                                                                               IndexSize array-length => 1
  561 01                                                                               IndexSize [ 0] id => 1
  562 06                                                                               IndexSize [ 0] name str-length => 6
  563 6e6f726d616c                                                                     IndexSize [ 0] name str => normal
@@ -103,7 +103,7 @@ Time taken: 204ms
  571 6e000000                                                                         generationCounter => 110
  575 0da6906700000000                                                                 saveTime => 2025-01-22 08:02:21 AM UTC
  583 01                                                                               synchronized => true
- 584 01000000                                                                         LibObj => 1
+ 584 01000000                                                                         LibObj array-length => 1
  588 01                                                                               LibObj slot-used => true => used
  589 03                                                                               LibObj entity-type => 3 => parseUpgradeItem()
  590 6d000000                                                                         LibObj UpgradeItem header generation => 109
@@ -112,10 +112,10 @@ Time taken: 204ms
  597 4c6172676520506c616e6e6572                                                       LibObj UpgradeItem header label str => Large Planner
  610 72                                                                               LibObj UpgradeItem description str-length => 114
  611 2d2049726f6e20636865737420746f20576f6f64656e20436865737420696e20536c6f7420310... LibObj UpgradeItem description str => - Iron chest to Wooden Chest in Slot 1\n- Red belt to Yellow belt in Slot 21\n- Small pole to Medium pole in Slot 33
- 725 00                                                                               LibObj UpgradeItem unknownIcons => 0
- 726 00                                                                               LibObj UpgradeItem icons => 0
- 727 00                                                                               LibObj UpgradeItem unknowns => 0
- 728 2c                                                                               LibObj UpgradeItem mappers => 44
+ 725 00                                                                               LibObj UpgradeItem unknownIcons array-length => 0
+ 726 00                                                                               LibObj UpgradeItem icons array-length => 0
+ 727 00                                                                               LibObj UpgradeItem unknowns array-length => 0
+ 728 2c                                                                               LibObj UpgradeItem mappers array-length => 44
  729 00                                                                               LibObj UpgradeItem mappers isItem => false
  730 0200                                                                             LibObj UpgradeItem mappers entry => 2 => iron-chest
  732 01                                                                               LibObj UpgradeItem mappers isItem => true
@@ -197,5 +197,5 @@ Found Strings:
  610 722d2049726f6e20636865737420746f20576f6f64656e20436865737420696e20536c6f74203... => - Iron chest to Wooden Chest in Slot 1\n- Red belt to Yellow belt in Slot 21\n- Small pole to Medium pole in Slot 33
  725 0000002c000200010200000000010001000000010000000000000100000000000100000000000...
 
-End time: 2025-02-18 07:39:01 AM UTC
-Time taken: 188ms
+End time: 2025-02-27 05:28:52 PM UTC
+Time taken: 167ms

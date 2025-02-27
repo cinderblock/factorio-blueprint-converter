@@ -1,12 +1,12 @@
-Load time: 2025-02-18 07:39:01 AM UTC
-Start time: 2025-02-18 07:39:01 AM UTC
-Time taken: 174ms
+Load time: 2025-02-27 05:28:52 PM UTC
+Start time: 2025-02-27 05:28:52 PM UTC
+Time taken: 171ms
    0 0200                                                                             version major => 2
    2 0000                                                                             version minor => 0
    4 1e00                                                                             version patch => 30
-   6 0100                                                                             version developer => 1
+   6 0100                                                                             version developer => 1 => 20000001e0001
    8 00                                                                               branchVersion => 0
-   9 0d                                                                               expansions => 13
+   9 0d                                                                               expansions array-length => 13
   10 04                                                                               expansions game str-length => 4
   11 62617365                                                                         expansions game str => base
   15 0a                                                                               expansions file str-length => 10
@@ -59,28 +59,28 @@ Time taken: 174ms
  325 73706163652d616765                                                               expansions game str => space-age
  334 19                                                                               expansions file str-length => 25
  335 74756e677374656e2d62656c742d72656e616d652e6a736f6e                               expansions file str => tungsten-belt-rename.json
- 360 0400                                                                             IndexSize => 4
+ 360 0400                                                                             IndexSize array-length => 4
  362 0e                                                                               IndexSize Prototype str-length => 14
  363 626c75657072696e742d626f6f6b                                                     IndexSize Prototype str => blueprint-book
- 377 0100                                                                             IndexSize => 1
+ 377 0100                                                                             IndexSize array-length => 1
  379 5000                                                                             IndexSize [ 0] id => 80
  381 0e                                                                               IndexSize [ 0] name str-length => 14
  382 626c75657072696e742d626f6f6b                                                     IndexSize [ 0] name str => blueprint-book
  396 07                                                                               IndexSize Prototype str-length => 7
  397 63617073756c65                                                                   IndexSize Prototype str => capsule
- 404 0100                                                                             IndexSize => 1
+ 404 0100                                                                             IndexSize array-length => 1
  406 4b00                                                                             IndexSize [ 0] id => 75
  408 10                                                                               IndexSize [ 0] name str-length => 16
  409 636c6966662d6578706c6f7369766573                                                 IndexSize [ 0] name str => cliff-explosives
  425 04                                                                               IndexSize Prototype str-length => 4
  426 6974656d                                                                         IndexSize Prototype str => item
- 430 0100                                                                             IndexSize => 1
+ 430 0100                                                                             IndexSize array-length => 1
  432 0100                                                                             IndexSize [ 0] id => 1
  434 0c                                                                               IndexSize [ 0] name str-length => 12
  435 776f6f64656e2d6368657374                                                         IndexSize [ 0] name str => wooden-chest
  447 07                                                                               IndexSize Prototype str-length => 7
  448 7175616c697479                                                                   IndexSize Prototype str => quality
- 455 01                                                                               IndexSize => 1
+ 455 01                                                                               IndexSize array-length => 1
  456 01                                                                               IndexSize [ 0] id => 1
  457 06                                                                               IndexSize [ 0] name str-length => 6
  458 6e6f726d616c                                                                     IndexSize [ 0] name str => normal
@@ -88,7 +88,7 @@ Time taken: 174ms
  466 71000000                                                                         generationCounter => 113
  470 53ac906700000000                                                                 saveTime => 2025-01-22 08:29:07 AM UTC
  478 01                                                                               synchronized => true
- 479 01000000                                                                         LibObj => 1
+ 479 01000000                                                                         LibObj array-length => 1
  483 01                                                                               LibObj slot-used => true => used
  484 01                                                                               LibObj entity-type => 1 => parseBlueprintBook()
  485 70000000                                                                         LibObj BB header generation => 112
@@ -97,8 +97,8 @@ Time taken: 174ms
  492 426c75657072696e7420626f6f6b                                                     LibObj BB header label str => Blueprint book
  506 31                                                                               LibObj BB description str-length => 49
  507 2d2049636f6e20313a20436c696666206578706c6f73697665730a2d2049636f6e20343a20576... LibObj BB description str => - Icon 1: Cliff explosives\n- Icon 4: Wooden chest
- 556 00                                                                               LibObj BB unknownIcons => 0
- 557 04                                                                               LibObj BB icons => 4
+ 556 00                                                                               LibObj BB unknownIcons array-length => 0
+ 557 04                                                                               LibObj BB icons array-length => 4
  558 00                                                                               LibObj BB icons signal type => 0 => ITEM
  559 4b00                                                                             LibObj BB icons signal entry => 75 => cliff-explosives => cliff-explosives
  561 01                                                                               LibObj BB icons signal type => 1 => FLUID
@@ -107,7 +107,7 @@ Time taken: 174ms
  565 0000                                                                             LibObj BB icons signal entry => 0 => null => null
  567 00                                                                               LibObj BB icons signal type => 0 => ITEM
  568 0001                                                                             LibObj BB icons signal entry => 256 => null => null
- 570 00010000                                                                         LibObj BB LibObj => 256
+ 570 00010000                                                                         LibObj BB LibObj array-length => 256
  574 00                                                                               LibObj BB LibObj slot-used => false => not used
  575 00                                                                               LibObj BB LibObj slot-used => false => not used
  576 00                                                                               LibObj BB LibObj slot-used => false => not used
@@ -119,7 +119,7 @@ Time taken: 174ms
 Unparsed bytes: 0
 Original file size: 581
 Errors: 1
-  undefined
+  Stream ended while reading 0 of 1 bytes
 Note: undefined
 
 Found Strings:
@@ -168,5 +168,5 @@ Found Strings:
  506 312d2049636f6e20313a20436c696666206578706c6f73697665730a2d2049636f6e20343a205... => - Icon 1: Cliff explosives\n- Icon 4: Wooden chest
  556 0004004b000100000000000000010001000000000000000000                              
 
-End time: 2025-02-18 07:39:01 AM UTC
-Time taken: 125ms
+End time: 2025-02-27 05:28:52 PM UTC
+Time taken: 104ms

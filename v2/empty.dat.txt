@@ -1,12 +1,12 @@
-Load time: 2025-02-18 07:39:01 AM UTC
-Start time: 2025-02-18 07:39:01 AM UTC
-Time taken: 186ms
+Load time: 2025-02-27 05:28:52 PM UTC
+Start time: 2025-02-27 05:28:52 PM UTC
+Time taken: 183ms
    0 0200                                                                             version major => 2
    2 0000                                                                             version minor => 0
    4 1e00                                                                             version patch => 30
-   6 0100                                                                             version developer => 1
+   6 0100                                                                             version developer => 1 => 20000001e0001
    8 00                                                                               branchVersion => 0
-   9 0d                                                                               expansions => 13
+   9 0d                                                                               expansions array-length => 13
   10 04                                                                               expansions game str-length => 4
   11 62617365                                                                         expansions game str => base
   15 0a                                                                               expansions file str-length => 10
@@ -59,14 +59,14 @@ Time taken: 186ms
  325 73706163652d616765                                                               expansions game str => space-age
  334 19                                                                               expansions file str-length => 25
  335 74756e677374656e2d62656c742d72656e616d652e6a736f6e                               expansions file str => tungsten-belt-rename.json
- 360 0000                                                                             IndexSize => 0
+ 360 0000                                                                             IndexSize array-length => 0
  362 0000                                                                             playerIndex => 0
  364 68000000                                                                         generationCounter => 104
  368 c99d906700000000                                                                 saveTime => 2025-01-22 07:27:05 AM UTC
  376 01                                                                               synchronized => true
- 377 00000000                                                                         LibObj => 0
+ 377 00000000                                                                         LibObj array-length => 0
  381 00                                                                               savedTargetablesCount => 0
- 382 00                                                                                => 0
+ 382 00                                                                               targeterToTargetableMapping array-length => 0
  383 00                                                                               v2-Unknown2 => 0x00 ✅
 
 Unparsed bytes: 0
@@ -104,5 +104,5 @@ Found Strings:
  334 1974756e677374656e2d62656c742d72656e616d652e6a736f6e                             => tungsten-belt-rename.json
  360 0000000068000000c99d9067000000000100000000000000                                
 
-End time: 2025-02-18 07:39:01 AM UTC
-Time taken: 169ms
+End time: 2025-02-27 05:28:52 PM UTC
+Time taken: 141ms

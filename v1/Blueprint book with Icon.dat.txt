@@ -1,26 +1,26 @@
-Load time: 2025-02-18 07:39:01 AM UTC
-Start time: 2025-02-18 07:39:01 AM UTC
-Time taken: 226ms
+Load time: 2025-02-27 05:28:52 PM UTC
+Start time: 2025-02-27 05:28:52 PM UTC
+Time taken: 207ms
    0 0100                                                                             version major => 1
    2 0100                                                                             version minor => 1
    4 6e00                                                                             version patch => 110
-   6 0000                                                                             version developer => 0
+   6 0000                                                                             version developer => 0 => 10001006e0000
    8 00                                                                               branchVersion => 0
-   9 01                                                                               expansions => 1
+   9 01                                                                               expansions array-length => 1
   10 04                                                                               expansions game str-length => 4
   11 62617365                                                                         expansions game str => base
   15 0a                                                                               expansions file str-length => 10
   16 312e312e302e6a736f6e                                                             expansions file str => 1.1.0.json
-  26 0200                                                                             IndexSize => 2
+  26 0200                                                                             IndexSize array-length => 2
   28 0e                                                                               IndexSize Prototype str-length => 14
   29 626c75657072696e742d626f6f6b                                                     IndexSize Prototype str => blueprint-book
-  43 0100                                                                             IndexSize => 1
+  43 0100                                                                             IndexSize array-length => 1
   45 4700                                                                             IndexSize [ 0] id => 71
   47 0e                                                                               IndexSize [ 0] name str-length => 14
   48 626c75657072696e742d626f6f6b                                                     IndexSize [ 0] name str => blueprint-book
   62 04                                                                               IndexSize Prototype str-length => 4
   63 6974656d                                                                         IndexSize Prototype str => item
-  67 0100                                                                             IndexSize => 1
+  67 0100                                                                             IndexSize array-length => 1
   69 5600                                                                             IndexSize [ 0] id => 86
   71 0d                                                                               IndexSize [ 0] name str-length => 13
   72 73746f6e652d6675726e616365                                                       IndexSize [ 0] name str => stone-furnace
@@ -28,7 +28,7 @@ Time taken: 226ms
   87 02000000                                                                         generationCounter => 2
   91 ea349f67                                                                         saveTime => 2025-02-02 09:03:38 AM UTC
   95 01                                                                               synchronized => true
-  96 01000000                                                                         LibObj => 1
+  96 01000000                                                                         LibObj array-length => 1
  100 01                                                                               LibObj slot-used => true => used
  101 01                                                                               LibObj entity-type => 1 => parseBlueprintBook()
  102 01000000                                                                         LibObj BB header generation => 1
@@ -37,11 +37,11 @@ Time taken: 226ms
  109 426c75657072696e7420626f6f6b20776974682049636f6e                                 LibObj BB header label str => Blueprint book with Icon
  133 47                                                                               LibObj BB description str-length => 71
  134 5354415254204445534352495054494f4e0a2d20456d7074790a2d2046697273742069636f6e2... LibObj BB description str => START DESCRIPTION\n- Empty\n- First icon is Stone furnace\nEND DESCRIPTION
- 205 00                                                                               LibObj BB unknownIcons => 0
- 206 01                                                                               LibObj BB icons => 1
+ 205 00                                                                               LibObj BB unknownIcons array-length => 0
+ 206 01                                                                               LibObj BB icons array-length => 1
  207 00                                                                               LibObj BB icons signal type => 0 => ITEM
  208 5600                                                                             LibObj BB icons signal entry => 86 => stone-furnace => stone-furnace
- 210 00000000                                                                         LibObj BB LibObj => 0
+ 210 00000000                                                                         LibObj BB LibObj array-length => 0
  214 0000                                                                             LibObj BB activeIndex => 0
 
 Unparsed bytes: 0
@@ -65,5 +65,5 @@ Found Strings:
  133 475354415254204445534352495054494f4e0a2d20456d7074790a2d2046697273742069636f6... => START DESCRIPTION\n- Empty\n- First icon is Stone furnace\nEND DESCRIPTION
  205 0001005600000000000000                                                          
 
-End time: 2025-02-18 07:39:01 AM UTC
-Time taken: 200ms
+End time: 2025-02-27 05:28:52 PM UTC
+Time taken: 190ms

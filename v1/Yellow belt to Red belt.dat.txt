@@ -1,20 +1,20 @@
-Load time: 2025-02-18 07:39:01 AM UTC
-Start time: 2025-02-18 07:39:01 AM UTC
-Time taken: 237ms
+Load time: 2025-02-27 05:28:52 PM UTC
+Start time: 2025-02-27 05:28:52 PM UTC
+Time taken: 221ms
    0 0100                                                                             version major => 1
    2 0100                                                                             version minor => 1
    4 6e00                                                                             version patch => 110
-   6 0000                                                                             version developer => 0
+   6 0000                                                                             version developer => 0 => 10001006e0000
    8 00                                                                               branchVersion => 0
-   9 01                                                                               expansions => 1
+   9 01                                                                               expansions array-length => 1
   10 04                                                                               expansions game str-length => 4
   11 62617365                                                                         expansions game str => base
   15 0a                                                                               expansions file str-length => 10
   16 312e312e302e6a736f6e                                                             expansions file str => 1.1.0.json
-  26 0200                                                                             IndexSize => 2
+  26 0200                                                                             IndexSize array-length => 2
   28 0e                                                                               IndexSize Prototype str-length => 14
   29 7472616e73706f72742d62656c74                                                     IndexSize Prototype str => transport-belt
-  43 0200                                                                             IndexSize => 2
+  43 0200                                                                             IndexSize array-length => 2
   45 7c00                                                                             IndexSize [ 0] id => 124
   47 13                                                                               IndexSize [ 0] name str-length => 19
   48 666173742d7472616e73706f72742d62656c74                                           IndexSize [ 0] name str => fast-transport-belt
@@ -23,7 +23,7 @@ Time taken: 237ms
   70 7472616e73706f72742d62656c74                                                     IndexSize [ 1] name str => transport-belt
   84 0c                                                                               IndexSize Prototype str-length => 12
   85 757067726164652d6974656d                                                         IndexSize Prototype str => upgrade-item
-  97 0100                                                                             IndexSize => 1
+  97 0100                                                                             IndexSize array-length => 1
   99 4600                                                                             IndexSize [ 0] id => 70
  101 0f                                                                               IndexSize [ 0] name str-length => 15
  102 757067726164652d706c616e6e6572                                                   IndexSize [ 0] name str => upgrade-planner
@@ -31,7 +31,7 @@ Time taken: 237ms
  119 01000000                                                                         generationCounter => 1
  123 45369f67                                                                         saveTime => 2025-02-02 09:09:25 AM UTC
  127 01                                                                               synchronized => true
- 128 01000000                                                                         LibObj => 1
+ 128 01000000                                                                         LibObj array-length => 1
  132 01                                                                               LibObj slot-used => true => used
  133 03                                                                               LibObj entity-type => 3 => parseUpgradeItem()
  134 00000000                                                                         LibObj UpgradeItem header generation => 0
@@ -40,10 +40,10 @@ Time taken: 237ms
  141 59656c6c6f772062656c7420746f205265642062656c74                                   LibObj UpgradeItem header label str => Yellow belt to Red belt
  164 49                                                                               LibObj UpgradeItem description str-length => 73
  165 5354415254204445534352495054494f4e0a2d2059656c6c6f772062656c7420746f205265642... LibObj UpgradeItem description str => START DESCRIPTION\n- Yellow belt to Red belt in First Slot\nEND DESCRIPTION
- 238 00                                                                               LibObj UpgradeItem unknownIcons => 0
- 239 00                                                                               LibObj UpgradeItem icons => 0
- 240 00                                                                               LibObj UpgradeItem unknowns => 0
- 241 18                                                                               LibObj UpgradeItem mappers => 24
+ 238 00                                                                               LibObj UpgradeItem unknownIcons array-length => 0
+ 239 00                                                                               LibObj UpgradeItem icons array-length => 0
+ 240 00                                                                               LibObj UpgradeItem unknowns array-length => 0
+ 241 18                                                                               LibObj UpgradeItem mappers array-length => 24
  242 00                                                                               LibObj UpgradeItem mappers isItem => false
  243 f400                                                                             LibObj UpgradeItem mappers entry => 244 => transport-belt
  245 00                                                                               LibObj UpgradeItem mappers isItem => false
@@ -79,5 +79,5 @@ Found Strings:
  164 495354415254204445534352495054494f4e0a2d2059656c6c6f772062656c7420746f2052656... => START DESCRIPTION\n- Yellow belt to Red belt in First Slot\nEND DESCRIPTION
  238 0000001800f400007c00010000010000010000010000010000010000010000010000010000010...
 
-End time: 2025-02-18 07:39:01 AM UTC
-Time taken: 218ms
+End time: 2025-02-27 05:28:52 PM UTC
+Time taken: 197ms

@@ -1,12 +1,12 @@
-Load time: 2025-02-18 07:39:01 AM UTC
-Start time: 2025-02-18 07:39:01 AM UTC
-Time taken: 212ms
+Load time: 2025-02-27 05:28:52 PM UTC
+Start time: 2025-02-27 05:28:52 PM UTC
+Time taken: 200ms
    0 0200                                                                             version major => 2
    2 0000                                                                             version minor => 0
    4 1e00                                                                             version patch => 30
-   6 0100                                                                             version developer => 1
+   6 0100                                                                             version developer => 1 => 20000001e0001
    8 00                                                                               branchVersion => 0
-   9 0d                                                                               expansions => 13
+   9 0d                                                                               expansions array-length => 13
   10 04                                                                               expansions game str-length => 4
   11 62617365                                                                         expansions game str => base
   15 0a                                                                               expansions file str-length => 10
@@ -59,22 +59,22 @@ Time taken: 212ms
  325 73706163652d616765                                                               expansions game str => space-age
  334 19                                                                               expansions file str-length => 25
  335 74756e677374656e2d62656c742d72656e616d652e6a736f6e                               expansions file str => tungsten-belt-rename.json
- 360 0300                                                                             IndexSize => 3
+ 360 0300                                                                             IndexSize array-length => 3
  362 09                                                                               IndexSize Prototype str-length => 9
  363 636f6e7461696e6572                                                               IndexSize Prototype str => container
- 372 0100                                                                             IndexSize => 1
+ 372 0100                                                                             IndexSize array-length => 1
  374 0100                                                                             IndexSize [ 0] id => 1
  376 0c                                                                               IndexSize [ 0] name str-length => 12
  377 776f6f64656e2d6368657374                                                         IndexSize [ 0] name str => wooden-chest
  389 0c                                                                               IndexSize Prototype str-length => 12
  390 757067726164652d6974656d                                                         IndexSize Prototype str => upgrade-item
- 402 0100                                                                             IndexSize => 1
+ 402 0100                                                                             IndexSize array-length => 1
  404 4f00                                                                             IndexSize [ 0] id => 79
  406 0f                                                                               IndexSize [ 0] name str-length => 15
  407 757067726164652d706c616e6e6572                                                   IndexSize [ 0] name str => upgrade-planner
  422 07                                                                               IndexSize Prototype str-length => 7
  423 7175616c697479                                                                   IndexSize Prototype str => quality
- 430 03                                                                               IndexSize => 3
+ 430 03                                                                               IndexSize array-length => 3
  431 02                                                                               IndexSize [ 0] id => 2
  432 08                                                                               IndexSize [ 0] name str-length => 8
  433 756e636f6d6d6f6e                                                                 IndexSize [ 0] name str => uncommon
@@ -88,7 +88,7 @@ Time taken: 212ms
  460 6f000000                                                                         generationCounter => 111
  464 63a7906700000000                                                                 saveTime => 2025-01-22 08:08:03 AM UTC
  472 01                                                                               synchronized => true
- 473 01000000                                                                         LibObj => 1
+ 473 01000000                                                                         LibObj array-length => 1
  477 01                                                                               LibObj slot-used => true => used
  478 03                                                                               LibObj entity-type => 3 => parseUpgradeItem()
  479 6e000000                                                                         LibObj UpgradeItem header generation => 110
@@ -97,10 +97,10 @@ Time taken: 212ms
  486 576f6f64656e206368657374205175616c697479205570677261646573                       LibObj UpgradeItem header label str => Wooden chest Quality Upgrades
  515 59                                                                               LibObj UpgradeItem description str-length => 89
  516 2d20416e7920576f6f64656e20636865737420746f204c6567656e6461727920576f6f64656e2... LibObj UpgradeItem description str => - Any Wooden chest to Legendary Wooden chest\n- Uncommon Wooden chest to Epic Wooden chest
- 605 00                                                                               LibObj UpgradeItem unknownIcons => 0
- 606 00                                                                               LibObj UpgradeItem icons => 0
- 607 00                                                                               LibObj UpgradeItem unknowns => 0
- 608 05                                                                               LibObj UpgradeItem mappers => 5
+ 605 00                                                                               LibObj UpgradeItem unknownIcons array-length => 0
+ 606 00                                                                               LibObj UpgradeItem icons array-length => 0
+ 607 00                                                                               LibObj UpgradeItem unknowns array-length => 0
+ 608 05                                                                               LibObj UpgradeItem mappers array-length => 5
  609 00                                                                               LibObj UpgradeItem mappers isItem => false
  610 0100                                                                             LibObj UpgradeItem mappers entry => 1 => wooden-chest
  612 00                                                                               LibObj UpgradeItem mappers isItem => false
@@ -161,5 +161,5 @@ Found Strings:
  515 592d20416e7920576f6f64656e20636865737420746f204c6567656e6461727920576f6f64656... => - Any Wooden chest to Legendary Wooden chest\n- Uncommon Wooden chest to Epic Wooden chest
  605 00000005000100000000000001000500000001000000000000010000000000010000000000000...
 
-End time: 2025-02-18 07:39:01 AM UTC
-Time taken: 195ms
+End time: 2025-02-27 05:28:52 PM UTC
+Time taken: 176ms

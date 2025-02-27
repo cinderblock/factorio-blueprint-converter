@@ -1,20 +1,20 @@
-Load time: 2025-02-18 07:39:01 AM UTC
-Start time: 2025-02-18 07:39:01 AM UTC
-Time taken: 230ms
+Load time: 2025-02-27 05:28:52 PM UTC
+Start time: 2025-02-27 05:28:52 PM UTC
+Time taken: 211ms
    0 0100                                                                             version major => 1
    2 0100                                                                             version minor => 1
    4 6e00                                                                             version patch => 110
-   6 0000                                                                             version developer => 0
+   6 0000                                                                             version developer => 0 => 10001006e0000
    8 00                                                                               branchVersion => 0
-   9 01                                                                               expansions => 1
+   9 01                                                                               expansions array-length => 1
   10 04                                                                               expansions game str-length => 4
   11 62617365                                                                         expansions game str => base
   15 0a                                                                               expansions file str-length => 10
   16 312e312e302e6a736f6e                                                             expansions file str => 1.1.0.json
-  26 0100                                                                             IndexSize => 1
+  26 0100                                                                             IndexSize array-length => 1
   28 0c                                                                               IndexSize Prototype str-length => 12
   29 757067726164652d6974656d                                                         IndexSize Prototype str => upgrade-item
-  41 0100                                                                             IndexSize => 1
+  41 0100                                                                             IndexSize array-length => 1
   43 4600                                                                             IndexSize [ 0] id => 70
   45 0f                                                                               IndexSize [ 0] name str-length => 15
   46 757067726164652d706c616e6e6572                                                   IndexSize [ 0] name str => upgrade-planner
@@ -22,7 +22,7 @@ Time taken: 230ms
   63 02000000                                                                         generationCounter => 2
   67 84329f67                                                                         saveTime => 2025-02-02 08:53:24 AM UTC
   71 01                                                                               synchronized => true
-  72 01000000                                                                         LibObj => 1
+  72 01000000                                                                         LibObj array-length => 1
   76 01                                                                               LibObj slot-used => true => used
   77 03                                                                               LibObj entity-type => 3 => parseUpgradeItem()
   78 01000000                                                                         LibObj UpgradeItem header generation => 1
@@ -31,10 +31,10 @@ Time taken: 230ms
   85 456d707479205570677261646520706c616e6e6572                                       LibObj UpgradeItem header label str => Empty Upgrade planner
  106 21                                                                               LibObj UpgradeItem description str-length => 33
  107 5354415254204445534352495054494f4e0a454e44204445534352495054494f4e               LibObj UpgradeItem description str => START DESCRIPTION\nEND DESCRIPTION
- 140 00                                                                               LibObj UpgradeItem unknownIcons => 0
- 141 00                                                                               LibObj UpgradeItem icons => 0
- 142 00                                                                               LibObj UpgradeItem unknowns => 0
- 143 18                                                                               LibObj UpgradeItem mappers => 24
+ 140 00                                                                               LibObj UpgradeItem unknownIcons array-length => 0
+ 141 00                                                                               LibObj UpgradeItem icons array-length => 0
+ 142 00                                                                               LibObj UpgradeItem unknowns array-length => 0
+ 143 18                                                                               LibObj UpgradeItem mappers array-length => 24
  144 01                                                                               LibObj UpgradeItem mappers isItem => true
  145 0000                                                                             LibObj UpgradeItem mappers entry => 0 => null
  147 01000001000001000001000001000001000001000001000001000001000001000001000001000001
@@ -61,5 +61,5 @@ Found Strings:
  106 215354415254204445534352495054494f4e0a454e44204445534352495054494f4e             => START DESCRIPTION\nEND DESCRIPTION
  140 00000018010000010000010000010000010000010000010000010000010000010000010000010...
 
-End time: 2025-02-18 07:39:01 AM UTC
-Time taken: 208ms
+End time: 2025-02-27 05:28:52 PM UTC
+Time taken: 196ms

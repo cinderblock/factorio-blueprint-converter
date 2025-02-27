@@ -1,20 +1,20 @@
-Load time: 2025-02-18 07:39:01 AM UTC
-Start time: 2025-02-18 07:39:01 AM UTC
-Time taken: 229ms
+Load time: 2025-02-27 05:28:52 PM UTC
+Start time: 2025-02-27 05:28:52 PM UTC
+Time taken: 210ms
    0 0100                                                                             version major => 1
    2 0100                                                                             version minor => 1
    4 6e00                                                                             version patch => 110
-   6 0000                                                                             version developer => 0
+   6 0000                                                                             version developer => 0 => 10001006e0000
    8 00                                                                               branchVersion => 0
-   9 01                                                                               expansions => 1
+   9 01                                                                               expansions array-length => 1
   10 04                                                                               expansions game str-length => 4
   11 62617365                                                                         expansions game str => base
   15 0a                                                                               expansions file str-length => 10
   16 312e312e302e6a736f6e                                                             expansions file str => 1.1.0.json
-  26 0100                                                                             IndexSize => 1
+  26 0100                                                                             IndexSize array-length => 1
   28 13                                                                               IndexSize Prototype str-length => 19
   29 6465636f6e737472756374696f6e2d6974656d                                           IndexSize Prototype str => deconstruction-item
-  48 0100                                                                             IndexSize => 1
+  48 0100                                                                             IndexSize array-length => 1
   50 4500                                                                             IndexSize [ 0] id => 69
   52 16                                                                               IndexSize [ 0] name str-length => 22
   53 6465636f6e737472756374696f6e2d706c616e6e6572                                     IndexSize [ 0] name str => deconstruction-planner
@@ -22,7 +22,7 @@ Time taken: 229ms
   77 01000000                                                                         generationCounter => 1
   81 55339f67                                                                         saveTime => 2025-02-02 08:56:53 AM UTC
   85 01                                                                               synchronized => true
-  86 01000000                                                                         LibObj => 1
+  86 01000000                                                                         LibObj array-length => 1
   90 01                                                                               LibObj slot-used => true => used
   91 02                                                                               LibObj entity-type => 2 => parseDeconstructionItem()
   92 00000000                                                                         LibObj Decon header generation => 0
@@ -31,11 +31,11 @@ Time taken: 229ms
   99 456d707479204465636f6e737472756374696f6e20706c616e6e6572                         LibObj Decon header label str => Empty Deconstruction planner
  127 21                                                                               LibObj Decon description str-length => 33
  128 5354415254204445534352495054494f4e0a454e44204445534352495054494f4e               LibObj Decon description str => START DESCRIPTION\nEND DESCRIPTION
- 161 00                                                                               LibObj Decon unknownIcons => 0
- 162 00                                                                               LibObj Decon icons => 0
+ 161 00                                                                               LibObj Decon unknownIcons array-length => 0
+ 162 00                                                                               LibObj Decon icons array-length => 0
  163 00                                                                               LibObj Decon EFMode => 0
- 164 00                                                                               LibObj Decon EF readFilters(ENTITY) entityFilterBackups => 0
- 165 1e                                                                               LibObj Decon EF readFilters(ENTITY) Filters => 30
+ 164 00                                                                               LibObj Decon EF readFilters(ENTITY) entityFilterBackups array-length => 0
+ 165 1e                                                                               LibObj Decon EF readFilters(ENTITY) Filters array-length => 30
  166 0000                                                                             LibObj Decon EF readFilters(ENTITY) Filters UnknownEntry => 0 => null
  168 0000                                                                             LibObj Decon EF readFilters(ENTITY) Filters UnknownEntry => 0 => null
  170 0000                                                                             LibObj Decon EF readFilters(ENTITY) Filters UnknownEntry => 0 => null
@@ -69,8 +69,8 @@ Time taken: 229ms
  226 00                                                                               LibObj Decon TROnly => false
  227 00                                                                               LibObj Decon TFMode => 0
  228 00                                                                               LibObj Decon TSMode => 0
- 229 00                                                                               LibObj Decon TF readFilters(TILE) entityFilterBackups => 0
- 230 1e                                                                               LibObj Decon TF readFilters(TILE) Filters => 30
+ 229 00                                                                               LibObj Decon TF readFilters(TILE) entityFilterBackups array-length => 0
+ 230 1e                                                                               LibObj Decon TF readFilters(TILE) Filters array-length => 30
  231 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
  232 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
  233 00                                                                               LibObj Decon TF readFilters(TILE) Filters UnknownEntry => 0 => null
@@ -120,5 +120,5 @@ Found Strings:
  127 215354415254204445534352495054494f4e0a454e44204445534352495054494f4e             => START DESCRIPTION\nEND DESCRIPTION
  161 000000001e0000000000000000000000000000000000000000000000000000000000000000000...
 
-End time: 2025-02-18 07:39:01 AM UTC
-Time taken: 205ms
+End time: 2025-02-27 05:28:52 PM UTC
+Time taken: 194ms

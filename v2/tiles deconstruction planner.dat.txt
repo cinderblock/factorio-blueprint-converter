@@ -1,12 +1,12 @@
-Load time: 2025-02-18 07:39:01 AM UTC
-Start time: 2025-02-18 07:39:01 AM UTC
-Time taken: 200ms
+Load time: 2025-02-27 05:28:52 PM UTC
+Start time: 2025-02-27 05:28:52 PM UTC
+Time taken: 190ms
    0 0200                                                                             version major => 2
    2 0000                                                                             version minor => 0
    4 1e00                                                                             version patch => 30
-   6 0100                                                                             version developer => 1
+   6 0100                                                                             version developer => 1 => 20000001e0001
    8 00                                                                               branchVersion => 0
-   9 0d                                                                               expansions => 13
+   9 0d                                                                               expansions array-length => 13
   10 04                                                                               expansions game str-length => 4
   11 62617365                                                                         expansions game str => base
   15 0a                                                                               expansions file str-length => 10
@@ -59,16 +59,16 @@ Time taken: 200ms
  325 73706163652d616765                                                               expansions game str => space-age
  334 19                                                                               expansions file str-length => 25
  335 74756e677374656e2d62656c742d72656e616d652e6a736f6e                               expansions file str => tungsten-belt-rename.json
- 360 0200                                                                             IndexSize => 2
+ 360 0200                                                                             IndexSize array-length => 2
  362 13                                                                               IndexSize Prototype str-length => 19
  363 6465636f6e737472756374696f6e2d6974656d                                           IndexSize Prototype str => deconstruction-item
- 382 0100                                                                             IndexSize => 1
+ 382 0100                                                                             IndexSize array-length => 1
  384 4e00                                                                             IndexSize [ 0] id => 78
  386 16                                                                               IndexSize [ 0] name str-length => 22
  387 6465636f6e737472756374696f6e2d706c616e6e6572                                     IndexSize [ 0] name str => deconstruction-planner
  409 04                                                                               IndexSize Prototype str-length => 4
  410 74696c65                                                                         IndexSize Prototype str => tile
- 414 0100                                                                             IndexSize => 1
+ 414 0100                                                                             IndexSize array-length => 1
  416 0100                                                                             IndexSize [ 0] id => 1
  418 0a                                                                               IndexSize [ 0] name str-length => 10
  419 73746f6e652d70617468                                                             IndexSize [ 0] name str => stone-path
@@ -76,7 +76,7 @@ Time taken: 200ms
  431 6d000000                                                                         generationCounter => 109
  435 cda1906700000000                                                                 saveTime => 2025-01-22 07:44:13 AM UTC
  443 01                                                                               synchronized => true
- 444 01000000                                                                         LibObj => 1
+ 444 01000000                                                                         LibObj array-length => 1
  448 01                                                                               LibObj slot-used => true => used
  449 02                                                                               LibObj entity-type => 2 => parseDeconstructionItem()
  450 6c000000                                                                         LibObj Decon header generation => 108
@@ -85,11 +85,11 @@ Time taken: 200ms
  457 54696c6573204465636f6e737472756374696f6e20506c616e6e6572                         LibObj Decon header label str => Tiles Deconstruction Planner
  485 21                                                                               LibObj Decon description str-length => 33
  486 2d2053746f6e6520706174680a2d204e6f726d616c0a2d2057686974656c697374               LibObj Decon description str => - Stone path\n- Normal\n- Whitelist
- 519 00                                                                               LibObj Decon unknownIcons => 0
- 520 00                                                                               LibObj Decon icons => 0
+ 519 00                                                                               LibObj Decon unknownIcons array-length => 0
+ 520 00                                                                               LibObj Decon icons array-length => 0
  521 00                                                                               LibObj Decon EFMode => 0
- 522 00                                                                               LibObj Decon EF readFilters(ENTITY) entityFilterBackups => 0
- 523 1e                                                                               LibObj Decon EF readFilters(ENTITY) Filters => 30
+ 522 00                                                                               LibObj Decon EF readFilters(ENTITY) entityFilterBackups array-length => 0
+ 523 1e                                                                               LibObj Decon EF readFilters(ENTITY) Filters array-length => 30
  524 0000                                                                             LibObj Decon EF readFilters(ENTITY) Filters UnknownEntry => 0 => null
  526 0000                                                                             LibObj Decon EF readFilters(ENTITY) Filters UnknownEntry => 0 => null
  528 0000                                                                             LibObj Decon EF readFilters(ENTITY) Filters UnknownEntry => 0 => null
@@ -120,15 +120,15 @@ Time taken: 200ms
  578 0000                                                                             LibObj Decon EF readFilters(ENTITY) Filters UnknownEntry => 0 => null
  580 0000                                                                             LibObj Decon EF readFilters(ENTITY) Filters UnknownEntry => 0 => null
  582 0000                                                                             LibObj Decon EF readFilters(ENTITY) Filters UnknownEntry => 0 => null
- 584 00                                                                               LibObj Decon EF readFilters(ENTITY) Quality => 0
+ 584 00                                                                               LibObj Decon EF readFilters(ENTITY) Quality array-length => 0
  585 00                                                                               LibObj Decon TROnly => false
  586 00                                                                               LibObj Decon TFMode => 0
  587 00                                                                               LibObj Decon TSMode => 0
- 588 00                                                                               LibObj Decon TF readFilters(TILE) entityFilterBackups => 0
- 589 00                                                                               LibObj Decon TF readFilters(TILE) Filters => 0
- 590 00                                                                               LibObj Decon TF readFilters(TILE) Quality => 0
+ 588 00                                                                               LibObj Decon TF readFilters(TILE) entityFilterBackups array-length => 0
+ 589 00                                                                               LibObj Decon TF readFilters(TILE) Filters array-length => 0
+ 590 00                                                                               LibObj Decon TF readFilters(TILE) Quality array-length => 0
  591 00                                                                               savedTargetablesCount => 0
- 592 00                                                                                => 0
+ 592 00                                                                               targeterToTargetableMapping array-length => 0
  593 00                                                                               v2-Unknown2 => 0x00 ✅
  594 0000000000000000000000000000000000000000000000001e010000000000000000000000000... RemainingData
 
@@ -178,5 +178,5 @@ Found Strings:
  485 212d2053746f6e6520706174680a2d204e6f726d616c0a2d2057686974656c697374             => - Stone path\n- Normal\n- Whitelist
  519 000000001e0000000000000000000000000000000000000000000000000000000000000000000...
 
-End time: 2025-02-18 07:39:01 AM UTC
-Time taken: 184ms
+End time: 2025-02-27 05:28:52 PM UTC
+Time taken: 162ms
