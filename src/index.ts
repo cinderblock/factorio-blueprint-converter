@@ -264,7 +264,7 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
   }
 
   async function readArray<T>(lengthLength: number, fn: (index: number) => Promise<T>) {
-    const length = await readNumber(lengthLength);
+    const length = await wrapLabel('array-length', () => readNumber(lengthLength));
     if (lengthLength === 1 && length === 255) {
       throw new Error(`Unexpected length 0xff for Array`);
     }
@@ -699,7 +699,9 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
       }
     }
 
-    const targeterToTargetableMapping = await readArray(0, () => readNumber(4));
+    const targeterToTargetableMapping = await wrapLabel('targeterToTargetableMapping', () =>
+      readArray(0, () => readNumber(4)),
+    );
     if (targeterToTargetableMapping.length !== 0) {
       throw new Error(`targeterToTargetableMapping is ${targeterToTargetableMapping.length}. Not yet implemented.`);
     }
