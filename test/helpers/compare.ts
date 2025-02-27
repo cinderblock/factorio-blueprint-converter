@@ -1,16 +1,11 @@
 import { BlueprintEntry } from '../../src/BlueprintData.js';
-import BlueprintString from 'factorio-blueprint';
+import { decodeBlueprintString } from '../../src/BlueprintString.js';
 
 export function checkBlueprintDataMatchesString(data: BlueprintEntry, blueprint: string | null): boolean {
   if (!data && !blueprint) return true;
   if (!data || !blueprint) return false;
 
-  let decoded;
-  try {
-    decoded = new BlueprintString(blueprint);
-  } catch (error) {
-    throw new Error(`Error decoding blueprint: ${error instanceof Error ? error.message : error}`);
-  }
+  const decoded = decodeBlueprintString(blueprint);
 
   // TODO: finish implementing
   return false;
