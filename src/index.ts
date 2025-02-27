@@ -214,12 +214,7 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
 
   async function readDate() {
     let date: Date;
-
-    // This matches exactly the version that is tested for in the original code, but 1.2.0 doesn't exist (at least not publicly)
-    // Effectively, this is v2 and later
-    const lastVersionThatUsed4ByteDate = new Version('1.2.0', 0x175);
-
-    if (ret.version.compare(lastVersionThatUsed4ByteDate) <= 0) {
+    if (ret.version.internal <= 0x1000200000175) {
       date = new Date((await readNumberLow(4)) * 1000);
     } else {
       const seconds = (await readNumberLow(8)) * 1000n;
