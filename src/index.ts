@@ -292,7 +292,7 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
   }
 
   async function readEntry(type: Index.Types) {
-    const id = await readNumber(type == 'TILE' ? 1 : 2);
+    const id = await readNumber(type == 'TILE' && ret.version.compare(new Version('1.2.0', 3)) < 0 ? 1 : 2);
     const a = index[type];
     const entry = a.find(e => e.id === id);
     if (!entry) {
