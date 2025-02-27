@@ -50,6 +50,25 @@ export class Version {
     }
   }
 
+  /**
+   * This is the internal representation of the version number.
+   * It is used to sort versions.
+   * It matches the versions in the decompiled source code.
+   * It is not the same as the version string.
+   */
+  get internal() {
+    let shift = 0;
+    const bits = 16;
+
+    let ret = this.developer;
+
+    ret += this.patch * (1 << bits) ** ++shift;
+    ret += this.minor * (1 << bits) ** ++shift;
+    ret += this.major * (1 << bits) ** ++shift;
+
+    return ret;
+  }
+
   compare(other: Version | string): number {
     if (typeof other === 'string') {
       other = new Version(other);

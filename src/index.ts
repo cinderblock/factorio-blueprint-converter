@@ -638,6 +638,8 @@ export async function parseBlueprintData(stream: Readable, annotation?: Annotati
     return ret;
   });
 
+  annotation?.decoded(ret.version.internal.toString(16));
+
   if (ret.version.major > 2) {
     console.error('Warning: Blueprint major version is greater than 2');
   }
